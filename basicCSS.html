@@ -1,0 +1,87 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose.
+
+CSS Grid helps you easily build complex web designs. It works by turning an HTML element into a grid container with rows and columns for you to place children elements where you want within the grid.
+ -->
+
+<style>
+  .injected-text {
+    margin-bottom: -25px;
+    text-align: center;
+  }
+
+  .box {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    text-align: center;
+  }
+
+  .yellow-box {
+    background-color: yellow;
+    padding: 10px;
+  }
+
+  .red-box {
+    background-color: crimson;
+    color: #fff;
+    margin-top: 40px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    padding:1.5em;
+  }
+
+  .blue-box {
+    background-color: blue;
+    color: #fff;
+    padding: 20px;
+    margin: -15px;
+  }
+</style>  <!-- An element's margin controls the amount of space between an element's border and surrounding elements.
+
+If you set an element's margin to a negative value, the element will grow larger. 
+
+CSS allows you to control the padding of all four individual sides of an element with the padding-top, padding-right, padding-bottom, and padding-left properties.  
+
+margin: 10px 20px 10px 20px;
+These four values work like a clock: top, right, bottom, left, and will produce the exact same result as using the side-specific margin instructions.
+ -->
+
+<h5 class="injected-text">margin</h5>
+
+<div class="box yellow-box">
+  <h5 class="box red-box">padding</h5>
+  <h5 class="box blue-box">padding</h5>
+</div>
+
+ <style>
+  body {
+    background-color: #000000;
+    font-family: monospace;
+    color: green;
+  }
+  .pink-text {
+    color: pink;
+  }
+  .blue-text {
+    color: blue;
+  }
+   #orange-text {
+    color: orange;
+  }
+</style> <!--  So when you absolutely need to be sure that an element has specific CSS, you can use !important to override all other CSS  i.e.  color: red !important;  In CSS, we can use 6 hexadecimal digits to represent colors, two each for the red (R), green (G), and blue (B) components. For example, #000000 is black and is also the lowest possible value. Hexadecimals (or hex) are base 16 numbers. This means it uses sixteen distinct symbols.  0-9 represent the values zero to nine. Then A,B,C,D,E,F represent the values ten to fifteen. Altogether, 0 to F can represent a digit in hexadecimal, giving us 16 total possible values.-->
+
+<h1 class="pink-text">Hello World!</h1>  <!-- class="pink-text" overrides the body element's CSS declaration! -->
+
+<h1 class="pink-text blue-text">Last class declaration in style always take precedence over the first, not the order of their use!</h1>  <!--browsers read CSS from top to bottom in order of their declaration. In other words, in the event of a conflict, the browser will use whichever CSS declaration (in style) came last. -->
+<h1 id="orange-text" class="pink-text blue-text">id attribute will always take precedence over class or body declaration</h1>
+
+<h1 style="color: white;" id="orange-text" class="pink-text blue-text">inline styles precede over id attribute, class, or body declaration</h1> <!-- inline styles will override all the CSS declarations in your style element.-->
+
+<h1 style="color: #FF00FF;">The digit 0 is the lowest number in hex code, and represents a complete absence of color. The digit F is the highest number in hex code, and represents the maximum possible brightness.</h1> <!-- one of 4 ways to represent colors (x = 0-9,A-F): #xxxxxx, #xxx, color names, rgb(#,#,#) -->
+
+<h1 style="color: #F00;"> Abbreviated Hex Code #F00 = #FF0000 = red </h1>
+
+<h1 style="color: rgb(255,255,0);"> Using RGB values to color elements - rgb(#,#,#);  #= 0 to 255</h1> <!-- The RGB value for black looks like this: rgb(0, 0, 0)
+The RGB value for white looks like this: rgb(255, 255, 255) 
+If you do the math, the two digits for one color equal 16 times 16, which gives us 256 total values. So RGB, which starts counting from zero, has the exact same number of possible values as hex code.-->

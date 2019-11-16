@@ -1,0 +1,86 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose.
+
+CSS3 introduced Flexible Boxes, or flexbox, to create page layouts for a dynamic UI. It is a layout mode that arranges elements in a predictable way for different screen sizes and browsers. While somewhat new, all popular modern browsers support flexbox. This section covers how to use flexbox and the different layout options it offers.
+-->
+
+<style>
+  #box-container {
+    height: 500px;
+    display: flex;
+  } /*Placing the CSS property display: flex; on an element allows you to use other flex properties to build a responsive page.  */
+
+  #box-1 {
+    background-color: dodgerblue;
+    width: 50%;
+    height: 50%;
+  }
+
+  #box-2 {
+    background-color: orangered;
+    width: 50%;
+    height: 50%;
+  }
+</style>
+<div id="box-container">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+
+
+<!-- Adding display: flex to an element turns it into a flex container. This makes it possible to align any children of that element into rows or columns. You do this by adding the flex-direction property to the parent item and setting it to row or column. Creating a row will align the children horizontally, and creating a column will align the children vertically.
+
+Other options for flex-direction are row-reverse and column-reverse.
+
+Note: The default value for the flex-direction property is row. -->
+<style>
+  #box-container-reverse {
+    display: flex;
+    height: 500px;
+    flex-direction: row-reverse;
+  }
+  #box-1 {
+    background-color: dodgerblue;
+    width: 50%;
+    height: 50%;
+  }
+
+  #box-2 {
+    background-color: orangered;
+    width: 50%;
+    height: 50%;
+  }
+</style>
+
+<div id="box-container-reverse">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+
+<!--  The last two challenges used the flex-direction property set to row. This property can also create a column by vertically stacking the children of a flex container.-->
+
+<style>
+  #box-container-column {
+    display: flex;
+    height: 500px;
+    flex-direction: column;
+  }
+  #box-1 {
+    background-color: dodgerblue;
+    width: 50%;
+    height: 50%;
+  }
+
+  #box-2 {
+    background-color: orangered;
+    width: 50%;
+    height: 50%;
+  }
+</style>
+
+<div id="box-container-column">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+
+
+

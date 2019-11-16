@@ -1,0 +1,197 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose.
+
+Applied Visual Design: Create a More Complex Shape Using CSS and HTML
+Make a CSS Heartbeat using an Infinite Animation Count
+-->
+<style>
+  .back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation-name: backdiv;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+
+  .heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
+    animation-name: beat;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+  } 
+  .heart:after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
+  } 
+  .heart:before {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 0px;
+  } /* The ::before and ::after pseudo-elements are used to add something before or after a selected element.  
+
+   For the ::before and ::after pseudo-elements to function properly, they must have a defined content property. This property is usually used to add things like a photo or text to the selected element. When the ::before and ::after pseudo-elements are used to make shapes, the content property is still required, but it's set to an empty string.*/
+
+  @keyframes backdiv {
+    50% {
+      background: #ffe6f2;
+    }
+  }
+
+  @keyframes beat {
+    0% {
+      transform: scale(1) rotate(-45deg);
+    }
+    50% {
+      transform: scale(0.6) rotate(-45deg);
+    }
+  }
+
+</style>
+<div class="back"></div>
+<div class="heart"></div>
+
+<!-- Learn How the CSS @keyframes and animation Properties Work   -->
+
+<style>
+  div {
+    height: 40px;
+    width: 70%;
+    background: black;
+    margin: 50px auto;
+    border-radius: 5px;
+    position: relative;  /* When elements have a specified position, such as fixed or relative, the CSS offset properties right, left, top, and bottom can be used in animation rules to create movement. */
+
+  }
+
+  #rect {
+    animation-name: rainbow;
+    animation-duration: 4s;
+    animation-iteration-count: infinite; /* allows you to control how many times you would like to loop through the animation. */
+
+  }
+  /* animation-name sets the name of the animation, which is later used by @keyframes to tell CSS which rules go with which animations.
+
+animation-duration sets the length of time for the animation.
+
+@keyframes is how to specify exactly what happens within the animation over the duration. This is done by giving CSS properties for specific "frames" during the animation, with percentages ranging from 0% to 100%. If you compare this to a movie, the CSS properties for 0% is how the element displays in the opening scene. The CSS properties for 100% is how the element appears at the end, right before the credits roll. Then CSS applies the magic to transition the element over the given duration to act out the scene.   */
+  @keyframes rainbow {
+    0% {
+      background-color: blue;
+      top: 0px;    /* Create Movement Using CSS Animation */
+      left: 0px;
+    }
+    50% {
+      background-color: green;
+      top: 50px;
+      left: 25px;
+    }
+    100% {
+      background-color: yellow;
+      top: 0px;
+      left:-25px;
+      opacity: 0.1;  /*  it gradually fades */
+    }
+  }
+
+</style>
+<div id="rect"></div>
+
+
+<!--Use CSS Animation to Change the Hover State of a Button -->
+<style>
+  button {
+    border-radius: 5px;
+    color: white;
+    background-color: #0F5897;
+    padding: 5px 10px 8px 10px;
+  }
+
+  button:hover {
+    animation-name: background-color;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+/*Notice how the animation resets after 500ms has passed, causing the button to revert back to the original color. You want the button to stay highlighted.
+
+This can be done by setting the animation-fill-mode property to forwards. The animation-fill-mode specifies the style applied to an element when the animation has finished.  */
+  }
+@keyframes background-color {
+  100% {
+    background-color: #4791d0;
+    }
+}
+
+</style>
+
+<button>Register</button>
+
+<!--  Animate Multiple Elements at Variable Rates -->
+
+<style>
+  .stars {
+    background-color: blue;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    animation-iteration-count: infinite;
+  }
+
+  .star-1 {
+    margin-top: 10%;
+    margin-left: 90%;
+    animation-duration: 0.9s;
+    animation-name: twinkle;
+  }
+
+  .star-2 {
+    margin-top: 10%;
+    margin-left: 10%;
+    animation-duration: 1s;
+    animation-name: twinkle;
+  }
+
+  .star-3 {
+    margin-top: 10%;
+    margin-left: 50%;
+    animation-duration: 1.1s;
+    animation-name: twinkle;
+  }
+
+  @keyframes twinkle {
+    20% {
+      transform: scale(0.5);
+      opacity: 0.5;
+    }
+  }
+
+</style>
+
+<div class="star-1 stars"></div>
+<div class="star-2 stars"></div>
+<div class="star-3 stars"></div>
+

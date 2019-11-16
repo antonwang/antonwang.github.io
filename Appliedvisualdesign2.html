@@ -1,0 +1,66 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose. -->
+
+
+<style>
+  #navbar {
+    position: fixed; /* the fixed position is a type of absolute positioning that locks an element relative to the browser window. One key difference between the fixed and absolute positions is that an element with a fixed position won't move when the user scrolls. */
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #767676;
+  }
+  nav ul {
+    margin: 0px;
+    padding: 5px 0px 5px 30px;
+  }
+  nav li {
+    display: inline;
+    margin-right: 20px;
+  }
+  a {
+    text-decoration: none;
+  }
+</style>
+<body>
+  <header>
+    <br><h1>Welcome!</h1>
+    <nav id="navbar">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <p>I shift up when the #navbar is fixed to the browser window.</p>
+</body>
+
+<head>
+  <style>
+    #left {
+      float: left; 
+      width: 50%;
+    }
+    #right {
+      float: right;
+      width: 40%;
+    } /*Floating elements are removed from the normal flow of a document and pushed to either the left or right of their containing parent element. It's commonly used with the width property to specify how much horizontal space the floated element requires. */
+    aside, section {
+      padding: 2px;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome!</h1>
+  </header>
+  <section id="left">
+    <h2>Content</h2>
+    <p>Good stuff</p>
+  </section>
+  <aside id="right">
+    <h2>Sidebar</h2>
+    <p>Links</p>
+  </aside>
+</body>
+

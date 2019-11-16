@@ -1,0 +1,136 @@
+<!--Contents are taken from freecodecamp Applied Visual Design tutorial. This is only for my learning purpose --> 
+
+<!-- Text is often a large part of web content. CSS has several options for how to align it with the text-align property.
+
+text-align: justify; causes all lines of text except the last line to meet the left and right edges of the line box.
+
+text-align: center; centers the text
+
+text-align: right; right-aligns the text
+
+And text-align: left; (the default) left-aligns the text.  -->
+
+
+<style>
+  h4 {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(45, 45, 45, 0.1);
+    /* rgba stands for:  r = red, g = green, b = blue, a = alpha/level of opacity. The RGB values can range from 0 to 255. The alpha value can range from 1, which is fully opaque or a solid color, to 0, which is fully transparent or clear.
+     */
+    font-size: 20px;
+    text-transform: uppercase; 
+    /*
+    The text-transform property in CSS is used to change the appearance of text, without having to change the text content of the actual HTML elements.
+
+    The following table shows how the different text-transformvalues change the example text "Transform me".
+
+    Value       Result
+    lowercase   "transform me"
+    uppercase   "TRANSFORM ME"
+    capitalize  "Transform Me"
+    initial     Use the default value
+    inherit     Use the text-transform value from the parent element
+    none        Default: Use the original text */
+    } 
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+    opacity: 0.7;
+  } /*The opacity property in CSS is used to adjust the opacity, or conversely, the transparency for an item.
+  A value of 1 is opaque, which isn't transparent at all.
+  A value of 0.5 is half see-through.
+  A value of 0 is completely transparent. */
+
+  #thumbnail {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    } /*
+    The box-shadow property applies one or more shadows to an element.
+
+    The box-shadow property takes values for
+
+    offset-x (how far to push the shadow horizontally from the element),
+    offset-y (how far to push the shadow vertically from the element),
+    blur-radius,
+    spread-radius and
+    color, in that order.
+    The blur-radius and spread-radius values are optional.
+
+    Multiple box-shadows can be created by using commas to separate properties of each box-shadow element.*/
+
+  .fullCard {
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+    width: 245px; /* Values can be given in relative length units (such as em), absolute length units (such as px), or as a percentage */
+  }
+  .cardContent {
+    padding: 10px; 
+  }
+  a:hover {
+    color: #00F;  /* Here's the CSS to change the color of the anchor tag to blue during its hover state */
+  } 
+</style>
+<div class="fullCard" id="thumbnail">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4><s>Google</s>Alphabet</h4>
+      <hr>  <!-- With the s tag, the browser applies the CSS of text-decoration: line-through; to the element.
+
+      You can use the hr tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content.-->
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p> <!-- With the strong tag, the browser applies the CSS of font-weight: bold; to the element. 
+
+      With the u tag, the browser applies the CSS of text-decoration: underline; to the element.
+
+      To emphasize text, you can use the em tag. This displays text as italicized, as the browser applies the CSS of font-style: italic; to the element.
+      -->
+    </div> 
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  h1 {
+    font-size: 68px;
+    font-weight: 800;  /*The font-weight property sets how thick or thin characters are in a section of text.*/
+  }
+  h2 {
+    font-size: 52px;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 40px;
+    font-weight: 500;
+  }
+  h4 {
+    font-size: 32px;
+    font-weight: 400; /*this is the second h4 style, so whichever property is read last will have precedence */
+  }
+  h5 {
+    font-size: 21px;
+    font-weight: 300;
+    position: relative; 
+    top: 15px; /*These say how many pixels, percentages, or ems to move the item AWAY from where it is normally positioned. The CSS offsets of top or bottom, and left or right tell the browser how far to offset an item relative to where it would sit in the normal flow of the document.  */
+  }
+  h6 {
+    font-size: 14px;
+    font-weight: 200;
+  }
+</style>
+<h1>This is h1 text</h1>
+<h2>This is h2 text</h2>
+<h3>This is h3 text</h3>
+<h4>This is h4 text</h4>
+<h5>This is h5 text</h5>
+<h6>This is h6 text</h6>
+<p style="line-height: 25px">  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>  
+
+

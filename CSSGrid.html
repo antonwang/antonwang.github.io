@@ -1,0 +1,154 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose.
+
+CSS Grid helps you easily build complex web designs. It works by turning an HTML element into a grid container with rows and columns for you to place children elements where you want within the grid. -->
+
+<style>
+  .d1{background:LightSkyBlue;}
+  .d2{background:LightSalmon;}
+  .d3{background:PaleTurquoise;}
+  .d4{background:LightPink;}
+  .d5{background:PaleGreen;}
+
+  .container {
+    font-size: 40px;
+    width: 100%;
+    background: LightGray;
+    display: grid; /* 
+    Turn any HTML element into a grid container by setting its display property to grid. This gives you the ability to use all the other properties associated with CSS Grid.
+
+	Note: In CSS Grid, the parent element is referred to as the container and its children are called items.*/
+    grid-template-columns: 100px 100px 100px; /* 
+    Simply creating a grid element doesn't get you very far. You need to define the structure of the grid as well. To add some columns to the grid, use the grid-template-columns property on a grid container
+
+    This will give your grid three columns that are each 100px wide. The number of parameters given to the grid-template-columns property indicates the number of columns in the grid, and the value of each parameter indicates the width of each column.
+
+
+    You can use absolute and relative units like px and em in CSS Grid to define the size of rows and columns. You can use these as well:
+
+	fr: sets the column or row to a fraction of the available space,
+
+	auto: sets the column or row to the width or height of its content automatically,
+
+	%: adjusts the column or row to the percent width of its container.
+
+		grid-template-columns: auto 50px 10% 2fr 1fr;
+    
+    This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
+	*/
+
+    grid-template-rows: 50px 50px;
+    /*The grid you created in the last challenge will set the number of rows automatically. To adjust the rows manually, use the grid-template-rows property in the same way you used grid-template-columns in previous challenge.*/
+
+    grid-column-gap: 20px;
+
+    /* So far in the grids you have created, the columns have all been tight up against each other. Sometimes you want a gap in between the columns. To add a gap between the columns, use the grid-column-gap property. This creates 20px of empty space between all of our columns. */
+
+    grid-row-gap: 5px;
+
+    grid-gap: 5px 20px;
+
+    /* grid-gap is a shorthand property for grid-row-gap and grid-column-gap from the previous two challenges that's more convenient to use. 
+
+    If grid-gap has one value, it will create a gap between all rows and columns. 
+
+    However, if there are two values, it will use the first one to set the gap between the rows and the second value for the columns. */
+  }
+</style>
+
+<div class="container">
+  <div class="d1">1</div>
+  <div class="d2">2</div>
+  <div class="d3">3</div>
+  <div class="d4">4</div>
+  <div class="d5">5</div>
+</div>
+
+
+
+<style>
+  .item1{background:LightSkyBlue;}
+  .item2{
+  	background:LightSalmon;
+	justify-self: center;
+	/*In CSS Grid, the content of each item is located in a box which is referred to as a cell. You can align the content's position within its cell horizontally using the justify-self property on a grid item. By default, this property has a value of stretch, which will make the content fill the whole width of the cell. This CSS Grid property accepts other values as well:
+
+	start: aligns the content at the left of the cell,
+
+	center: aligns the content in the center of the cell,
+
+	end: aligns the content at the right of the cell.   */
+  }
+  .item3{
+  	background:PaleTurquoise;
+  	align-self: end;
+  	/*Align an Item Vertically using align-self
+	
+	Just as you can align an item horizontally, there's a way to align an item vertically as well. To do this, you use the align-self property on an item. This property accepts all of the same values as justify-self. */
+  }
+  .item4{background:LightPink;}
+
+  .item5 {
+    background: PaleGreen;
+
+    grid-column: 2/4;
+    /* The hypothetical horizontal and vertical lines that create the grid are referred to as lines. These lines are numbered starting with 1 at the top left corner of the grid and move right for columns and down for rows, counting upward.	
+
+    This will make the item start at the second vertical line of the grid on the left and span to the 4th line of the grid, consuming two columns.*/
+    grid-row: 2/4;
+  }
+
+  .container2 {
+    font-size: 40px;
+    min-height: 300px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+</style>
+
+<div class="container2">
+  <div class="item1">1</div>
+  <div class="item2">2</div>
+  <div class="item3">3</div>
+  <div class="item4">4</div>
+  <div class="item5">5</div>
+</div>
+
+<style>
+  .item-a{background:LightSkyBlue;}
+  .item-b{background:LightSalmon;}
+  .item-c{background:PaleTurquoise;}
+  .item-d{background:LightPink;}
+  .item-e{background:PaleGreen;}
+
+  .container3 {
+    font-size: 40px;
+    min-height: 300px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+
+    justify-items: center;
+    /* CSS Grid: Align All Items Horizontally using justify-items
+
+	Sometimes you want all the items in your CSS Grid to share the same alignment. You can use the previously learned properties and align them individually, or you can align them all at once horizontally by using justify-items on your grid container. This property can accept all the same values you learned about in the previous two challenges, the difference being that it will move all the items in our grid to the desired alignment. */
+	align-items: end;
+
+  }
+</style>
+
+<div class="container3">
+  <div class="item-a">1</div>
+  <div class="item-b">2</div>
+  <div class="item-c">3</div>
+  <div class="item-d">4</div>
+  <div class="item-e">5</div>
+</div>
+
+

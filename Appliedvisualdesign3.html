@@ -1,0 +1,36 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose. -->
+
+<style>
+  div {
+    width: 30%;
+    height: 200px;
+    margin-top: 20px;
+  }
+
+  .first {
+    background-color: red;
+    position: absolute;
+    z-index:2;
+  } /*the z-index property can specify the order of how elements are stacked on top of one another. It must be an integer (i.e. a whole number and not a decimal), and higher values for the z-index property of an element move it higher in the stack than those with lower values. */
+
+  .second {
+    background-color: blue;
+    position: absolute;
+    left: 40px;
+    top: 50px;
+    z-index: 1;
+  }
+  .third {
+    background-color: black;
+    position: absolute;
+    left: 200px;
+    top: 300px;
+    margin: auto; /* Another positioning technique is to center a block element horizontally. One way to do this is to set its margin to a value of auto. */
+  }
+</style>
+
+<div class="first"></div>
+<div class="second"></div>
+<div class="third"></div>
+
+

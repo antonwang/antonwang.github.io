@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+My coding journey. First learn HTML and CSS to understand markup languages.
+Code and notes are summarized from HTML and CSS tutorials with freecodecamp.org - username: https://www.freecodecamp.org/focus_concepts
+
+-->
+<main> <!-- helps search engines to find content of your page-->
+<head> <!-- displays words on the tab (metadata element)  -->
+	<title>My coding journey</title>
+</head>
+
+<body> <!-- page contents -->
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+<h1 style="color: blue;">Purpose of this site</h1> <!-- CSS = cascading style sheets - inline style declaration. Good practice to end with a ;1 way of adding style-->
+<p>To practice coding as I learn how to code</p>  
+<p>To document my coding journey</p>
+
+<style>
+h2 {color:green;} </style> <!-- using CSS selector for all h2 elements. Preferred way is to create a .css document with all styles in it for ease of coding -->
+
+<style>
+    .blue-text {color:blue;} 
+    p {font-size: 20px; font-family: monospace;}
+    h2 {font-family: Lobster, mmonospace;}
+     .smaller-image {
+          width: 800px;
+    }
+    
+    .thick-teal-border {
+        border-color: teal;
+        border-width: 10px;
+        border-style: solid;
+        border-radius: 10px; 
+    }
+
+    .gold-background { 
+        background-color: gold;
+    }
+    #key-ingredients {
+        background-color: orange;
+    }
+    [type='checkbox'] {
+        margin: 10px 0px 15px 0px;
+    }
+    body {background-color: beige;
+    }
+</style>  <!-- using a CSS class to style an element .blue-text is a class (starts with a period in CSS style element) that is a reusable style. applying css rules to elements i.e p and h2.  Under h2, monospace is a second option if lobster font is not found i.e. commenting out the link reference to lobster. Border-radius can also hold a percentage value, like 50%. In style element, always reference classes or ids by putting a . or a # in front respectively. A # = referencing an id (which has a higher importance than referencing a class)-->
+
+
+<h2><strong> About me </strong></h2> <!--  <strong> bolds words</strong>  -->
+<p class="blue-text">I think coding is my newfound addiction. I don't drink coffee, because I was really cheap in college, so yes, I survived college with good old H2O. I strive for work-life balance and I enjoy hanging out with people and in nature. I subscribe to <em> "happy wife happy life."</em></p>   <!--  <em> italicizes words </em>  -->
+<p>Click here to <a href="http:www.google.com">search the internet</a></p>
+<p>One of my favorite <a href="https://www.instagram.com/p/Bx_nQV_BwPN/">pictures</a></p>
+
+<a href="#"><img class="smaller-image thick-teal-border" src="file:///Users/anton/Code/My_Projects/antonandbird.jpeg" alt="A bird on my shoulder"> </a><!-- a href="#" is a placeholder empty site for clicking on the image - the arrow will change into a hand when hovering over the image. img src=" " displays an image on the site; class= " " brings out the css class defined under style rules above. Just separate two classes by a space.  -->
+
+<div class="gold-background">
+    <p>Current goals:</p>
+    <ul> <!-- unordered list - bullet points -->
+    	<li>Complete freecodecamp tutorials and practice along</li>
+    	<li>Meet other programmers</li>
+    	<li>Learn from online resources including youtube</li>
+    </ul>
+
+    <p>To create a website, the following must be mastered:</p>
+    <ol> <!-- ordered list - numbering system -->
+    	<li>HTML</li>
+    	<li>CSS</li>
+    	<li>Javascript</li>
+    </ol>
+</div>
+
+<form id="key-ingredients" action="/key ingredients">  <!-- for user input-->
+    <p>One of two ways to reach your goal</p>
+    <!-- same category of input should have the same name -->
+    <label><input type="radio" name="general-guideline">100 days of code</label>
+    <label><input type="radio" name="general-guideline">No zero days</label><br>
+    
+    <p>Traits of a good programmer</p>
+    <!-- for best practice, include for=" " after the label, and id " " after the input.   for="" and id="" should have the same content-->
+    <label for="curiosity"><input id="curiosity" type="checkbox" name="quality" value="curiosity" checked> Curiosity</label>
+    
+    <label for="problem solver"><input id="problem solver" type="checkbox" name="quality" value="problem solver" checked> Problem solver</label>
+    
+    <label for="relentlessness"><input id="relentlessness" type="checkbox" name="quality" value="relentlessness" checked> Relentlessness</label><br>
+    
+    <input type="text" placeholder="qualities" required>
+    <button type="submit">Submit</button>
+</form>
+</body>
+<main>
+</html>

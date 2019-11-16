@@ -1,0 +1,191 @@
+<!-- The following codes are taken from freecodecamp.org CSS tutorial. This is only for my learning purpose.
+
+Applied Accessibility: Add a Text Alternative to Images for Visually Impaired Accessibility
+
+Applied Accessibility: Make Screen Reader Navigation Easier with the header, nav, footer Landmarks   etc
+ -->
+
+<img src="doingKarateWow.jpeg" alt="Camper Cat is doing karate">
+
+<!-- People with visual impairments rely on screen readers to convert web content to an audio interface. They won't get information if it's only presented visually. For images, screen readers can access the alt attribute and read its contents to deliver key information.
+
+Good alt text provides the reader a brief description of the image. You should always include an alt attribute on your image. Per HTML5 specification, this is now considered mandatory. -->
+
+<img src="visualDecoration.jpeg" alt="">
+<!-- 
+In situations when an image is already explained with text content, or does not add meaning to a page, the img still needs an alt attribute, but it can be set to an empty string. 
+
+Note: For images with a caption, you may still want to include alt text, since it helps search engines catalog the content of the image.
+-->
+
+
+<!-- Headings (h1 through h6 elements) are workhorse tags that help provide structure and labeling to your content. Screen readers can be set to read only the headings on a page so the user gets a summary. This means it is important for the heading tags in your markup to have semantic meaning and relate to each other, not be picked merely for their size values.
+
+Semantic meaning means that the tag you use around content indicates the type of information it contains.
+
+
+One final point, each page should always have one (and only one) h1 element, which is the main subject of your content. This and the other headings are used in part by search engines to understand the topic of the page.
+
+The main element is used to wrap (you guessed it) the main content, and there should be only one per page. It's meant to surround the information that's related to the central topic of your page. It's not meant to include items that repeat across pages, like navigation links or banners.
+
+The main tag also has an embedded landmark feature that assistive technology can use to quickly navigate to the main content. If you've ever seen a "Jump to Main Content" link at the top of a page, using a main tag automatically gives assistive devices that functionality.
+-->    
+
+<style>
+	body {
+		color: black;
+		background-color: #FFF;
+	}
+</style>   <!--The Web Content Accessibility Guidelines (WCAG) recommend at least a 4.5 to 1 contrast ratio for normal text. The ratio is calculated by comparing the relative luminance values of two colors. This ranges from 1:1 for the same color, or no contrast, to 21:1 for white against black, the strongest contrast.  -->
+
+<body>
+  <header>
+    <h1>Training with Camper Cat</h1>
+ <!--  header tag is used to wrap introductory information or navigation links for its parent tag and works well around content that's repeated at the top on multiple pages.
+
+Note: The header is meant for use in the body tag of your HTML document. This is different than the head element, which contains the page's title, meta information, etc.	-->
+    <nav>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </nav>
+    <!-- The nav element is another HTML5 item with the embedded landmark feature for easy screen reader navigation. This tag is meant to wrap around the main navigation links in your page.-->
+
+  </header>
+  <main>
+    <section id="stealth">
+      <h2>Stealth &amp; Agility Training</h2>
+      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
+      <article><h3>No training is NP-complete without parkour</h3></article>
+    </section>
+
+<!-- An article is for standalone content, and a section is for grouping thematically related content. When there's no relationship between groups of content, then use a div.
+<div> - groups content  
+<section> - groups related content
+<article> - groups independent, self-contained content
+ -->
+
+    <section id="combat">
+      <h2>Combat Training</h2>
+      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
+      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+    </section>
+    <section id="weapons">
+      <h2>Weapons Training</h2>
+      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
+      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+    </section>
+  </main>
+
+  <audio controls>
+  	<source src="https://s3.amazonaws.com/freecodecamp/screen-reader.mp3" type="audio/mpeg"/>
+  </audio>
+  <!--  HTML5's audio element gives semantic meaning when it wraps sound or audio stream content in your markup. Audio content also needs a text alternative to be accessible to people who are deaf or hard of hearing. This can be done with nearby text on the page or a link to a transcript.
+	
+The audio tag supports the controls attribute. This shows the browser default play, pause, and other controls, and supports keyboard functionality. This is a boolean attribute, meaning it doesn't need a value, its presence on the tag turns the setting on.-->
+	<figure>
+	  <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
+	  <br>
+	  <figcaption>
+	    Master Camper Cat demonstrates proper form of a roundhouse kick.
+	  </figcaption>
+	</figure>  <!--HTML5 introduced the figure element, along with the related figcaption. Used together, these items wrap a visual representation (like an image, diagram, or chart) along with its caption.  -->
+
+	<form>
+      <p>Sign up to receive Camper Cat's blog posts by email here!</p>
+
+
+      <label for="email">Email:</label> <!-- The value of the for attribute must be the same as the value of the id attribute of the form control. -->
+      <input type="text" id="email" name="email"> <!-- Forms often include the input field, which can be used to create several different form controls. The type attribute on this element indicates what kind of input will be created. 	-->
+
+
+      <input type="submit" name="submit" value="Submit">
+    </form>
+	<!-- The label tag wraps the text for a specific form control item, usually the name or label for a choice. This ties meaning to the item and makes the form more readable. The for attribute on a label tag explicitly associates that label with the form control and is used by screen readers. -->
+
+	<fieldset>
+        <legend>What level ninja are you?</legend>
+        <input id="newbie" type="radio" name="levels" value="newbie">
+        <label for="newbie">Newbie Kitten</label><br>
+        <input id="intermediate" type="radio" name="levels" value="intermediate">
+        <label for="intermediate">Developing Student</label><br>
+        <input id="master" type="radio" name="levels" value="master">
+        <label for="master">Master</label>
+    </fieldset>
+
+    <section>
+      <h2>Mortal Kombat Tournament Survey</h2>
+      <form>
+        <p>Tell us the best date for the competition</p>
+        <label for="pickdate">Preferred Date:</label>
+        <input type="date" id="pickdate" name="date">
+
+        <input type="submit" name="submit" value="Submit">
+      </form>
+    </section>
+  	
+  	<h2>Mortal Kombat Tournament Survey Results</h2>
+      <p>Thank you to everyone for responding to Master Camper Cat's survey. The best day to host the vaunted Mortal Kombat tournament is <time datetime=2016-09-15>Thursday, September 15<sup>th</sup></time>. May the best ninja win!</p>  <!--HTML5 also introduced the time element along with a datetime attribute to standardize times. This is an inline element that can wrap a date or time on a page. datetime attribute is the value accessed by assistive devices. It helps avoid confusion by stating a standardized version of a time, even if it's written in an informal or colloquial manner in the text.-->
+
+
+    <style>
+    	.sr-only {
+		  position: absolute;
+		  left: -10000px;
+		  width: 1px;
+		  height: 1px;
+		  top: auto;
+		  overflow: hidden;
+		}
+	</style>  <!-- CSS's magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.-->
+
+	<figure>
+      <!-- Stacked bar chart of weekly training-->
+      <p>[Stacked bar chart]</p>
+      <br />
+      <figcaption>Breakdown per week of time to spend training in stealth, combat, and weapons.</figcaption>
+    </figure>
+    <table class="sr-only">
+      <caption>Hours of Weekly Training in Stealth, Combat, and Weapons</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">Stealth &amp; Agility</th>
+          <th scope="col">Combat</th>
+          <th scope="col">Weapons</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Week One</th>
+          <td>3</td>
+          <td>5</td>
+          <td>2</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th scope="row">Week Two</th>
+          <td>4</td>
+          <td>5</td>
+          <td>3</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <th scope="row">Week Three</th>
+          <td>4</td>
+          <td>6</td>
+          <td>3</td>
+          <td>13</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</body> 
+
+<footer>&copy; 2018 Camper Cat</footer>
+<!-- Similar to header and nav, the footer element has a built-in landmark feature that allows assistive devices to quickly navigate to it. It's primarily used to contain copyright information or links to related documents that usually sit at the bottom of a page.  -->
+
