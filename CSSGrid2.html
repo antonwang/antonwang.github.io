@@ -60,4 +60,21 @@ grid-area: horizontal line to start at / vertical line to start at / horizontal 
 
 So the item in the example will consume the rows between lines 1 and 2, and the columns between lines 1 and 4.
 
+
+
+
+CSS Grid: Reduce Repetition Using the repeat Function
+
+Here's an example that would create the 100 row grid, each row at 50px tall.
+
+grid-template-rows: repeat(100, 50px);
+You can also repeat multiple values with the repeat function and insert the function amongst other values when defining a grid structure. Here's what that looks like:
+
+grid-template-columns: repeat(2, 1fr 50px) 20px;
+This translates to:
+
+grid-template-columns: 1fr 50px 1fr 50px 20px;
+Note: The 1fr 50px is repeated twice followed by 20px.
 -->
+
+
