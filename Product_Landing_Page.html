@@ -1,3 +1,182 @@
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #c3cfff;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+header {
+  top: 0;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  background-color: lightyellow;
+}
+
+#header-img {
+  margin-left: 50px; 
+}
+
+.logo {
+    display: flex;
+    width: 67%;
+    align-items: center;
+}
+
+#name_logo {
+  font-size: 1.2em;
+  color: black;
+  padding: 10px;
+}
+
+.nav-link {
+  color: black;
+  text-decoration:  overline wavy black;
+}
+
+nav > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+li {
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+#signmeup {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+}
+#email {
+  font-family: inherit;
+  font-size: inherit;
+  margin: 10px 0px;
+}
+
+#submit {
+  color: teal;
+  background-color: white;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#features {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width:60%;
+ }
+
+.box {
+  display: flex;
+}
+
+.icon {
+  margin-top:15px;
+  height: 60px;
+  width: 60px;
+  //border: 1px solid black;
+}
+
+.text {
+  margin: 0px 0px 30px 70px;
+}
+
+#printTypes {
+    width: 60%;
+}
+
+#pricing {
+  display: flex;
+}
+
+.product {
+  margin: 40px;
+  width: 220px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.level {
+  height: 30px;
+  width: 100%;
+  text-transform: uppercase;
+  background-color: lightyellow;
+}
+
+div > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product > ul > li {
+    border: 1px solid black;
+}
+
+footer {
+  margin: 0 20%;
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.select {
+  border: 1px solid black;
+  font-family: inherit;  
+  font-size: inherit;
+  font-weight: 550;
+  margin: 10px;
+  padding: 5px;
+  background-color: yellow;
+    
+}
+
+footer > ul {
+  display: flex;
+  list-style-type: none;
+  }
+
+footer > ul > li {
+  margin: 0;
+}
+
+span {
+  font-size: 18px;
+}
+
+@media (max-width: 800px) {
+  #video {
+    height: 300px;
+  }
+}
+
+</style>
+
 <head>
   <script src="https://kit.fontawesome.com/e6e6da4e04.js" crossorigin="anonymous"></script>
 </head>
@@ -11,13 +190,13 @@
     <nav id="nav-bar">
       <ul>
         <li>
-          <a class="nav-link" href="#Features">Features</a>
+          <a class="nav-link" href="#features">Features</a>
         </li>
         <li>
-          <a class="nav-link" href="#PrintTypes">Print Types</a>
+          <a class="nav-link" href="#printTypes">Print Types</a>
         </li>
         <li>
-          <a class="nav-link" href="#Pricing">Pricing</a>
+          <a class="nav-link" href="#pricing">Pricing</a>
         </li>
       </ul>
     </nav>
@@ -33,8 +212,8 @@
     </form>
   </section>
   
-  <div id="container1">
-  <section id="Features">
+  <div id="container">
+  <section id="features">
     <div class="box">
       <div class="icon">
         <i class="far fa-check-circle" style="font-size:60px;"></i>
@@ -71,13 +250,13 @@
   </section>
   <!--end of feature section and beginning of Print Types section-->
 
-  <section id="PrintTypes">
+  <section id="printTypes">
     <iframe id="video" width="100%" height="500" src="https://www.youtube.com/embed/MzdpoKkMEDQ" allowfullscreen></iframe>
   </section>
   <!--end of PrintTypes section and beginning of Pricing section-->
     
-  <section id="Pricing">
-    <div class="product" id="PaperPrint">
+  <section id="pricing">
+    <div class="product" id="paperPrint">
       <div class="level">Paper Print</div>
       <h3>$49</h3>
       <ul>
@@ -88,7 +267,7 @@
       </ul>
       <button class="select">Select</button>
     </div>
-    <div class="product" id="MetalPrint">
+    <div class="product" id="metalPrint">
       <div class="level">Metal Print</div>
       <h3>$129</h3>
       <ul>
@@ -99,7 +278,7 @@
       </ul>
       <button class="select">Select</button>
     </div>
-    <div class="product" id="CanvasPrint">
+    <div class="product" id="canvasPrint">
       <div class="level">Canvas Print</div>
       <h3>$159</h3>
       <ul>
@@ -124,8 +303,3 @@
   <script src='https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js'></script>
 </body>
 
-<!-- 
-
-User Story #14: My product landing page should have at least one media query.
-
- -->
