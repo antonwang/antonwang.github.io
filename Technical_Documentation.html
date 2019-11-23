@@ -1,0 +1,186 @@
+<style>
+main {
+  margin-left: 300px;
+  padding: 0px 30px;
+}
+
+#navbar {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 5px solid grey;
+  overflow: auto;
+
+}
+
+@media (max-height 600px) {
+  #navbar {
+    overflow: scroll;
+  }
+}
+
+ul > li {
+  padding: 5px;
+}
+
+ol li {
+  padding: 5px;
+}
+
+#navbar > ul {
+  margin: 0;
+  padding: 0;
+}
+
+#navbar header p {
+  font-family: monospace;
+  font-size: 30px;
+  text-align: center;
+}
+
+#navbar > ul >li {
+  list-style: none;
+  padding: 20px 0;
+  text-align: center;
+  font-family: monospace;
+  font-size: 20px;
+  border-top: 1px solid black;
+  margin: 0;
+  
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+} 
+
+a:hover {
+  color: blue;
+}
+
+code {
+  background-color: #e0dedc;
+}
+
+</style>
+
+<body>
+<main id="main-doc"> <!-- contains the page's main content (technical documentation) -->
+  
+  <section class="main-section" id="What_is_Javascript,_really?"> <!-- each section contains the different topics of technical documentation); min of 5 sections; any spaces should be replaced with underscores-->
+    <header>
+      <h2>What is JavaScript, really?<h2>
+    </header>
+    <p>JavaScript ("JS" for short) is a full-fledged dynamic programming language that, when applied to an HTML document, can provide dynamic interactivity on websites. It was invented by Brendan Eich, co-founder of the Mozilla project, the Mozilla Foundation, and the Mozilla Corporation.</p>
+    <p>JavaScript is incredibly versatile and beginner friendly. With more experience, you'll be able to create games, animated 2D and 3D graphics, comprehensive database-driven apps, and much more!</p>
+    <p>JavaScript itself is fairly compact yet very flexible. Developers have written a large variety of tools on top of the core JavaScript language, unlocking a vast amount of extra functionality with minimum effort.</p>
+  </section>
+  
+  <section class="main-section" id="Variables">
+    <header>
+      <h2>Variables</h2>
+    </header>
+    <p>
+       JavaScript is one of the most lively web technologies today, and as you start to get good at using it, your websites will enter a new dimension of power and creativity.
+    </p>
+    <ol>
+      <li>To start, variables are containers that you can store values in. You start by declaring a variable with the var (less recommended, dive deeper for the explaination) or the let keyword, followed by any name you want to call it:
+        <code>let myVariable;</code>
+      </li>
+      <li>After declaring a variable, you can give it a value:
+        <code>myVariable = 'Bob'</code>
+      </li>
+      <li>You can do both these operations on the same line if you wish:
+        <code>let myVariable = 'Bob';</code>
+      </li>
+      <li>You can retrieve the value by just calling the variable by name:
+        <code>myVariable;</code>
+      </li>
+      <li>After giving a variable a value, you can later choose to change it:
+        <code>let myVariable = 'Bob'; myVariable = 'Steve';</code>
+      </li>
+    </ol>
+    
+  </section>
+  
+  <section class="main-section" id="Comments">
+    <header>
+      <h2>Comments</h2>
+    </header>
+    <p>Comments are, essentially, short snippets of text that can be added in-between code which is ignored by the browser. You can put comments into JavaScript code, just as you can in CSS:
+    </p>
+    <code>/* Everything in between is a comment. */</code>
+    <p>If your comment contains no line breaks, it's often easier to put it behind two slashes like this:
+    </p>
+    <code>// This is a comment</code>
+  </section>
+  
+  <section class="main-section" id="Operators">
+    <header>
+      <h2>Operators</h2>
+    </header>
+    <p>An operator is a mathematical symbol which produces a result based on two values (or variables). In the following table you can see some of the simplest operators, along with some examples to try out in the JavaScript console.
+    </p>
+    <ul>
+      <li>Addition: Used to add two numbers together or glue two strings together.	
+        <code> 6 + 9; "Hello " + "world!";</code>
+      </li>
+      <li>Subtraction, Multiplication, Division: These do what you'd expect them to do in basic math.
+        <code>9 - 3; 8 * 2; 9 / 3;</code>
+      </li>
+      <li>Assignment: it assigns a value to a variable.
+        <code>let myVariable = 'Bob';</code>
+      </li>
+      <li>Equality: Does a test to see if two values are equal to one another and returns a true/false (Boolean) result.
+        <code>	let myVariable = 3; myVariable === 4;</code>
+      </li>
+      <li>Not, Does-not-equal: Returns the logically opposite value of what it precedes; it turns a true into a false, etc. When it is used alongside the Equality operator, the negation operator tests whether two values are not equal.
+        <pre><code>let myVariable = 3; !(myVariable === 3); /*returns false */
+let myVariable = 3; myVariable !== 3; /*returns false */</code></pre>
+      </li>
+  </section>
+  
+  <section class="main-section" id="Conditionals">
+    <header>
+      <h2>Conditionals</h2>
+    </header>
+    <p>
+      Conditionals are code structures which allow you to test if an expression returns true or not, running alternative code revealed by its result. A very common form of conditionals is the if ... else statement. For example:
+    </p>
+    <pre><code>let iceCream = 'chocolate';
+if(iceCream === 'chocolate') {
+  alert('Yay, I love chocolate ice cream!');    
+} else {
+  alert('Awwww, but chocolate is my favorite...');    
+}</code></pre>
+  <p>The expression inside the if( ... ) is the test — this uses the identity operator (as described above) to compare the variable iceCream with the string chocolate to see if the two are equal.</p>
+  <p>If this comparison returns true, the first block of code is run. If the comparison is not true, the first block is skipped and the second code block, after the else statement, is run instead.</p>
+  </section>
+  
+    <section class="main-section" id="Reference">
+    <header>
+      <h2>Reference<h2>
+    </header>
+    <p>All the documentation in this page is taken from <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics" target="_blank">Mozilla Developer Network (MDN) Web Docs</a></p>
+  </section>
+      
+  <nav id="navbar">
+    <header> <!-- describes the topic of the technical documentation-->
+      <p id="JavaScript_docu">JavaScript Documentation</p>
+    </header>
+    <ul> <!--When I click on a navbar element, the page should navigate to the corresponding section of the main-doc element. Each text corresponds to the header text within each section -->
+      <li><a class="nav-link" href="#What_is_Javascript,_really?">What is Javascript, really?<a></li>
+      <li><a class="nav-link" href="#Variables">Variables<a></li>
+      <li><a class="nav-link" href="#Comments">Comments<a></li>
+      <li><a class="nav-link" href="#Operators">Operators<a></li>
+      <li><a class="nav-link" href="#Conditionals">Conditionals<a></li>
+      <li><a class="nav-link" href="#Reference">Reference<a></li>
+    <ul>
+  </nav>
+</main>
+
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
