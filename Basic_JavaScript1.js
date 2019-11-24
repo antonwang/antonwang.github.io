@@ -107,3 +107,113 @@ var ourArray = ["Stimpson", "J", "cat"];
 ourArray.shift(); // ourArray now equals ["J", "cat"]
 ourArray.unshift("Happy"); //unshift() adds the element at the beginning of the array.
 // ourArray now equals ["Happy", "J", "cat"]
+
+//Write Reusable JavaScript with Functions
+/*Here's an example of a function: */
+function functionName() {
+  console.log("Hello World");
+}
+/*
+You can call or invoke this function by using its name
+ followed by parentheses, like this: functionName(); 
+ Each time the function is called it will print out the
+ message "Hello World" on the dev console.
+  All of the code between the curly braces will 
+  be executed every time the function is called.
+*/
+
+//Passing Values to Functions with Arguments
+// Example
+function ourFunctionWithArgs(a, b) {
+  console.log(a - b);
+}
+ourFunctionWithArgs(10, 5); // Outputs 5
+/*Parameters are variables that act as placeholders for 
+the values that are to be input to a function when it is
+ called. The actual values that are input (or "passed") 
+ into a function when it is called are known as arguments.*/
+
+//Global Scope and Functions
+/*In JavaScript, scope refers to the visibility of variables.
+Variables which are defined outside of a function block 
+have Global scope. This means, they can be seen everywhere
+ in your JavaScript code. */
+var myGlobal = 10; // this is a global variable b/c it is outside of a function.
+
+function fun1() {
+  // Assign 5 to oopsGlobal Here
+  oopsGlobal = 5; // this is a global variable b/c no var definition
+}
+function fun2() {
+  var output = "";
+  if (typeof myGlobal != "undefined") {
+    output += "myGlobal: " + myGlobal;
+  }
+  if (typeof oopsGlobal != "undefined") {
+    output += " oopsGlobal: " + oopsGlobal;
+  }
+  console.log(output);
+}
+/*
+Variables which are used without the var keyword are
+ automatically created in the global scope. This can 
+ create unintended consequences elsewhere in your code 
+ or when running a function again. You should always 
+ declare your variables with var.
+*/
+
+//Local Scope and Functions
+/*Variables which are declared within a function,
+ as well as the function parameters have local scope.
+ That means, they are only visible within that function.
+
+Here is a function myTest with a local variable called loc.
+*/
+function myTest() {
+  var loc = "foo";
+  console.log(loc);
+}
+myTest(); // logs "foo"
+console.log(loc); // loc is not defined
+//loc is not defined outside of the function.
+
+//Global vs. Local Scope in Functions
+/* It is possible to have both local and global variables with the same name. When you do this, the local variable takes precedence over the global variable.
+
+In this example:*/
+var someVar = "Hat";
+function myFun() {
+  var someVar = "Head";
+  return someVar;
+}
+//The function myFun will return "Head" because the local version of the variable is present.
+
+//Return a Value from a Function with Return
+//We can pass values into a function with arguments. You can use a return statement to send a value back out of a function.
+// Example
+function minusSeven(num) {
+  return num - 7;
+}
+
+// Only change code below this line
+function timesFive(num) {
+  return num * 5;
+}
+
+console.log(minusSeven(10)); // returns 3
+console.log(timesFive(10)); //returns 50
+
+//Understanding Undefined Value returned from a Function
+/*A function can include the return statement but it does 
+not have to. In the case that the function doesn't have a 
+return statement, when you call it, the function processes
+ the inner code but the returned value is undefined.*/
+var sum = 0;
+
+function addSum(num) {
+  sum = sum + num;
+}
+addSum(3); // sum will be modified but returned value is undefined
+
+//addSum is a function without a return statement. The function 
+//will change the global sum variable but the returned value of the function is undefined.
