@@ -443,3 +443,90 @@ function testLogicalOr(val) {
   return "Inside";
 }
 testLogicalOr(15); // returns inside
+
+//Introducing Else Statements
+/*
+When a condition for an if statement is true, 
+the block of code following it is executed. 
+What about when that condition is false? 
+Normally nothing would happen. With an else statement,
+ an alternate block of code can be executed.
+ */
+if (num > 10) {
+  return "Bigger than 10";
+} else {
+  return "10 or Less";
+}
+
+//Introducing Else If Statements
+/* If you have multiple conditions that need to be 
+addressed, you can chain if statements together with 
+else if statements.
+*/
+if (num > 15) {
+  return "Bigger than 15";
+} else if (num < 5) {
+  return "Smaller than 5";
+} else {
+  return "Between 5 and 15";
+}
+
+//Logical Order in If Else Statements
+
+/*Order is important in if, else if statements.
+
+The function is executed from top to bottom so 
+you will want to be careful of what statement comes
+ first.
+*/
+function foo(x) {
+  if (x < 1) {
+    return "Less than one";
+  } else if (x < 2) {
+    return "Less than two";
+  } else {
+    return "Greater than or equal to two";
+  }
+}
+
+//Chaining If Else Statements
+function testSize(num) {
+  if (num < 5) {
+    return "Tiny";
+  } else if (num < 10) {
+    return "Small";
+  } else if (num < 15) {
+    return "Medium";
+  } else if (num < 20) {
+    return "Large";
+  } else {
+    return "Huge";
+  }
+}
+testSize(7);
+
+//Golf Code
+/*In the game of golf each hole has a par meaning 
+the average number of strokes a golfer is expected 
+to make in order to sink the ball in a hole to complete
+the play. Depending on how far above or below par your
+ strokes are, there is a different nickname.*/
+var names = ["Hole-in-one!", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
+function golfScore(par, strokes) {
+  if (strokes == 1) {
+    return names[0];
+  } else if (strokes <= par - 2) {
+    return names[1];
+  } else if (strokes == par - 1) {
+    return names[2];
+  } else if (strokes == par) {
+    return names[3];
+  } else if (strokes == par + 1) {
+    return names[4];
+  } else if (strokes == par + 2) {
+    return names[5];
+  } else {
+    return names[6];
+  }
+}
+golfScore(5, 4);
