@@ -1,15 +1,189 @@
 <style>
+
+//global CSS rules
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+@media (max-height 600px) {
+  body {
+    font-size: 70%;
+  }
+}
+
+//navigation bar section
+
+#navbar {
+  width: 100%;
+  position: fixed;
+  top: 0; //The navbar should always be at the top of the viewport.
+  border-bottom: 4px solid grey;
+  overflow: auto;
+  background-color: #ffcc00;
+}
+
+#navbar ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#navbar ul li {
+  margin-right: 1em;
+}
+
+#navbar ul li a {
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 25px;
+  color: #6600cc;
+  padding: 0.5em 1em;
+  line-height: 250%;
+}
+
+#navbar ul li a:hover {
+  decoration: none;
+  //margin-top: 2em;
+  color: white;
+  background-color: black;
+}
+
+//to start main body 50px from the top
+main {
+  margin-top: 50px;
+}
+
+//welcome section
+
+#welcome-section {
+  height: 100vh; //The height of the welcome section should be equal to the height of the viewport.
+  background-color: #6600cc; //purple
+  color: #ffffff; //white
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 130%;
+  p {
+    font-weight: 700;
+  }
+}
+
+.imagesize {
+  height: 400px;
+  width: 500px;
+}
+
+//project section using CSS Gridbox
+
+#project_header {
+  text-align: center;
+  padding: 0.5em 1em;
+  background-color: #000000;
+  color: #ffcc00;
+}
+
+#projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  justify-items: center;
+  background-color: #6600cc;
+  grid-gap: 20px;
+}
+
+.project-tile a p {
+  text-align: center;
+  color: #ffcc00;
+  font-size: 25px;
+  padding: 0.5em 1em;
+}
+
+.project-tile a {
+  text-decoration: none;
+}
+
+.project-tile a:hover {
+  p {
+    color: white;
+    background-color: black;
+  }
+}
+
+//contact me section using CSS Flexbox
+#contact {
+  width: 100%;
+  height: 90vh;
+  background-color: black; //rgb(139,0,139); //megenta
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#contact {
+  color: #ffcc00; //yellow
+  h1 {
+    font-size: 250%;
+    padding: 0.2em 1em;
+  }
+  p {
+    font-size: 120%;
+    padding: 0.2em 1em;
+  }
+}
+
+#contact ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border: 1px solid black; to visually see the borders of the list
+}
+
+#contact ul li a {
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 25px;
+  color: #ffcc00;
+  padding: 0.5em 1em;
+  line-height: 250%;
+}
+
+#contact ul li a:hover {
+  decoration: none;
+  color: white;
+  background-color: black;
+}
+
+//footer section using CSS Flexbox
+
+footer {
+  border-top: 4px solid grey;
+  background-color: black;
+  color: #ffcc00;
+  font-size: 14px;
+  padding: 1em;
+  display: flex;
+  justify-content: space-around;
+}
 </style>
 
-<body>
-	<header id="header">
+<head>
+  <!--to access icons from https://fontawesome.com/icons/-->
+  <script src="https://kit.fontawesome.com/e6e6da4e04.js" crossorigin="anonymous"></script>
+</head>
+
+<header id="header">
   <nav id="navbar">
     <ul>
       <li>
         <a class="nav-link" href="#welcome-section">About Me</a>
       </li>
       <li>
-        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#project_header">Projects</a>
       </li>
       <li>
         <a class="nav-link" href="#contact">Contact</a>
@@ -18,56 +192,67 @@
   </nav>
 </header>
 
+<body>
 <main>
   <section id="welcome-section">
-    <h1>Hello! I am Anton</h1>
+    <h1>Hello! I am Anton, a budding new coder</h1>
     <p>Welcome to my Portfolio</p>
   </section>
-  
-  <h1 id="project_header">Here are some of my projects</h1> 
+
+  <h1 id="project_header">Here are some of my projects</h1>
 
   <section id="projects">
     <div class="project-tile">
-      <a target="_blank"
-         href="https://codepen.io/antonwang/pen/eYYQXmJ">
+      <a target="_blank" href="https://codepen.io/antonwang/full/eYYQXmJ">
         <img class="imagesize" src="https://lh3.googleusercontent.com/tv9obd0yMMX-Pybv2l5hL0_vQz8dNLW3YX0sJ45A0EABkLTumRriz1s3O9hEKsHviYBJa3lH2LtQN16-JCOp30P1DoA_h4riOVHBVi1NXK3iIMZjL2EBzDxrMHiqhs6IQ7pM4qCalrwe6Z3ApRG1ANWUmLOSobhNdcV2shXLJIgJYesgCdRV3DCVqJSLc9ENQAMN0lsOo7rAp-8IDUxPwYX-eFIfsVci4ukAL8E-_p2UszCYlvEDi8F7Lo2TLKHg9yZCVIyIWsL71zEaxH9Fqe1KxMls5HdLSoUdSfyt8vblcRQFWhvl3g2EG5R8jLRpkkuUFU3v3Df31eP3Ud538PPOgwVV18hIxXsKCdJUdtV4WbBBMWvMSaWfMbGzdw8MJ0Uu7R9V62gPBqxRXqc2s3ukBGF11pICNdjmb2BlKB8er7k3Ec8oBdWKd03d4aA2dlk6R7uTUimzwtXXnsDOdLpcpYIk4qT7Yuaz0Y4olDKbVOyfb6TXBBDsbFGZmpSCLrJfBI0i8LjwKvkdSiedyIgtbYgAmroNsbT48Vomu66g9ZbjLBLfVBK85Ucv0nCuxvaBMYIDN5cQO8cFsVPO4mOAY3CAhwA6kVVxS4WjksIIoV-gx2ad-hThrmclwpIuWxcRyvba6W0Is1KSR5EN97NyK-H17R7UQVghpdwu7eIBPeInJSgEFfs=w559-h314-no" alt="project"/>
         <p>Tribute Page</p>
       </a>
     </div>
     <div class="project-tile">
-    <a target="_blank"
-         href="https://codepen.io/antonwang/pen/XWWojKZ">
+      <a target="_blank" href="https://codepen.io/antonwang/full/XWWojKZ">
         <img class="imagesize" src="https://lh3.googleusercontent.com/ovIjzg2khdGvmRCuyEn4R1LPIIbMeMz4UTm-OujFUJvfLqWYE__9OybMsm8fDfz8-9uWy-uj56LwcSVuN0TUq2tReWgZujeYqr7iJlWv7lwP0DqiuGYLq3KRErhBeApOaEoU6IOczkeBdK_D1AUOSAvusU2-eLA1xoVE5BWkQprK9_WSDX7L0OTKGTn_GjYSYiifMUVUXgCB0RUktcZI98f-zNQBhPbZwTf2YxhjR2VVpAAo0IT21z4YUEmqjHJMYlMrJ2xuOLgduWh_Ni5DaoFeLuq8vqFH73VIB9fpMJb8pw2W_N6U6jCaNgFGnuIXo7s_yIJwzOnrqhBqCrF_i8YcwLcbhklowj4sKB-5JDmsQLBEdp1pMid-qfJmxSXCeWXuIpZ4wOBwk82ztDJfCm5bCmpznzaHNqMmJwPfrAeUHnhimYbzrqsHa1xRPy3mJcGpo-1-0Ki-1AVlgZ73CFuRsyP0EPMmbYOo1cIhfi2gyYnejwEmGoeP7IYJiq_PtP6qED0Q1TokxYR1-ts5iTilSugAHy_igwUhF09ylGzv2xEd-27V7MicgBI8YLKyh0Py12DN0hYuAQ7FWpkj-RkWA0syUFbOqKj_VtA-G9LPwSbtbry4pS3tRINNyaYM8_1pIfG20rcJO5jYRkuL1kPfaJyr_DrFDT39G0WgKiBDqkM_pHZKMdY=w557-h310-no" alt="project"/>
         <p>Survey Form</p>
       </a>
     </div>
     <div class="project-tile">
-    <a target="_blank"
-         href="https://codepen.io/antonwang/pen/jOOdNpv">
+      <a target="_blank" href="https://codepen.io/antonwang/full/jOOdNpv">
         <img class="imagesize" src="https://lh3.googleusercontent.com/tZKrYdNETRCjPjLld3qs7Y7LAi-u4UoZRIqMw6DL0014la8WXRaQ7GZaV-Q0gTfW4evTQeI5_-CygX7s6fxZo4YDt5_dJsAdGApZManHG78cPG5FHRMjLcTiUNIwdXMDiP20CYc5EWz66Xr54hpkFL9PYsGHDWItgfJ3hzJKyoEWzYYJe7WxAc52Mh47W78BE3Dg6nhXuW2s6i9XnFfHJUhmwndqd5PE9NCek-oBVO6WBjrvS68pA8GC2Kdp3b14jwRMlqZnTK9ka_kF0SJF7GgFdPbPjXMFCaShxshFrhTbnnWt1u2FCM7WF4WlU3MKLm7nBMgkLcD3rciqCo1og3WeMyYe6RBwRuHl3GUt19IvjIokdyDhOFpuMq0gBAks_x-PsFNOEcrlnAEYtJQPHcqErk-g5Vltb2jwp8-QH3CT7s5pBZY6Iw0XhrCQWXAGxzSbx_hVVn_5vX1knmSalRHxt2tHLWJfJzplRh5nvK0Gyl7xmfYcqoPWeHssRqVLDNReIsnz7JwGRxwSC0wRURr_YWs0HUe8u6pNL5hcyLzfQFPUL5M6DZCSLrUiWAKTRoRZMqPo4e6IsaZaK4rz4CZgwQSVl8BG3BdWZvsigB2IEAQosFlrGIP09tmXFg_eatp0wkjaNm2Ig_JaQDyqqSiCjH2waBxXkiDldm6esHBJawMGlHKiovo=w563-h313-no" alt="project"/>
         <p>Product Landing Page</p>
       </a>
     </div>
     <div class="project-tile">
-      <a target="_blank"
-         href="https://codepen.io/antonwang/pen/pooBaoN">
+      <a target="_blank" href="https://codepen.io/antonwang/full/pooBaoN">
         <img class="imagesize" src="https://lh3.googleusercontent.com/NECN6AoVp_PzD_d3SHOqgTvIoZzsaGXUe5CTQN5xuutF3O2FiqyEmGWttiJMJxmek5O1nK3ZZ5TyOU6N_5B0T0EP_FUSYVhFU9C3udrUiMC1k0_motfOJlkYuyZo9giXw7F566HmLf0aqFFP-a2Hk7BIglXFQFEE8ZLWEw97Os6a52BfmjaeupouOZ8SZi-vxi2rPSxB7_3K1PeJ1-vScS6vEQ0n0FV8PcW_1_2nfA_2fjFZ9ppRqTiHHvDQU87iIMFlyANRSDd7bEsnKjOcQt8sbiERXjaJ82mJTS9_xHMFGCGn6pT5U9NeuXEq4sp6jAk3526OYocmqrCNRsdUFf_0B4HcmMxEH1brhTCGnGn2A7JodfXcvVx_lK7XsUrsODmSK7A31ak2fTvdPNGA5YXFVCcQ6qZ3LLoLpUluDe41mzn4a8j7Gi_f4uPPPISB2SH-nK79i7i9LsqdtSobyHQ9PmtAscnsjjW9qPC1WKn86U-mmXJJQ1fQNsdWPHV4BNN3cxbTRU84ya22YBKPLgyEfPITHeL-SToIj6lUxebFlXrLeBD54rTROHTslhDj9A1q3cNj6dwF7WfbgmKlMUiDMkhnuF6Hw7AE7pSBiF5Frun-2yFriQVKp0MMFt9RppHyrcqI5yqwY7eKQGiTxAnwgbCtCPz2h7rtaUu6gWbv7B5idR85lqw=w559-h315-no" alt="project"/>
         <p>Technical Documentation</p>
       </a>
     </div>
   </section>
-  
+
   <section id="contact">
-  <ul>
-      <li><a target="_blank" href="https://twitter.com/focus_concepts/">Twitter</a></li>
-      <li><a target="_blank" href="https://github.com/antonwang">GitHub</a></li>
-      <li><a id="profile-link" target="_blank" href="https://www.freecodecamp.org/focus_concepts">FreeCodeCamp</a></li>
-      <li><a id="profile-link" target="_blank" href="https://codepen.io/antonwang">Code Pen</a></li>
-  </ul>
+    <h1>Let's work together!</h1>
+    <p>Do you like coffee or tea?</p>
+    <ul>
+      <li><a target="_blank" href="https://twitter.com/focus_concepts/"><i class="fab fa-twitter-square"></i> Twitter
+      </a></li>
+      <li><a target="_blank" href="https://github.com/antonwang"><i class="fab fa-github-square"></i> GitHub
+      </a></li>
+      <li><a id="profile-link" target="_blank" href="https://www.freecodecamp.org/focus_concepts"><i class="fab fa-free-code-camp"></i> freeCodeCamp
+      </a></li>
+      <li><a id="profile-link" target="_blank" href="https://codepen.io/antonwang"><i class="fab fa-codepen"></i> CodePen
+      </a></li>
+      <li><a id="profile-link" target="_blank" href="https://www.linkedin.com/in/anton-wang-54010329"><i class="fab fa-linkedin"></i> LinkedIn
+      </a></li>
+    </ul>
   </section>
+
+  <footer>
+    <p> This Personal Portfolio Webpage fulfills the final project of the Responsive Web Design Certification administered by freeCodeCamp.org
+    </p>
+    <p>
+      &copy;focus_concepts
+    </p>
+  </footer>
 </main>
+</body>
 
 <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-<!--
-User Story #9: My portfolio should have at least one media query.  -->
-</body>
