@@ -336,3 +336,324 @@ let arr2;
 arr2 = [...arr1];  // Copy all contents of arr1 into another array arr2 using the spread operator.
 console.log(arr2);
 
+
+
+//ES6: Use Destructuring Assignment to Extract Values from Objects
+/*Destructuring assignment is special syntax introduced in ES6, for neatly assigning
+ values taken directly from an object.
+
+Consider the following ES5 code: */
+
+const user = { name: 'John Doe', age: 34 };
+
+const name = user.name; // name = 'John Doe'
+const age = user.age; // age = 34
+
+//Here's an equivalent assignment statement using the ES6 destructuring syntax:
+const { name, age } = user;  // name = 'John Doe', age = 34
+/*Here, the name and age variables will be created and assigned the values of 
+their respective values from the user object. You can see how much cleaner this is. */
+
+const HIGH_TEMPERATURES = {
+  yesterday: 75,
+  today: 77,
+  tomorrow: 80
+};
+
+const {today, tomorrow} = HIGH_TEMPERATURES;
+
+console.log(yesterday) // should be not defined
+console.log(today); // should be 77
+console.log(tomorrow); // should be 80
+
+
+//ES6: Use Destructuring Assignment to Assign Variables from Objects
+/*Destructuring allows you to assign a new variable name when extracting values. 
+You can do this by putting the new name after a colon when assigning the value.
+
+Using the same object from the last example: */
+
+const user = { name: 'John Doe', age: 34 };
+
+//Here's how you can give new variable names in the assignment:
+const { name: userName, age: userAge } = user; // userName = 'John Doe', userAge = 34
+/*You may read it as "get the value of user.name and assign it to a new variable 
+named userName" and so on. */
+
+//example
+const HIGH_TEMPERATURES = {
+  yesterday: 75,
+  today: 77,
+  tomorrow: 80
+};  
+const { today: highToday, tomorrow: highTomorrow }= HIGH_TEMPERATURES
+console.log(yesterday) // should be not defined
+console.log(highToday); // should be 77
+console.log(highTomorrow); // should be 80
+
+
+//ES6: Use Destructuring Assignment to Assign Variables from Nested Objects
+/* You can use the same principles from the previous two lessons to destructure values 
+from nested objects.
+
+Using an object similar to previous examples: */
+
+const user = {
+  johnDoe: { 
+    age: 34,
+    email: 'johnDoe@freeCodeCamp.com'
+  }
+};
+//Here's how to extract the values of object properties and assign them to variables with the same name:
+const { johnDoe: { age, email }} = user;
+
+//And here's how you can assign an object properties' values to variables with different names:
+const { johnDoe: { age: userAge, email: userEmail }} = user;
+
+//example
+const LOCAL_FORECAST = {
+  yesterday: { low: 61, high: 75 },
+  today: { low: 64, high: 77 },
+  tomorrow: { low: 68, high: 80 }
+};  
+const {today: { low: lowToday, high: highToday }} = LOCAL_FORECAST
+
+console.log(lowToday); // should be 64
+console.log(highToday); // should be 77
+
+
+//ES6: Use Destructuring Assignment to Assign Variables from Arrays
+/*ES6 makes destructuring arrays as easy as destructuring objects.
+
+One key difference between the spread operator and array destructuring is that the
+ spread operator unpacks all contents of an array into a comma-separated list. 
+ Consequently, you cannot pick or choose which elements you want to assign to variables.
+
+Destructuring an array lets us do exactly that:  */
+
+const [a, b] = [1, 2, 3, 4, 5, 6];
+console.log(a, b); // 1, 2
+/* The variable a is assigned the first value of the array, and b is assigned the 
+second value of the array. We can also access the value at any index in an array 
+with destructuring by using commas to reach the desired index:  */
+
+const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c); // 1, 2, 5
+
+let a = 8, b = 6;
+[a , b] = [b , a]; // Using destructuring assignment to swap the values of a and b
+console.log(a); // should be 6
+console.log(b); // should be 8
+
+
+//ES6: Use Destructuring Assignment with the Rest Parameter to Reassign Array Elements
+/* In some situations involving array destructuring, we might want to collect the rest
+ of the elements into a separate array.
+
+The result is similar to Array.prototype.slice(), as shown below:  */
+
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); // 1, 2
+console.log(arr); // [3, 4, 5, 7]
+/* Variables a and b take the first and second values from the array. After that, 
+because of rest parameter's presence, arr gets rest of the values in the form of 
+an array. The rest element only works correctly as the last variable in the list. 
+As in, you cannot use the rest parameter to catch a subarray that leaves out last 
+element of the original array.  */
+
+const source = [1,2,3,4,5,6,7,8,9,10];
+function removeFirstTwo(list) {
+  "use strict";
+  const [a, b, ...arr] = list; // arr is a sub-array of the original array source with the first two elements omitted.
+  return arr;
+}
+const arr = removeFirstTwo(source);
+console.log(arr); // should be [3,4,5,6,7,8,9,10]
+console.log(source); // should be [1,2,3,4,5,6,7,8,9,10];
+
+
+//ES6: Use Destructuring Assignment to Pass an Object as a Function's Parameters
+/* In some cases, you can destructure the object in a function argument itself.
+
+Consider the code below: */
+
+const profileUpdate = (profileData) => {
+  const { name, age, nationality, location } = profileData;
+  // do something with these variables
+}
+//This effectively destructures the object sent into the function. This can also be done in-place:
+
+const profileUpdate = ({ name, age, nationality, location }) => {
+  /* do something with these fields */
+}
+/* This removes some extra lines and makes our code look neat. This has the added
+ benefit of not having to manipulate an entire object in a function — only the fields
+  that are needed are copied inside the function.  */
+
+//example
+const stats = {
+max: 56.78,
+standard_deviation: 4.34,
+median: 34.54,
+mode: 23.87,
+min: -0.75,
+average: 35.85
+};
+
+const half = ({max, min}) => {   // use function argument destructuring
+return (max + min) / 2.0; 
+}
+console.log(stats); // should be object
+console.log(half(stats)); // should be 28.015
+
+
+
+//ES6: Create Strings using Template Literals
+/* A new feature of ES6 is the template literal. This is a special type of string
+ that makes creating complex strings easier.
+
+Template literals allow you to create multi-line strings and to use string 
+interpolation features to create strings.
+
+Consider the code below: */
+
+const person = {
+  name: "Zodiac Hasbro",
+  age: 56
+};
+
+// Template literal with multi-line and string interpolation
+const greeting = `Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+
+console.log(greeting); // prints
+// Hello, my name is Zodiac Hasbro!
+// I am 56 years old.
+/*A lot of things happened there. Firstly, the example uses backticks (`), not quotes
+ (' or "), to wrap the string. Secondly, notice that the string is multi-line, both in 
+ the code and the output. This saves inserting \n within strings. The ${variable} syntax
+  used above is a placeholder. Basically, you won't have to use concatenation with the
+   + operator anymore. To add variables to strings, you just drop the variable in a 
+   template string and wrap it with ${ and }. Similarly, you can include other expressions 
+   in your string literal, for example ${a + b}. This new way of creating strings gives 
+   you more flexibility to create robust strings.  */
+
+
+const result = {
+  success: ["max-length", "no-amd", "prefer-arrow-functions"],
+  failure: ["no-var", "var-on-top", "linebreak"],
+  skipped: ["id-blacklist", "no-dup-keys"]
+};
+function makeList(arr) {
+  "use strict";
+ 
+  const resultDisplayArray = arr.map(item => `<li class="text-warning">${item}</li>`);
+    return resultDisplayArray;
+}
+/**
+ * makeList(result.failure) should return:
+ * [ `<li class="text-warning">no-var</li>`,
+ *   `<li class="text-warning">var-on-top</li>`,
+ *   `<li class="text-warning">linebreak</li>` ]
+ **/
+const resultDisplayArray = makeList(result.failure);
+
+
+//ES6: Write Concise Object Literal Declarations Using Object Property Shorthand
+/* ES6 adds some nice support for easily defining object literals.
+
+Consider the following code: */
+
+const getMousePosition = (x, y) => ({
+  x: x,
+  y: y
+});
+/* getMousePosition is a simple function that returns an object containing two properties. 
+ES6 provides the syntactic sugar to eliminate the redundancy of having to write x: x. 
+You can simply write x once, and it will be converted to x: x (or something equivalent) 
+under the hood. Here is the same function from above rewritten to use this new syntax:  */
+
+const getMousePosition = (x, y) => ({ x, y });
+
+//example
+const createPerson = (name, age, gender) => {
+  "use strict";
+  return ({name, age, gender});
+};
+console.log(createPerson("Zodiac Hasbro", 56, "male")); // returns {"name":"Zodiac Hasbro","age":56,"gender":"male"}
+
+
+//ES6: Write Concise Declarative Functions with ES6
+//When defining functions within objects in ES5, we have to use the keyword function as follows:
+
+const person = {
+  name: "Taylor",
+  sayHello: function() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};
+//With ES6, You can remove the function keyword and colon altogether when defining
+// functions in objects. Here's an example of this syntax:
+
+const person = {
+  name: "Taylor",
+  sayHello() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};
+
+//example
+const bicycle = {
+  gear: 2,
+  setGear(newGear) {
+    this.gear = newGear;
+  }
+};
+bicycle.setGear(3);
+console.log(bicycle.gear);
+
+
+
+//ES6: Use class Syntax to Define a Constructor Function
+/*ES6 provides a new syntax to create objects, using the class keyword.
+
+It should be noted that the class syntax is just syntax, and not a full-fledged 
+class-based implementation of an object-oriented paradigm, unlike in languages
+ such as Java, Python, Ruby, etc.
+
+In ES5, we usually define a constructor function and use the new keyword to
+ instantiate an object.  */
+
+var SpaceShuttle = function(targetPlanet){
+  this.targetPlanet = targetPlanet;
+}
+var zeus = new SpaceShuttle('Jupiter');
+
+//The class syntax simply replaces the constructor function creation:
+class SpaceShuttle {
+  constructor(targetPlanet) {
+    this.targetPlanet = targetPlanet;
+  }
+}
+const zeus = new SpaceShuttle('Jupiter');
+/* It should be noted that the class keyword declares a new function, to which
+ a constructor is added. This constructor is invoked when new is called to create
+  a new object.
+
+Notes:
+UpperCamelCase should be used by convention for ES6 class names, as in SpaceShuttle used above.
+The constructor method is a special method for creating and initializing an object 
+created with a class. You will learn more about it in the Object Oriented Programming 
+section of the JavaScript Algorithms And Data Structures Certification.
+
+//example
+/* Alter code below this line */
+class Vegetable {
+    constructor(name) {
+        this.name = name;
+    }
+}
+/* Alter code above this line */
+
+const carrot = new Vegetable('carrot');
+console.log(carrot.name); // => should be 'carrot'
