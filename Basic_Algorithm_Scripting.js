@@ -377,3 +377,55 @@ contain a "y".
 
 Lastly, ["Alien", "line"], should return true because all of the letters in "line" are
  present in "Alien".   */
+
+function mutation(arr) {
+  let str1arr = arr[0].toLowerCase().split("");
+  let str2arr = arr[1].toLowerCase().split("");
+  console.log(str1arr, str2arr);
+  for (let i = 0; i < str2arr.length; i++) {
+    if (str1arr.indexOf(str2arr[i]) == -1) {
+    // for each char in str 2 arr, cycle it through str 1 arr. Return false if no matches
+
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(mutation(["hello", "hey"]));
+
+//A better solution without using .split("")
+function mutation(arr) {
+  var test = arr[1].toLowerCase();
+  var target = arr[0].toLowerCase();
+  for (var i = 0; i < test.length; i++) {
+    if (target.indexOf(test[i]) < 0) return false;
+  }
+  return true;
+}
+
+//Another solution using declarative function and 'every'
+/*Every will basically give you letter by letter to compare, which we do by using indexOf 
+on the first string. indexOf will give you -1 if the current letter is missing.   */
+function mutation(arr) {
+  return arr[1]
+    .toLowerCase()
+    .split("")
+    .every(function(letter) {
+      return arr[0].toLowerCase().indexOf(letter) != -1;
+    });
+}
+
+//Basic Algorithm Scripting: Chunky Monkey
+/* Write a function that splits an array (first argument) into groups the length 
+of size (second argument) and returns them as a two-dimensional array. */
+
+function chunkArrayInGroups(arr, size) {
+  let multiarr = [];
+  for (let i =0; i < arr.length; i += size) {
+    // Break it up.
+    multiarr.push(arr.slice(i, i+size));
+  }
+  return multiarr;
+}
+console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
