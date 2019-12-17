@@ -1273,3 +1273,63 @@ The output is a string with the spaces between words replaced by a hyphen (-)
 The output should be all lower-cased letters
 
 The output should not have any spaces   */
+
+// the global variable
+var globalTitle = "Winter Is Coming";
+
+// Add your code below this line
+function urlSlug(title) {
+    return title.trim().toLowerCase().split(/\s+/).join("-");
+}   //trim removes spaces around the string; /\s+/ means more than 1 white spaces
+// Add your code above this line
+
+var winterComing = urlSlug(globalTitle); // Should be "winter-is-coming"
+
+
+
+//Functional Programming: Use the every Method to Check that Every Element in an Array Meets a Criteria
+/* The every method works with arrays to check if every element passes a particular test. 
+It returns a Boolean value - true if all values meet the criteria, false if not.
+
+For example, the following code would check if every element in the numbers array is
+ less than 10:  */
+
+var numbers = [1, 5, 8, 0, 10, 11];
+numbers.every(function(currentValue) {
+  return currentValue < 10;
+});   // Returns false
+
+/* Use the every method inside the checkPositive function to check if every element 
+in arr is positive. The function should return a Boolean value.  */
+
+function checkPositive(arr) {
+  // Add your code below this line
+  return arr.every(function(num) {
+    return num > 0;
+  }); 
+  //if every element passes the test --> true if all passes, false if not
+  // Add your code above this line
+}
+checkPositive([1, 2, 3, -4, 5]); //returns false
+
+
+//Functional Programming: Use the some Method to Check that Any Elements in an Array Meet a Criteria
+/* The some method works with arrays to check if any element passes a particular test. 
+It returns a Boolean value - true if any of the values meet the criteria, false if not.
+
+For example, the following code would check if any element in the numbers array is less than 10:  */
+
+var numbers = [10, 50, 8, 220, 110, 11];
+numbers.some(function(currentValue) {
+  return currentValue < 10;
+}); // Returns true
+
+/* Use the some method inside the checkPositive function to check if any element in arr 
+is positive. The function should return a Boolean value.  */
+
+function checkPositive(arr) {
+  // Add your code below this line
+  return arr.some(num => num > 0);  //checks array if any element > 0;
+  // Add your code above this line
+}
+checkPositive([1, 2, 3, -4, 5]); //returns true
