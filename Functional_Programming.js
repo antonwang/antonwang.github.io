@@ -20,8 +20,7 @@ Functions have minimal side effects in the program
 The functional programming software development approach breaks a program into small, 
 testable parts. This section covers basic functional programming principles in JavaScript. */
 
-
-//Functional Programming: Learn About Functional Programming
+// Functional Programming: Learn About Functional Programming
 /* Functional programming is a style of programming where solutions are simple, 
 isolated functions, without any side effects outside of the function scope.
 
@@ -1333,3 +1332,60 @@ function checkPositive(arr) {
   // Add your code above this line
 }
 checkPositive([1, 2, 3, -4, 5]); //returns true
+
+
+
+//Functional Programming: Introduction to Currying and Partial Application
+/* The arity of a function is the number of arguments it requires. Currying a 
+function means to convert a function of N arity into N functions of arity 1.
+
+In other words, it restructures a function so it takes one argument, then returns
+another function that takes the next argument, and so on. 
+
+Here's an example:  */
+
+//Un-curried function
+function unCurried(x, y) {
+  return x + y;
+}
+
+//Curried function
+function curried(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+//Alternative using ES6
+const curried = x => y => x + y
+
+curried(1)(2) // Returns 3
+/* This is useful in your program if you can't supply all the arguments to a 
+function at one time. You can save each function call into a variable, which 
+will hold the returned function reference that takes the next argument when 
+it's available. Here's an example using the curried function in the example above:  */
+
+// Call a curried function in parts:
+var funcForY = curried(1);
+console.log(funcForY(2)); // Prints 3
+/* Similarly, partial application can be described as applying a few arguments 
+to a function at a time and returning another function that is applied to more 
+arguments. Here's an example:   */
+
+//Impartial function
+function impartial(x, y, z) {
+  return x + y + z;
+}
+var partialFn = impartial.bind(this, 1, 2);
+partialFn(10); // Returns 13
+
+//Fill in the body of the add function so it uses currying to add parameters x, y, and z.
+function add(x) {
+  // Add your code below this line - done
+  return function(y) {
+    return function(z) {
+      return x+y+z;
+    }
+  }
+  // Add your code above this line
+}
+add(10)(20)(30); //60
