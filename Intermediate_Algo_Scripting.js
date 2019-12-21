@@ -161,3 +161,70 @@ and the second argument is { last: "Capulet" }, then you must return the third
 object from the array (the first argument), because it contains the name and its
 value, that was passed on as the second argument.  */
 
+function whatIsInAName(collection, source) {
+  var arr = [];
+  // Only change code below this line
+  //key is an array of every property name in source
+  let key = Object.keys(source);
+  //filter creates a new arr that has matching collection and source's key and value 
+  arr = collection.filter(obj => key.every(key => obj.hasOwnProperty(key) && obj[key] == source[key]))
+  // Only change code above this line
+  return arr;
+}
+console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }));
+//returns [ { first: 'Tybalt', last: 'Capulet' } ]
+
+
+//Another solution from freecodecamp
+function whatIsInAName(collection, source) {
+   var srcKeys = Object.keys(source);
+  return collection.filter(function(obj) {
+    return srcKeys.every(function(key) {
+      return obj.hasOwnProperty(key) && obj[key] === source[key];
+    });
+  });
+}
+console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }));
+//returns [ { first: 'Tybalt', last: 'Capulet' } ]
+
+
+
+
+//Intermediate Algorithm Scripting: Spinal Tap Case
+// Convert a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
+
+function spinalCase(str) {
+  //first replace() adds a space between lowercase and uppercase letter
+  //second replace() changes any space character or underscore to a dash
+  //toLowerCase() changes the string into all lower case
+  return str.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\s|_/g,"-").toLowerCase();
+}
+console.log(spinalCase('thisIsSpinalTap'));  //this-is-spinal-tap
+
+//another solution from freecodecamp
+function spinalCase(str) {
+  /* Split the string at one of the following conditions (converted to an array)
+  - a whitespace character [\s] is encountered
+  - underscore character [_] is encountered
+  - or is followed by an uppercase letter [(?=[A-Z])]
+ Join the array using a hyphen (-)
+ Lowercase the whole resulting string  */
+  return str
+    .split(/\s|_|(?=[A-Z])/)
+    .join("-")
+    .toLowerCase();
+}
+console.log(spinalCase('thisIsSpinalTap'));  //this-is-spinal-tap
+
+
+//Intermediate Algorithm Scripting: Pig Latin
+/* Translate the provided string to pig latin.
+
+Pig Latin takes the first consonant (or consonant cluster) of an English word,
+moves it to the end of the word and suffixes an "ay".
+
+If a word begins with a vowel you just add "way" to the end.
+
+If a word does not contain a vowel, just add "ay" to the end.
+
+Input strings are guaranteed to be English words in all lowercase.  */
