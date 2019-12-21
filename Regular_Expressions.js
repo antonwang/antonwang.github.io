@@ -732,3 +732,43 @@ let hello = "   Hello, World!  ";
 let wsRegex = /^\s+|\s+$/g; // searches whitespace at the beginning and end of strings.
 let result = hello.replace(wsRegex, ""); // returns "Hello, World"
 
+
+
+//Intermediate Algorithm Scripting: Spinal Tap Case
+// Convert a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
+
+function spinalCase(str) {
+  //first replace() adds a space between lowercase and uppercase letter
+  //second replace() changes any space character or underscore to a dash
+  //toLowerCase() changes the string into all lower case
+  return str.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\s|_/g,"-").toLowerCase();
+}
+console.log(spinalCase('thisIsSpinalTap'));  //this-is-spinal-tap
+
+//another solution from freecodecamp
+function spinalCase(str) {
+  /* Split the string at one of the following conditions (converted to an array)
+  - a whitespace character [\s] is encountered
+  - underscore character [_] is encountered
+  - or is followed by an uppercase letter [(?=[A-Z])]
+ Join the array using a hyphen (-)
+ Lowercase the whole resulting string  */
+  return str
+    .split(/\s|_|(?=[A-Z])/)
+    .join("-")
+    .toLowerCase();
+}
+console.log(spinalCase('thisIsSpinalTap'));  //this-is-spinal-tap
+
+
+//Intermediate Algorithm Scripting: Pig Latin
+/* Translate the provided string to pig latin.
+
+Pig Latin takes the first consonant (or consonant cluster) of an English word,
+moves it to the end of the word and suffixes an "ay".
+
+If a word begins with a vowel you just add "way" to the end.
+
+If a word does not contain a vowel, just add "ay" to the end.
+
+Input strings are guaranteed to be English words in all lowercase.  */
