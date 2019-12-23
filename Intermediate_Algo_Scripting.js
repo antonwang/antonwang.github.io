@@ -291,3 +291,96 @@ function myReplace(str, before, after) {
 }
 
 console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting"));
+
+
+
+//Intermediate Algorithm Scripting: DNA Pairing
+/* The DNA strand is missing the pairing element. Take each character, get its pair, 
+and return the results as a 2d array.
+
+Base pairs are a pair of AT and CG. Match the missing element to the provided character.
+
+Return the provided character as the first element in each array.
+
+For example, for the input GCG, return [["G", "C"], ["C","G"],["G", "C"]]
+
+The character and its pair are paired up in an array, and all the arrays are grouped
+into one encapsulating array. */
+
+function pairElement(str) {
+  let basepairs = {  //create an object for base pairing
+    A: "T",
+    T: "A",
+    C: "G",
+    G: "C"
+  };
+  let arr = str.split("");  //splits a str into an array
+  let newarr = arr.map(x => [x, basepairs[x]]); //map creates a new arr
+  return newarr;
+}
+console.log(pairElement("GCG")); //[ [ 'G', 'C' ], [ 'C', 'G' ], [ 'G', 'C' ] ]
+
+//Another solution from freecodecamp
+function pairElement(str) {
+  // Return each strand as an array of two elements, the original and the pair.
+  var paired = [];
+  // Function to check with strand to pair.
+  var search = function(char) {
+    switch (char) {
+      case "A":
+        paired.push(["A", "T"]);
+        break;
+      case "T":
+        paired.push(["T", "A"]);
+        break;
+      case "C":
+        paired.push(["C", "G"]);
+        break;
+      case "G":
+        paired.push(["G", "C"]);
+        break;
+    }
+  };
+  // Loops through the input and pair.
+  for (var i = 0; i < str.length; i++) {
+    search(str[i]);
+  }
+  return paired;
+}
+pairElement("GCG"); ////[ [ 'G', 'C' ], [ 'C', 'G' ], [ 'G', 'C' ] ]
+
+
+
+//Intermediate Algorithm Scripting: Missing letters
+/* Find the missing letter in the passed letter range and return it.
+
+If all letters are present in the range, return undefined.  */
+
+function fearNotLetter(str) {
+  let abcstr = "abcdefghijklmnopqrstuvwxyz";
+  let position = abcstr.indexOf(str[0]);
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] !== abcstr[position]) {
+      return abcstr[position];
+    }
+    position++;
+  }
+  return undefined;
+}
+
+console.log(fearNotLetter("stvwx")); //u
+
+//Another solution from freecodecamp
+
+function fearNotLetter(str) {
+  for (let i = 1; i < str.length; ++i) {
+    if (str.charCodeAt(i) - str.charCodeAt(i - 1) > 1) {
+      return String.fromCharCode(str.charCodeAt(i - 1) + 1);
+    }
+  }
+}
+/* Code Explanation
+Loop over the string
+Check if the difference in char codes between adjacent characters in the string is more than 1 (check ASCII table)
+Return the missing character ( +1 from where the gap was detected) */
+
