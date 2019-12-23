@@ -228,3 +228,66 @@ If a word begins with a vowel you just add "way" to the end.
 If a word does not contain a vowel, just add "ay" to the end.
 
 Input strings are guaranteed to be English words in all lowercase.  */
+
+function translatePigLatin(str) {
+  return str
+  .replace(/^[aeiou]\w*/, "$&way") //if aeiou is the first letter, just add way to the str
+  .replace(/(^[^aeiou]+)(\w*)/, "$2$1ay"); //move consonant to the end of the str, and add "ay"
+  }
+  console.log(translatePigLatin("algorithm"));
+
+//Another solution from freecodecamp
+function translatePigLatin(str) {
+// The regex looks at the beginning of the string ^ for one of the specified characters [aeiou]
+// If it does, you only need to return the original string with “way” appended on the end.
+    if (str.match(/^[aeiou]/)) return str + "way";
+  
+//match() returns an Array with the matched string as the first element,
+//which is all we want. Grab it with [0].    
+    const consonantCluster = str.match(/^[^aeiou]+/)[0];
+//first part is the original string w/o beginning cosonant...
+    return str.substring(consonantCluster.length) + consonantCluster + "ay";
+  }
+translatePigLatin("consonant");
+
+//another solution from freecodecamp
+function translatePigLatin(str) {
+  let consonantRegex = /^[^aeiou]+/;
+  let myConsonants = str.match(consonantRegex);
+  return myConsonants !== null
+    ? str
+        .replace(consonantRegex, "")
+        .concat(myConsonants)
+        .concat("ay")
+    : str.concat("way");
+}
+
+translatePigLatin("consonant");
+/*Code Explanation
+start at beginning and get longest match of everything not a vowel (consonants)
+if regex pattern found, it saves the match; else, it returns null
+if regex pattern found (starts with consonants), it deletes match, adds the match to the end, and adds “ay” to the end
+if regex pattern not found (starts with vowels), it just adds “way” to the ending */
+
+
+//Intermediate Algorithm Scripting: Search and Replace
+/* Perform a search and replace on the sentence using the arguments provided and return the new sentence.
+
+First argument is the sentence to perform the search and replace on.
+
+Second argument is the word that you will be replacing (before).
+
+Third argument is what you will be replacing the second argument with (after).
+
+Note: Preserve the case of the first character in the original word when you are replacing
+it. For example if you mean to replace the word "Book" with the word "dog", it should be
+replaced as "Dog"   */
+
+function myReplace(str, before, after) {
+  if (before[0] == before[0].toUpperCase()) {
+    after = after.charAt(0).toUpperCase() + after.slice(1);
+  }
+  return str.replace(before, after);
+}
+
+console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting"));
