@@ -384,3 +384,245 @@ Loop over the string
 Check if the difference in char codes between adjacent characters in the string is more than 1 (check ASCII table)
 Return the missing character ( +1 from where the gap was detected) */
 
+
+
+//Intermediate Algorithm Scripting: Sorted Union
+/* Write a function that takes two or more arrays and returns a new array of unique 
+values in the order of the original provided arrays.
+
+In other words, all values present from all arrays should be included in their original
+ order, but with no duplicates in the final array.
+
+The unique numbers should be sorted by their original order, but the final array 
+should not be sorted in numerical order.
+
+Check the assertion tests for examples.  */
+
+function uniteUnique(arr) {
+  let arg = [...arguments];
+  let final = [];
+  for (let i = 0; i < arg.length; i++) {
+    for (let j = 0; j < arg[i].length; j++) {
+      if (!final.includes(arg[i][j])) {
+        final.push(arg[i][j]);
+      }
+    }
+  }
+  return final;
+}
+console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1])); //[ 1, 3, 2, 5, 4 ]
+
+//Another solution from freecodecamp
+
+function uniteUnique(arr1, arr2, arr3) {
+  // Creates an empty array to store our final result.
+  var finalArray = [];
+
+  // Loop through the arguments object to truly make the program work with two or more arrays
+  // instead of 3.
+  for (var i = 0; i < arguments.length; i++) {
+    var arrayArguments = arguments[i];
+
+    // Loops through the array at hand
+    for (var j = 0; j < arrayArguments.length; j++) {
+      var indexValue = arrayArguments[j];
+
+      // Checks if the value is already on the final array.
+      if (finalArray.indexOf(indexValue) < 0) {
+        finalArray.push(indexValue);
+      }
+    }
+  }
+  return finalArray;
+}
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
+
+
+//Intermediate Algorithm Scripting: Convert HTML Entities
+/* Convert the characters &, <, >, " (double quote), and ' (apostrophe), in a string
+ to their corresponding HTML entities.  */
+
+function convertHTML(str) {
+  let char = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&apos;"
+  };
+  return str.replace(/([&<>\"'])/g, x => char[x]);
+}
+
+console.log(convertHTML("Dolce & Gabbana"));
+
+//Another solution from freecodecamp
+function convertHTML(str) {
+  // Split by character to avoid problems.
+
+  var temp = str.split("");
+
+  // Since we are only checking for a few HTML elements, use a switch
+
+  for (var i = 0; i < temp.length; i++) {
+    switch (temp[i]) {
+      case "<":
+        temp[i] = "&lt;";
+        break;
+      case "&":
+        temp[i] = "&amp;";
+        break;
+      case ">":
+        temp[i] = "&gt;";
+        break;
+      case '"':
+        temp[i] = "&quot;";
+        break;
+      case "'":
+        temp[i] = "&apos;";
+        break;
+    }
+  }
+
+  temp = temp.join("");
+  return temp;
+}
+convertHTML("Dolce & Gabbana");
+
+
+//Intermediate Algorithm Scripting: Sum All Odd Fibonacci Numbers
+/* Given a positive integer num, return the sum of all odd Fibonacci numbers that are
+ less than or equal to num.
+
+The first two numbers in the Fibonacci sequence are 1 and 1. Every additional number
+ in the sequence is the sum of the two previous numbers. The first six numbers of the 
+ Fibonacci sequence are 1, 1, 2, 3, 5 and 8.
+
+For example, sumFibs(10) should return 10 because all odd Fibonacci numbers less than
+ or equal to 10 are 1, 1, 3, and 5.   */
+
+function sumFibs(num) {
+  let arr = [1]; //tracks only odd fibonacci sequence
+  let arrfib = [1];  //tracks regular fibonacci sequence: 1, 1, 2, 3, 5, 8, ...
+  for (let i = 1; i <= num; i+= arrfib[arrfib.length - 2]) {
+    arrfib.push(i); //push regular fibonacci sequence into array
+    if (!(i % 2 == 0)) {
+    arr.push(i); //push only odd fibonacci sequence into array
+    }
+  }
+  return arr.reduce((a, b) => a + b, 0); //sum up elements in array
+}
+
+console.log(sumFibs(1000));
+
+//Another simpler solution from freecodecamp
+
+function sumFibs(num) {
+  var prevNumber = 0;
+  var currNumber = 1;
+  var result = 0;
+  while (currNumber <= num) {
+    if (currNumber % 2 !== 0) {
+      result += currNumber;
+    }
+
+    currNumber += prevNumber;
+    prevNumber = currNumber - prevNumber;
+  }
+
+  return result;
+}
+sumFibs(4);
+
+
+
+//Intermediate Algorithm Scripting: Sum All Primes
+/* A prime number is a whole number greater than 1 with exactly two divisors:
+ 1 and itself. For example, 2 is a prime number because it is only divisible 
+ by 1 and 2. In contrast, 4 is not prime since it is divisible by 1, 2 and 4.
+
+Rewrite sumPrimes so it returns the sum of all prime numbers that are less than
+ or equal to num.   */
+
+function sumPrimes(num) {
+  let n = 2;
+  let sum = 0;
+  while (n <= num) { //loops through all number of num
+    if (isPrime(n)) {
+      sum += n; //sums up all the prime numbers in num
+    }
+    n++;
+  }
+  return sum;
+}
+
+function isPrime(number) {
+  for (let i = 2; i <= number; i++) {
+    if (number % i === 0 && number != i) {
+      return false; //not a prime number if it is divisible by any number that is not itself.
+    }
+  }
+  return true; //is a prime number
+}
+console.log(sumPrimes(10)); //17
+
+
+
+
+//Intermediate Algorithm Scripting: Smallest Common Multiple
+/* Find the smallest common multiple of the provided parameters that can be evenly 
+divided by both, as well as by all sequential numbers in the range between these parameters.
+
+The range will be an array of two numbers that will not necessarily be in numerical order.
+
+For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that
+is also evenly divisible by all numbers between 1 and 3. The answer here would be 6.  */
+
+function smallestCommons(arr) {
+  arr.sort((a, b) => a - b);
+  let newarr = [];
+  for (let i = arr[0]; i <= arr[1]; i++) {
+    newarr.push(i); //creating a new arr that is sorted from min to max
+  }
+  let max = newarr[newarr.length - 1];
+  let min = newarr[0];
+  let multiple = max;
+  for(var i = max; i >= min; i--){
+    if(multiple % i !== 0){
+      multiple += max; 
+      i = max;
+    } 
+  }
+  return multiple;
+}
+
+console.log(smallestCommons([1,5]));  //60
+
+//another simpler solution from freecodecamp
+const smallestCommons = arr => {
+  let max = Math.max(...arr);
+  let min = Math.min(...arr);
+  // Initially the solution is assigned to the highest value of the array
+  let sol = max;
+
+  for (let i = max - 1; i >= min; i--) {
+    // Each time the solution checks (i.e. sol%i===0) it won't be necessary
+    // to increment 'max' to our solution and restart the loop
+    if (sol % i) {
+      sol += max;
+      i = max;
+    }
+  }
+  return sol;
+};
+smallestCommons([1, 5]);
+
+
+//Intermediate Algorithm Scripting: Drop it
+/* Given the array arr, iterate through and remove each element starting from the 
+first element (the 0 index) until the function func returns true when the iterated 
+element is passed through it.
+
+Then return the rest of the array once the condition is satisfied, otherwise, arr 
+should be returned as an empty array.  */
+
