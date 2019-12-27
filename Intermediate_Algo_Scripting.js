@@ -855,3 +855,37 @@ The values should be rounded to the nearest whole number. The body being orbited
 The radius of the earth is 6367.4447 kilometers, and the GM value of earth is
 398600.4418 km3s-2. */
 
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  
+  for (let i = 0; i < arr.length; i++) {
+    var avgAlt = arr[i]["avgAlt"];
+    var orbital = Math.round(2 * Math.PI * Math.sqrt(Math.pow(earthRadius + avgAlt, 3)/GM));
+    delete arr[i].avgAlt;
+    arr[i].orbitalPeriod = orbital;
+    }
+  return arr;
+}
+
+console.log(orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]));
+
+//Another solution using var item in arr
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  
+  for (var item in arr) {
+    var avgAlt = arr[item]["avgAlt"];
+    var orbital = Math.round(2 * Math.PI * Math.sqrt(Math.pow(earthRadius + avgAlt, 3)/GM));
+    delete arr[item].avgAlt;
+    arr[item].orbitalPeriod = orbital;
+    }
+  return arr;
+}
+
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
+
+// returns [ { name: 'iss', orbitalPeriod: 5557 },
+//   { name: 'hubble', orbitalPeriod: 5734 },
+//   { name: 'moon', orbitalPeriod: 2377399 } ]
