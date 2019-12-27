@@ -626,3 +626,116 @@ element is passed through it.
 Then return the rest of the array once the condition is satisfied, otherwise, arr 
 should be returned as an empty array.  */
 
+function dropElements(arr, func) {
+  let length = arr.length;
+  for (let i = 0; i < length; i++) {
+    if (func(arr[0])) {
+      break; //The break statement breaks the loop and continues executing the code after the loop (if any)
+    }
+    else arr.shift(); //removes index 0 of the array
+  }
+  return arr;
+}
+
+dropElements([1, 2, 3, 4], function(n) {return n >= 3;}); //[ 3, 4 ]
+
+
+
+//Intermediate Algorithm Scripting: Steamroller
+// Flatten a nested array. You must account for varying levels of nesting.
+function steamrollArray(arr) {
+  arr = arr.flat(Infinity); //flattens the array of all depths
+  return arr;
+}
+steamrollArray([1, [2], [3, [[4]]]]);
+
+//another solution from freecodecamp
+function steamrollArray(arr) {
+  //arr.some to find out if the new array contains an array still
+  while (arr.some(element => Array.isArray(element))) {  
+    arr = arr.flat(); //flattens the array
+  }
+  return arr;
+}
+steamrollArray([1, [2], [3, [[4]]]]);
+
+//Another solution from freecodecamp
+function steamrollArray(arr) {
+  var flattenedArray = [];
+  // Create function that adds an element if it is not an array.
+  // If it is an array, then loops through it and uses recursion on that array.
+  var flatten = function(arg) {
+    if (!Array.isArray(arg)) {
+      flattenedArray.push(arg);
+    } else {
+      for (var a in arg) {
+        flatten(arg[a]);
+      }
+    }
+  };
+  // Call the function for each element in the array
+  arr.forEach(flatten);
+  return flattenedArray;
+}
+steamrollArray([1, [2], [3, [[4]]]]);
+
+
+
+//Intermediate Algorithm Scripting: Binary Agents
+/* Return an English translated sentence of the passed binary string.
+
+The binary string will be space separated. */
+
+function binaryAgent(str) {
+  return str.split(" ").map(item => String.fromCharCode(parseInt(item, 2))).join('');
+}
+
+console.log(binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"));
+//Aren't bonfires fun!?
+
+
+
+//Intermediate Algorithm Scripting: Everything Be True
+/* Check if the predicate (second argument) is truthy on all elements of a collection 
+(first argument).
+
+In other words, you are given an array collection of objects. The predicate pre will 
+be an object property and you need to return true if its value is truthy. Otherwise, 
+return false.
+
+In JavaScript, truthy values are values that translate to true when evaluated in a 
+Boolean context.
+
+Remember, you can access object properties through either dot notation or [] notation. */
+
+function truthCheck(collection, pre) {
+  let count = 0;
+  for (let i = 0; i < collection.length; i++) {
+    if (collection[i].hasOwnProperty(pre) && Boolean(collection[i][pre])) {
+      count++;
+    }
+  }
+  if (count === collection.length) {
+    return true;
+  }
+  return false;  
+}
+
+truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");  //true
+
+//another solution from freecodecamp
+
+
+//Intermediate Algorithm Scripting: Arguments Optional
+/*Create a function that sums two arguments together. If only one argument is provided,
+ then return a function that expects one argument and returns the sum.
+
+For example, addTogether(2, 3) should return 5, and addTogether(2) should return a function.
+
+Calling this returned function with a single argument will then return the sum:
+
+var sumTwoAnd = addTogether(2);
+
+sumTwoAnd(3) returns 5.
+
+If either argument isn't a valid number, return undefined. */
