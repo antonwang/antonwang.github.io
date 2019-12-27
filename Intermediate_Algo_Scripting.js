@@ -725,6 +725,24 @@ truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy"}, {"user": 
 
 //another solution from freecodecamp
 
+//Code Explanation
+/*  For every object in the collection array, check the truthiness of object’s property passed in pre parameter
+Array#every method internally checks if the value returned from the callback is truthy.
+Return true if it passes for every object. Otherwise, return false. */
+function truthCheck(collection, pre) {
+return collection.every(obj => obj[pre]);
+}
+
+truthCheck(
+  [
+    { user: "Tinky-Winky", sex: "male" },
+    { user: "Dipsy", sex: "male" },
+    { user: "Laa-Laa", sex: "female" },
+    { user: "Po", sex: "female" }
+  ],
+  "sex"
+);
+
 
 //Intermediate Algorithm Scripting: Arguments Optional
 /*Create a function that sums two arguments together. If only one argument is provided,
@@ -739,3 +757,101 @@ var sumTwoAnd = addTogether(2);
 sumTwoAnd(3) returns 5.
 
 If either argument isn't a valid number, return undefined. */
+
+function addTogether() {
+  var args = Array.prototype.slice.call(arguments); //creates an array from arguments
+  var check = function(num) {   //creates a function to check if value is a number
+    if (typeof num !== "number") {
+    return undefined;
+    } 
+    else return num;
+  };
+  
+  if (args.length > 1) {
+    var a = check(args[0]);
+    var b = check(args[1]);
+    if (a === undefined || b === undefined) {  //both arguments must be a number
+      return undefined;
+    }
+    else {
+      return a+b; //adds up both arguments provided that they are numbers
+    }
+  }
+  
+  else {  //args.length is 1 or 0.
+    if (check(args[0])) {   //checks argument to see if it is a number
+      return function(arg2) { //calls the second argument
+        if (check(args[0]) === undefined || check(arg2) === undefined) { //checks both args
+          return undefined;
+        }
+        else return args[0] + arg2;  //sums up both args
+      };
+    }
+  }
+}
+
+addTogether(2,3);  //5
+
+
+//Intermediate Algorithm Scripting: Make a Person
+/* Fill in the object constructor with the following methods below:
+
+getFirstName()
+getLastName()
+getFullName()
+setFirstName(first)
+setLastName(last)
+setFullName(firstAndLast)
+Run the tests to see the expected output for each method. The methods that take an
+argument must accept only one argument and it has to be a string. These methods 
+must be the only available means of interacting with the object.  */
+
+var Person = function(firstAndLast) {
+  var fullname = firstAndLast;
+
+  this.setFullName = function(firstLast) {
+    fullname = firstLast;
+  };
+  this.setFirstName = function(first) {
+    fullname = first + " " + fullname.split(" ")[1];
+  };
+  this.setLastName = function(last) {
+    fullname = fullname.split(" ")[0] + " " + last;
+  };
+
+  this.getFullName = function() {
+    return fullname;
+  };
+  this.getFirstName = function() {
+    return fullname.split(" ")[0];
+  };
+  this.getLastName = function() {
+    return fullname.split(" ")[1];
+  };
+};
+
+var bob = new Person('Bob Ross');
+
+console.log(bob.getFullName()); //Bob Ross
+console.log(bob.getFirstName()); //Bob
+console.log(bob.getLastName()); //Ross
+console.log(bob instanceof Person); //true
+console.log(bob.setFullName("Haskell Curry")); //undefined
+console.log(bob.getFullName()); //Haskell Curry
+console.log(bob.getFirstName()); //Haskell
+console.log(bob.getLastName()); //Curry
+
+
+//Intermediate Algorithm Scripting: Map the Debris
+/* Return a new array that transforms the elements' average altitude into their orbital
+periods (in seconds).
+
+The array will contain objects in the format {name: 'name', avgAlt: avgAlt}.
+
+You can read about orbital periods on Wikipedia.
+
+The values should be rounded to the nearest whole number. The body being orbited is Earth.
+
+The radius of the earth is 6367.4447 kilometers, and the GM value of earth is
+398600.4418 km3s-2. */
+
