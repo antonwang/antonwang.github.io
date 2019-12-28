@@ -45,7 +45,28 @@ palindrome("0_0 (: /-\ :) 0-0") should return true.
 palindrome("five|\_/|four") should return false. */
 
 
-
+function palindrome(str) {
+    //removes spaces, special characters, and underscores throughout the str, then convert str to lower case
+    var lowerStr = str.replace(/[\s\W_]/g, "").toLowerCase();  
+    console.log(lowerStr);  //checking that the str follows the regex and is lower case
+    var tailChar = lowerStr.length - 1;
+    var midChar = Math.round(lowerStr.length/2) - 1;
+    console.log(midChar);
+    for (let i = 0; i < lowerStr.length; i++) { //moves front char closer to the middle by one
+      if (lowerStr[i] == lowerStr[tailChar]) {  //checks the front char vs tail char;
+        if (tailChar == midChar) {  //if the tail char is already at the middle, return true
+          return true;
+        }
+        tailChar--; //moves tail char closer to the middle by one
+        continue; //skips the else statement below when the first if statement is true
+      }
+      else return false; //if the the front char != tail char, return false
+    }
+  }
+  //eye   length = 3
+  //012  <-- str position  ; midChar would be 1
+  palindrome("eye"); // return true
+  
 
 
 
