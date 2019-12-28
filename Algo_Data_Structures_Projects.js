@@ -101,3 +101,80 @@ convertToRoman(1006) should return "MVI"
 convertToRoman(1023) should return "MXXIII"
 convertToRoman(2014) should return "MMXIV"
 convertToRoman(3999) should return "MMMCMXCIX" */
+
+function convertToRoman(num) {
+    var romanSymbols = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
+    }
+    var romanNum = "", i;
+    for (i in romanSymbols) {
+        while (num >= romanSymbols[i]) { //as long as num >= value of property i
+            console.log(romanNum += i);  //roman numeric becomes current str + current property
+            console.log(num -= romanSymbols[i]); //num becomes current num - property value
+        }
+    }
+    return romanNum;
+}
+
+console.log(convertToRoman(36));
+/* output:
+X
+26
+XX
+16
+XXX
+6
+XXXV
+1
+XXXVI
+0 
+XXXVI*/
+
+
+
+// JavaScript Algorithms and Data Structures Projects: Caesars Cipher
+/* One of the simplest and most widely known ciphers is a Caesar cipher, also known 
+as a shift cipher. In a shift cipher the meanings of the letters are shifted by some
+set amount.
+
+A common modern use is the ROT13 cipher, where the values of the letters are shifted
+by 13 places. Thus 'A' ↔ 'N', 'B' ↔ 'O' and so on.
+
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+All letters will be uppercase. Do not transform any non-alphabetic character 
+(i.e. spaces, punctuation), but do pass them on.
+ */
+//https://en.wikipedia.org/wiki/List_of_Unicode_characters
+function rot13(str) {
+    let newStr = "";
+    for (let i = 0; i < str.length; i++) {
+      let char13 = str[i].charCodeAt(); //getting the unicode at each position
+      if (char13 > 64 && char13 < 91) {   //preserves punctuations and spaces
+      //unicode 65 - 90 inclusively is A - Z
+      char13 += 13; //if unicode is A-Z, move unicode by 13 positions
+      }
+      if (char13 > 90) { //if new unicode is over 90, move it to letter A [unicode 65], and store it in newStr
+        let temp = 64 + (char13 - 90);
+        newStr += String.fromCharCode(temp); 
+      }
+      if (char13 <= 90) { //if new unicode is within 90, store it in newStr
+        newStr += String.fromCharCode(char13);
+      }
+    }
+    return newStr;
+  }
+console.log(rot13("SERR PBQR PNZC")); //FREE CODE CAMP
+  
