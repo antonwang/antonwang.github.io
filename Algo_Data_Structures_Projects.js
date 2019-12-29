@@ -229,3 +229,60 @@ telephoneCheck("2(757)622-7382") should return false.
 telephoneCheck("555)-555-5555") should return false.
 telephoneCheck("(555-555-5555") should return false.
 telephoneCheck("(555)5(55?)-5555") should return false. */
+
+function telephoneCheck(str) {
+    var regex = /^[1]?[\s]?[(]?[\d]{3}[\s]?[)]?[-\s]?[\d]{3}[-\s]?[\d]{4}$/;
+/* /^[1]?[\s]?[(]?[\d]{3}[\s]?[)]?[-\s]?[\d]{3}[-\s]?[\d]{4}$/
+regex: begins with zero or one of digit 1, zero or one of space, zero or one of open parenthesis,
+three consecutive digits from 0-9, zero or one of space, zero or one of close parenthesis, 
+zero or one of dash or space, three consecutive digits from 0-9, zero or one of dash
+or space, then ending in four consecutive digits from 0-9.
+*/
+
+    var ans = regex.test(str); //validates phone number with country code 1, but not full parentheses
+    var regexparen1 = /^[1]?[\s]?[(]{1}[\d]{3}[)]{1}/; //checks if numbers have full parentheses
+    var regexparen0 = /^[1]?[\s]?[\d]{3}[-\s]*[\d]{3}/; //checks if numbers do not have any parentheses
+
+    if ((ans && regexparen1.test(str)) || (ans &&regexparen0.test(str))) {
+        //if validated numbers have full or zero parentheses, return true
+      return true;
+    }
+    else return false;
+}
+
+console.log(telephoneCheck("1 555)555-5555")); //returns false
+
+
+
+
+
+//JavaScript Algorithms and Data Structures Projects: Cash Register
+/* Design a cash register drawer function checkCashRegister() that accepts purchase 
+price as the first argument (price), payment as the second argument (cash), and 
+cash-in-drawer (cid) as the third argument.
+
+cid is a 2D array listing available currency.
+
+The checkCashRegister() function should always return an object with a status key 
+and a change key.
+
+Return {status: "INSUFFICIENT_FUNDS", change: []} if cash-in-drawer is less than the 
+change due, or if you cannot return the exact change.
+
+Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value for the key
+change if it is equal to the change due.
+
+Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and
+bills, sorted in highest to lowest order, as the value of the change key.
+
+Currency Unit	Amount
+Penny	$0.01 (PENNY)
+Nickel	$0.05 (NICKEL)
+Dime	$0.1 (DIME)
+Quarter	$0.25 (QUARTER)
+Dollar	$1 (DOLLAR)
+Five Dollars	$5 (FIVE)
+Ten Dollars	$10 (TEN)
+Twenty Dollars	$20 (TWENTY)
+One-hundred Dollars	$100 (ONE HUNDRED) */
+
