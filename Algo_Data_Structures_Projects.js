@@ -286,3 +286,63 @@ Ten Dollars	$10 (TEN)
 Twenty Dollars	$20 (TWENTY)
 One-hundred Dollars	$100 (ONE HUNDRED) */
 
+function checkCashRegister(price, cash, cid) {
+    var changeReturn = cash - price;  //change amount to return to customer
+    
+    var cidTotal = 0;
+    for (let i = 0; i < cid.length; i++) {
+      cidTotal += cid[i][1];
+      }
+  
+    if (changeReturn == cidTotal) {   //if change amount to return is the same as "cash in drawer"  - return following statement
+      return {status: "CLOSED", change: cid};
+    }
+  
+    var changeArr = [];
+    //create a new array for comparison and calculation (see following for-if-while loop)
+    var cashRegister = [["PENNY", 0.01], ["NICKEL", 0.05], ["DIME", 0.1], ["QUARTER", 0.25], ["ONE", 1], ["FIVE", 5], ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED", 100]];
+  
+    var count = 0; //to keep track of # of cash type  i.e. 4 ten dollar bills
+    var total = 0; //to keep track of total in cash type  i.e. 40 dollars
+  
+    //to create a new array of cash type and # of cash type to return to customer
+    for (let i = cid.length - 1; i >= 0; i--) { //to loop through new array of cash type
+      if (changeReturn >= cashRegister[i][1] && cid[i][1] > 0 && changeReturn > 0) {
+        //if change amount to return is greater than cash type (i.e. one hundred), and "cash in drawer" and change amount to return are greater than 0
+        while (changeReturn >= cashRegister[i][1] && cid[i][1] > 0 && changeReturn > 0) {
+        //loops through while condition is met, keeping track of change amount to return and "cash in drawer"
+          cid[i][1] -= cashRegister[i][1]; 
+          changeReturn -= cashRegister[i][1];
+
+          cid[i][1] = cid[i][1].toFixed(2); //fix numeric number to 2 decimal point; to correct floating point error in base 2 computing
+          changeReturn = changeReturn.toFixed(2); //fix numeric number to 2 decimal point
+          count++; //to keep track of # of cash type
+        }
+        total = count * cashRegister[i][1]; //to keep track of total in cash type
+        changeArr.push([cashRegister[i][0], total]); //push an array of cash type and total in cash type
+  
+        total = 0; //reset tracking of total in cash type
+        count = 0; //reset tracking of # of cash type
+      }
+    }
+  
+    
+    if (changeReturn > 0) {  //if change amount to return is greater than cash in drawer, return following statement
+      return {status: "INSUFFICIENT_FUNDS", change: []};
+      }
+    else return {status: "OPEN", change: changeArr}; // or else return this statement
+  
+  }
+  
+  // Example cash-in-drawer array:
+  // [["PENNY", 1.01],
+  // ["NICKEL", 2.05],
+  // ["DIME", 3.1],
+  // ["QUARTER", 4.25],
+  // ["ONE", 90],
+  // ["FIVE", 55],
+  // ["TEN", 20],
+  // ["TWENTY", 60],
+  // ["ONE HUNDRED", 100]]
+  
+  checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
