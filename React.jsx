@@ -406,3 +406,113 @@ class TypesOfFood extends React.Component {
         );
     }
 };
+
+/* React: Compose React Components
+As the challenges continue to use more complex compositions with React components 
+and JSX, there is one important point to note. Rendering ES6 style class components 
+within other components is no different than rendering the simple components you used 
+in the last few challenges. You can render JSX elements, stateless functional components, 
+and ES6 class components within other components.
+
+In the code editor, the TypesOfFood component is already rendering a component called 
+Vegetables. Also, there is the Fruits component from the last challenge.
+
+Nest two components inside of Fruits — first NonCitrus, and then Citrus. Both of these 
+components are provided for you in the background. Next, nest the Fruits class component 
+into the TypesOfFood component, below the h1 header and above Vegetables. The result 
+should be a series of nested components, which uses two different component types. */
+
+class Fruits extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+    render() {
+      return (
+        <div>
+          <h2>Fruits:</h2>
+          { /* change code below this line */ }
+          <NonCitrus />
+          <Citrus />
+          { /* change code above this line */ }
+        </div>
+      );
+    }
+};
+
+class TypesOfFood extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div>
+            <h1>Types of Food:</h1>
+            { /* change code below this line */ }
+            <Fruits />
+            { /* change code above this line */ }
+            <Vegetables />
+        </div>
+        );
+    }
+};
+
+
+/* React: Render a Class Component to the DOM
+You may remember using the ReactDOM API in an earlier challenge to render JSX elements
+to the DOM. The process for rendering React components will look very similar. The 
+past few challenges focused on components and composition, so the rendering was done 
+for you behind the scenes. However, none of the React code you write will render to 
+the DOM without making a call to the ReactDOM API.
+
+Here's a refresher on the syntax: ReactDOM.render(componentToRender, targetNode). The 
+first argument is the React component that you want to render. The second argument is 
+the DOM node that you want to render that component within.
+
+React components are passed into ReactDOM.render() a little differently than JSX 
+elements. For JSX elements, you pass in the name of the element that you want to render. 
+However, for React components, you need to use the same syntax as if you were rendering 
+a nested component, for example ReactDOM.render(<ComponentToRender />, targetNode). You 
+use this syntax for both ES6 class components and functional components.
+
+Both the Fruits and Vegetables components are defined for you behind the scenes. Render 
+both components as children of the TypesOfFood component, then render TypesOfFood to 
+the DOM. There is a div with id='challenge-node' available for you to use. */
+
+class TypesOfFood extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div id='challenge-node'>
+            <h1>Types of Food:</h1>
+            {/* change code below this line */}
+            <Fruits />
+            <Vegetables />
+            {/* change code above this line */}
+        </div>
+        );
+    }
+};
+  
+// change code below this line
+ReactDOM.render(<TypesOfFood />, document.getElementById('challenge-node'));
+
+
+
+/* React: Write a React Component from Scratch
+Now that you've learned the basics of JSX and React components, it's time to write a 
+component on your own. React components are the core building blocks of React 
+applications so it's important to become very familiar with writing them. Remember, 
+a typical React component is an ES6 class which extends React.Component. It has a 
+render method that returns HTML (from JSX) or null. This is the basic form of a React 
+component. Once you understand this well, you will be prepared to start building more 
+complex React projects.
+
+Define a class MyComponent that extends React.Component. Its render method should return 
+a div that contains an h1 tag with the text: My First React Component! in it. Use this 
+text exactly, the case and punctuation matter. Make sure to call the constructor for your 
+component, too.
+
+Render this component to the DOM using ReactDOM.render(). There is a div with 
+id='challenge-node' available for you to use. */
