@@ -701,3 +701,111 @@ class ShoppingCart extends React.Component {
 };
 
 
+/* React: Use PropTypes to Define the Props You Expect
+React provides useful type-checking features to verify that components receive props 
+of the correct type. For example, your application makes an API call to retrieve data 
+that you expect to be in an array, which is then passed to a component as a prop. You 
+can set propTypes on your component to require the data to be of type array. This will 
+throw a useful warning when the data is of any other type.
+
+It's considered a best practice to set propTypes when you know the type of a prop ahead 
+of time. You can define a propTypes property for a component in the same way you defined 
+defaultProps. Doing this will check that props of a given key are present with a given 
+type. Here's an example to require the type function for a prop called handleClick: */
+
+MyComponent.propTypes = { handleClick: PropTypes.func.isRequired }
+
+/* In the example above, the PropTypes.func part checks that handleClick is a function. 
+Adding isRequired tells React that handleClick is a required property for that component.
+You will see a warning if that prop isn't provided. Also notice that func represents 
+function. Among the seven JavaScript primitive types, function and boolean 
+(written as bool) are the only two that use unusual spelling. In addition to the 
+primitive types, there are other types available. For example, you can check that a 
+prop is a React element. Please refer to the documentation for all of the options.
+
+Note: As of React v15.5.0, PropTypes is imported independently from React, like this:  */
+import PropTypes from 'prop-types';
+
+/* Define propTypes for the Items component to require quantity as a prop and verify that 
+it is of type number. */
+
+const Items = (props) => {
+    return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+  };
+  
+  // change code below this line
+  Items.propTypes = {quantity: PropTypes.number.isRequired}; //verify that quantity of Item is a number
+  // change code above this line
+  
+  Items.defaultProps = {
+    quantity: 0
+  };
+  
+  class ShoppingCart extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+    render() {
+      return <Items />
+    }
+  };
+
+
+
+/* React: Access Props Using this.props
+The last several challenges covered the basic ways to pass props to child components. 
+But what if the child component that you're passing a prop to is an ES6 class component, 
+rather than a stateless functional component? The ES6 class component uses a slightly 
+different convention to access props.
+
+Anytime you refer to a class component within itself, you use the this keyword. To 
+access props within a class component, you preface the code that you use to access 
+it with this. For example, if an ES6 class component has a prop called data, you write 
+{this.props.data} in JSX.
+
+Render an instance of the ReturnTempPassword component in the parent component 
+ResetPassword. Here, give ReturnTempPassword a prop of tempPassword and assign it a 
+value of a string that is at least 8 characters long. Within the child, 
+ReturnTempPassword, access the tempPassword prop within the strong tags to make sure 
+the user sees the temporary password. */
+
+class ReturnTempPassword extends React.Component {
+    constructor(props) {
+      super(props);
+  
+    }
+    render() {
+      return (
+          <div>
+              { /* change code below this line */ }
+              <p>Your temporary password is: <strong>{this.props.tempPassword}</strong></p>
+              { /* change code above this line */ }
+          </div>
+      );
+    }
+  };
+  
+  class ResetPassword extends React.Component {
+    constructor(props) {
+      super(props);
+  
+    }
+    render() {
+      return (
+          <div>
+            <h2>Reset Password</h2>
+            <h3>We've generated a new temporary password for you.</h3>
+            <h3>Please reset this password from your account settings ASAP.</h3>
+            { /* change code below this line */ }
+          <ReturnTempPassword tempPassword ="abcdefghi" />
+            { /* change code above this line */ }
+          </div>
+      );
+    }
+  };
+
+/* output:
+Reset Password
+We've generated a new temporary password for you.
+Please reset this password from your account settings ASAP.
+Your temporary password is: abcdefghi */
