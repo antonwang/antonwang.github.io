@@ -210,8 +210,8 @@ There are two ways to create a React component. The first way is to use a JavaSc
 function. Defining a component in this way creates a stateless functional component. 
 The concept of state in an application will be covered in later challenges. For now, 
 think of a stateless component as one that can receive data and render it, but does not
- manage or track changes to that data. (We'll cover the second way to create a React 
- component in the next challenge.)
+manage or track changes to that data. (We'll cover the second way to create a React 
+component in the next challenge.)
 
 To create a component with a function, you simply write a JavaScript function that 
 returns either JSX or null. One important thing to note is that React requires your 
@@ -220,9 +220,9 @@ functional component that assigns an HTML class in JSX: */
 
 // After being transpiled, the <div> will have a CSS class of 'customClass'
 
-const DemoComponent = function() { //function must begin w/ a capital letter
+const DemoComponent = function() { //a stateless functional component must begin w/ a capital letter
 return (
-    <div className='customClass' />
+    <div className='customClass' /> //returns either JSX or null
     );
 };
 
@@ -516,3 +516,188 @@ component, too.
 
 Render this component to the DOM using ReactDOM.render(). There is a div with 
 id='challenge-node' available for you to use. */
+
+// change code below this line
+class MyComponent extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div id = 'challenge-node'>
+                <h1>My First React Component!</h1>
+                </div>
+        )
+    }
+}
+ReactDOM.render(<MyComponent />, document.getElementById('challenge-node'));
+
+
+
+
+/* React: Pass Props to a Stateless Functional Component
+The previous challenges covered a lot about creating and composing JSX elements, 
+functional components, and ES6 style class components in React. With this foundation, 
+it's time to look at another feature very common in React: props. In React, you can 
+pass props, or properties, to child components. Say you have an App component which 
+renders a child component called Welcome which is a stateless functional component. 
+You can pass Welcome a user property by writing:
+ */
+<App>
+  <Welcome user='Mark' />
+</App>
+/* You use custom HTML attributes created by you and supported by React to be passed to
+the component. In this case, the created property user is passed to the component 
+Welcome. Since Welcome is a stateless functional component, it has access to this 
+value like so: */
+
+const Welcome = (props) => <h1>Hello, {props.user}!</h1>
+
+/* It is standard to call this value props and when dealing with stateless functional 
+components, you basically consider it as an argument to a function which returns JSX. 
+You can access the value of the argument in the function body. With class components, 
+you will see this is a little different.
+
+There are Calendar and CurrentDate components in the code editor. When rendering 
+CurrentDate from the Calendar component, pass in a property of date assigned to the
+current date from JavaScript's Date object. Then access this prop in the CurrentDate 
+component, showing its value within the p tags. Note that for prop values to be 
+evaluated as JavaScript, they must be enclosed in curly brackets, for instance
+date={Date()}. */
+
+const CurrentDate = (props) => {
+    return (
+      <div>
+        { /* change code below this line */ }
+        <p>The current date is: {props.date}</p> {/* Accessing property of date */}
+        { /* change code above this line */ }
+      </div>
+    );
+};
+//Passing date information from parent (Calendar) to child (Current Date) using props / property
+class Calendar extends React.Component { 
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div>
+            <h3>What date is it?</h3>
+            { /* change code below this line */ }
+            <CurrentDate date={Date()}/>   {/* second child - assigning currrent date from JavaScript's Date object */}
+            { /* change code above this line */ }
+        </div>
+        );
+    }
+};
+
+
+/* React: Pass an Array as Props
+The last challenge demonstrated how to pass information from a parent component to a 
+child component as props or properties. This challenge looks at how arrays can be passed 
+as props. To pass an array to a JSX element, it must be treated as JavaScript and wrapped 
+in curly braces. */
+
+<ParentComponent>
+  <ChildComponent colors={["green", "blue", "red"]} />
+</ParentComponent>
+
+/* The child component then has access to the array property colors. Array methods such as 
+join() can be used when accessing the property.  */
+
+const ChildComponent = (props) => <p>{props.colors.join(', ')}</p> 
+
+/* This will join all colors array items into a comma separated string and produce: */
+<p>green, blue, red</p> 
+
+/* Later, we will learn about other common methods to render arrays of data in React.
+
+There are List and ToDo components in the code editor. When rendering each List from 
+the ToDo component, pass in a tasks property assigned to an array of to-do tasks, for 
+example ["walk dog", "workout"]. Then access this tasks array in the List component, 
+showing its value within the p element. Use join(", ") to display the props.tasksarray 
+in the p element as a comma separated list. Today's list should have at least 2 tasks 
+and tomorrow's should have at least 3 tasks. */  
+
+const List = (props) => {
+    { /* change code below this line */ }
+    return <p>{props.tasks.join(", ")}</p> /* accessing property of tasks and join items into a string */
+    { /* change code above this line */ }
+};
+
+class ToDo extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div>
+            <h1>To Do Lists</h1>
+            <h2>Today</h2>
+            { /* change code below this line */ }
+            <List tasks={["walk dog", "workout"]} />
+            <h2>Tomorrow</h2>
+            <List tasks={["walk dog", "workout", "cook"]}/>
+            { /* change code above this line */ }
+        </div>
+        );
+    }
+};
+
+/* React: Use Default Props
+React also has an option to set default props. You can assign default props to a component
+as a property on the component itself and React assigns the default prop if necessary. 
+This allows you to specify what a prop value should be if no value is explicitly provided.
+For example, if you declare MyComponent.defaultProps = { location: 'San Francisco' },
+you have defined a location prop that's set to the string San Francisco, unless you 
+specify otherwise. React assigns default props if props are undefined, but if you 
+pass null as the value for a prop, it will remain null.
+
+The code editor shows a ShoppingCart component. Define default props on this component 
+which specify a prop items with a value of 0. */
+
+const ShoppingCart = (props) => {
+    return (
+      <div>
+        <h1>Shopping Cart Component</h1>
+      </div>
+    )
+};
+// change code below this line
+ShoppingCart.defaultProps = { items: 0 }
+
+
+
+/* React: Override Default Props
+The ability to set default props is a useful feature in React. The way to override 
+the default props is to explicitly set the prop values for a component.
+
+The ShoppingCart component now renders a child component Items. This Items component 
+has a default prop quantity set to the integer 0. Override the default prop by passing 
+in a value of 10 for quantity.
+
+Note: Remember that the syntax to add a prop to a component looks similar to how you 
+add HTML attributes. However, since the value for quantity is an integer, it won't go 
+in quotes but it should be wrapped in curly braces. For example, {100}. This syntax 
+tells JSX to interpret the value within the braces directly as JavaScript. */
+
+const Items = (props) => {
+    return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+  }
+  
+Items.defaultProps = {
+    quantity: 0
+}
+
+class ShoppingCart extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        { /* change code below this line */ }
+        return <Items quantity= {10}/>
+        { /* change code above this line */ }
+    }
+};
+
+
