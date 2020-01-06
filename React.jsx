@@ -1,4 +1,58 @@
-/* Introduction to the React Challenges
+ // Contents are taken from freecodecamp's React tutorials. 
+//This is only for my learning purpose
+
+/* Tutorials
+Introduction to the React Challenges
+Create a Simple JSX Element
+Create a Complex JSX Element
+Add Comments in JSX
+Render HTML Elements to the DOM
+Define an HTML Class in JSX
+Learn About Self-Closing JSX Tags
+Create a Stateless Functional Component
+Create a React Component
+Create a Component with Composition
+Use React to Render Nested Components
+Compose React Components
+Render a Class Component to the DOM
+Write a React Component from Scratch
+Pass Props to a Stateless Functional Component
+Pass an Array as Props
+Use Default Props
+Override Default Props
+Use PropTypes to Define the Props You Expect
+Access Props Using this.props
+Review Using Props with Stateless Functional Components
+Create a Stateful Component
+Render State in the User Interface
+Render State in the User Interface Aher Way
+Set State with this.setState
+Bind 'this' to a Class Method
+Use State to Toggle an Element
+Write a Simple Counter
+Create a Controlled Input
+Create a Controlled Form
+State as Props to Child Components
+a Callback as Props
+Use the Lifecycle Method componentWillMount
+Use the Lifecycle Method componentDidMount
+Add Event Listeners
+Optimize Re-Renders with shouldComponentUpdate
+Introducing Inline Styles
+Add Inline Styles in React
+Use Advanced JavaScript in React Render Method
+Render with an If-Else Condition
+Use && for a More Concise Conditional
+Use a Ternary Expression for Conditional Rendering
+Render Conditionally from Props
+Change Inline CSS Conditionally Based on Component State
+Use Array.map() to Dynamically Render Elements
+Give Sibling Elements a Unique Key Attribute
+Use Array.filter() to Dynamically Filter an Array
+Render React on the Server with renderToString
+ */
+
+ /* Introduction to the React Challenges
 React, created by Facebook, is an open-source JavaScript library for building user 
 interfaces. It is used to create components, handle state and props, utilize event 
 listeners and certain life cycle methods to update data as it changes.
@@ -324,28 +378,28 @@ familiar with the arrow function syntax, please refer to the JavaScript section.
 
 const ChildComponent = () => {
     return (
-      <div>
+        <div>
         <p>I am the child</p>
-      </div>
+        </div>
     );
-  };
-  
-  class ParentComponent extends React.Component {
+    };
+
+class ParentComponent extends React.Component {
     constructor(props) {
-      super(props);
+        super(props);
     }
     render() {
-      return (
+        return (
         <div>
-          <h1>I am the parent</h1>
-          { /* change code below this line */ }
-          <ChildComponent />
-  
-          { /* change code above this line */ }
+            <h1>I am the parent</h1>
+            { /* change code below this line */ }
+            <ChildComponent />
+
+            { /* change code above this line */ }
         </div>
-      );
+        );
     }
-  };
+};
 
 
 
@@ -1268,4 +1322,163 @@ class ControlledInput extends React.Component {
       );
     }
 };
+
+
+/* React: Create a Controlled Form
+The last challenge showed that React can control the internal state for certain elements like input and textarea, which makes them controlled components. This applies to other form elements as well, including the regular HTML form element.
+
+The MyForm component is set up with an empty form with a submit handler. The submit handler will be called when the form is submitted.
+
+We've added a button which submits the form. You can see it has the type set to submit indicating it is the button controlling the form. Add the input element in the form and set its value and onChange() attributes like the last challenge. You should then complete the handleSubmit method so that it sets the component state property submit to the current input value in the local state.
+
+Note:  You also must call event.preventDefault() in the submit handler, to prevent the default form submit behavior which will refresh the web page.
+
+Finally, create an h1 tag after the form which renders the submit value from the component's state. You can then type in the form and click the button (or press enter), and you should see your input rendered to the page. */
+
+class MyForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { //Create a controlled input that stores its value in state, so that there is a single source of truth.
+        input: '',
+        submit: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleChange(event) {
+        this.setState({
+        input: event.target.value
+        });
+    }
+    handleSubmit(event) {
+        // change code below this line
+        event.preventDefault() // prevents the page from refreshing because form is submitting
+        this.setState({
+        submit: this.state.input //set ‘submit’ to the value of the variable ‘input’
+        });
+        // change code above this line
+    }
+    render() {
+        return (
+        <div>
+            <form onSubmit={this.handleSubmit}>
+            { /* change code below this line */ }
+            <input value={this.state.input} onChange={this.handleChange} />
+            { /* change code above this line */ }
+            <button type='submit'>Submit!</button>
+            </form>
+            { /* change code below this line - display value of input stored in submit*/ }
+            <h1>{this.state.submit}</h1> 
+            { /* change code above this line */ }
+        </div>
+        );
+    }
+};
+
+
+
+/* React: Pass State as Props to Child Components
+You saw a lot of examples that passed props to child JSX elements and child React components in previous challenges. You may be wondering where those props come from. A common pattern is to have a stateful component containing the state important to your app, that then renders child components. You want these components to have access to some pieces of that state, which are passed in as props.
+
+For example, maybe you have an App component that renders a Navbar, among other components. In your App, you have state that contains a lot of user information, but the Navbar only needs access to the user's username so it can display it. You pass that piece of state to the Navbar component as a prop.
+
+This pattern illustrates some important paradigms in React. The first is unidirectional data flow. State flows in one direction down the tree of your application's components, from the stateful parent component to child components. The child components only receive the state data they need. The second is that complex stateful apps can be broken down into just a few, or maybe a single, stateful component. The rest of your components simply receive state from the parent as props, and render a UI from that state. It begins to create a separation where state management is handled in one part of code and UI rendering in another. This principle of separating state logic from UI logic is one of React's key principles. When it's used correctly, it makes the design of complex, stateful applications much easier to manage.
+
+The MyApp component is stateful and renders a Navbar component as a child. Pass the name property in its state down to the child component, then show the name in the h1 tag that's part of the Navbar render method.   */
+
+
+class MyApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        name: 'CamperBot'
+        }
+    }
+    render() {
+        return (
+            <div>
+            {/* this.state.name passes the value of CamperBot to the NavBar component */}
+            <Navbar name = {this.state.name}/* your code here */ />
+            </div>
+        );
+    }
+};
   
+class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div>
+        {/* Using props in child components will allow us to keep all the state data in the parent component and we can pass the data in one direction to the children components. */}
+        <h1>Hello, my name is: {this.props.name} {/* your code here */} </h1>
+        </div>
+        );
+    }
+};
+
+
+
+/* React: Pass a Callback as Props
+You can pass state as props to child components, but you're not limited to passing data. You can also pass handler functions or any method that's defined on a React component to a child component. This is how you allow child components to interact with their parent components. You pass methods to a child just like a regular prop. It's assigned a name and you have access to that method name under this.props in the child component.
+
+There are three components outlined in the code editor. The MyApp component is the parent that will render the GetInput and RenderInput child components. Add the GetInput component to the render method in MyApp, then pass it a prop called input assigned to inputValue from MyApp's state. Also create a prop called handleChange and pass the input handler handleChange to it.
+
+Next, add RenderInput to the render method in MyApp, then create a prop called input and pass the inputValue from state to it. Once you are finished you will be able to type in the input field in the GetInput component, which then calls the handler method in its parent via props. This updates the input in the state of the parent, which is passed as props to both children. Observe how the data flows between the components and how the single source of truth remains the state of the parent component. Admittedly, this example is a bit contrived, but should serve to illustrate how data and callbacks can be passed between React components. */
+
+
+class MyApp extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        inputValue: ''
+      }
+      this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+      this.setState({
+        inputValue: event.target.value
+      });
+    }
+    render() {
+      return (
+         <div>
+          { /* change code below this line */ }
+          <GetInput input={this.state.inputValue} handleChange={this.handleChange} />
+          <RenderInput input={this.state.inputValue}  />
+          { /* change code above this line */ }
+         </div>
+      );
+    }
+};
+  
+class GetInput extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div>
+            <h3>Get Input:</h3>
+            <input
+            value={this.props.input}
+            onChange={this.props.handleChange}/>
+        </div>
+        );
+    }
+};
+
+class RenderInput extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+        <div>
+            <h3>Input Render:</h3>
+            <p>{this.props.input}</p>
+        </div>
+        );
+    }
+};
