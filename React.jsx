@@ -1033,4 +1033,239 @@ class MyComponent extends React.Component {
 };
 
 
+/* React: Bind 'this' to a Class Method
+In addition to setting and updating state, you can also define methods for your 
+component class. A class method typically needs to use the this keyword so it can 
+access properties on the class (such as state and props) inside the scope of the method. 
+There are a few ways to allow your class methods to access this.
+
+One common way is to explicitly bind this in the constructor so this becomes bound to 
+the class methods when the component is initialized. You may have noticed the last 
+challenge used this.handleClick = this.handleClick.bind(this) for its handleClick method 
+in the constructor. Then, when you call a function like this.setState() within your 
+class method, this refers to the class and will not be undefined.
+
+Note: The this keyword is one of the most confusing aspects of JavaScript but it plays
+an important role in React. Although its behavior here is totally normal, these lessons
+aren't the place for an in-depth review of this so please refer to other lessons if 
+the above is confusing!
+
+The code editor has a component with a state that keeps track of the text. It also has
+a method which allows you to set the text to "You clicked!". However, the method 
+doesn't work because it's using the this keyword that is undefined. Fix it by 
+explicitly binding this to the handleClick() method in the component's constructor.
+
+Next, add a click handler to the button element in the render method. It should trigger
+the handleClick() method when the button receives a click event. Remember that the 
+method you pass to the onClick handler needs curly braces because it should be 
+interpreted directly as JavaScript.
+
+Once you complete the above steps you should be able to click the button and see You 
+clicked!. */
+
+class MyComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        text: "Hello"
+        };
+        // change code below this line
+        this.handleClick = this.handleClick.bind(this); // this.setState() refers to the class and will not be undefined.
+        // change code above this line
+    }
+    handleClick() {
+        this.setState({
+        text: "You clicked!"
+        });
+    }
+    render() {
+        return (
+        <div>
+            { /* change code below this line */ }
+            <button onClick={this.handleClick}>Click Me</button> {/* add a click handler to the button element  */}
+            { /* change code above this line */ }
+            <h1>{this.state.text}</h1>
+        </div>
+        );
+    }
+};
+
+
+/* React: Use State to Toggle an Element
+Sometimes you might need to know the previous state when updating the state. However, 
+state updates may be asynchronous - this means React may batch multiple setState() 
+calls into a single update. This means you can't rely on the previous value of 
+this.state or this.props when calculating the next value. So, you should not use code
+like this: */
+
+this.setState({
+  counter: this.state.counter + this.props.increment
+});
+
+/* Instead, you should pass setState a function that allows you to access state and 
+props. Using a function with setState guarantees you are working with the most current
+values of state and props. This means that the above should be rewritten as: */
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+
+// You can also use a form without props if you need only the state:
+
+this.setState(state => ({
+  counter: state.counter + 1
+}));
+
+/* Note that you have to wrap the object literal in parentheses, otherwise JavaScript 
+thinks it's a block of code.
+
+MyComponent has a visibility property which is initialized to false. The render method
+returns one view if the value of visibility is true, and a different view if it is false.
+
+Currently, there is no way of updating the visibility property in the component's state. 
+The value should toggle back and forth between true and false. There is a click handler 
+on the button which triggers a class method called toggleVisibility(). Pass a function 
+to setState to define this method so that the state of visibility toggles to the opposite
+value when the method is called. If visibility is false, the method sets it to true, and
+vice versa.
+
+Finally, click the button to see the conditional rendering of the component based on its
+state.
+
+Hint: Don't forget to bind the this keyword to the method in the constructor! */
+
+
+class MyComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        visibility: false
+        };
+        // change code below this line
+        this.toggleVisibility = this.toggleVisibility.bind(this);  //bind this keyword to the method
+        // change code above this line
+    }
+    // change code below this line
+        toggleVisibility() { //updates component's state upon click
+        if (this.state.visibility) {
+        this.setState(visibility => ({
+        visibility: false })); 
+        }
+        else
+        this.setState(visibility => ({
+        visibility: true })); 
+        }
+    // change code above this line
+    render() {
+        if (this.state.visibility) {
+        return (
+            <div>
+            <button onClick={this.toggleVisibility}>Click Me</button>
+            <h1>Now you see me!</h1>
+            </div>
+        );
+        } else {
+        return (
+            <div>
+            <button onClick={this.toggleVisibility}>Click Me</button>
+            </div>
+        );
+        }
+    }
+};
+
+
+
+/* React: Write a Simple Counter
+You can design a more complex stateful component by combining the concepts covered so far. These include initializing state, writing methods that set state, and assigning click handlers to trigger these methods.
+
+The Counter component keeps track of a count value in state. There are two buttons which call methods increment() and decrement(). Write these methods so the counter value is incremented or decremented by 1 when the appropriate button is clicked. Also, create a reset() method so when the reset button is clicked, the count is set to 0.
+
+Note: Make sure you don't modify the classNames of the buttons. Also, remember to add the necessary bindings for the newly-created methods in the constructor.  */
+
+class Counter extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        count: 0
+      };
+      // change code below this line
+      this.increment = this.increment.bind(this); //binds this keyword to the method
+      this.decrement = this.decrement.bind(this);
+      this.reset = this.reset.bind(this);
+      // change code above this line
+    }
+    // change code below this line
+    increment() {
+      this.setState(state => ({ //Using a function with setState guarantees the most current values of state
+        count: state.count + 1
+      }));
+    }
+  
+    decrement() {
+      this.setState(state => ({ 
+        count: state.count - 1
+      }));
+    }
+  
+    reset() {
+      this.setState(count => ({
+        count: 0
+      }));
+    }
+    // change code above this line
+    render() {
+      return (
+        <div>
+          <button className='inc' onClick={this.increment}>Increment!</button>
+          <button className='dec' onClick={this.decrement}>Decrement!</button>
+          <button className='reset' onClick={this.reset}>Reset</button>
+          <h1>Current Count: {this.state.count}</h1>
+        </div>
+      );
+    }
+};
+
+
+/* React: Create a Controlled Input
+Your application may have more complex interactions between state and the rendered UI. For example, form control elements for text input, such as input and textarea, maintain their own state in the DOM as the user types. With React, you can move this mutable state into a React component's state. The user's input becomes part of the application state, so React controls the value of that input field. Typically, if you have React components with input fields the user can type into, it will be a controlled input form.
+
+The code editor has the skeleton of a component called ControlledInput to create a controlled input element. The component's state is already initialized with an input property that holds an empty string. This value represents the text a user types into the input field.
+
+First, create a method called handleChange() that has a parameter called event. When the method is called, it receives an event object that contains a string of text from the input element. You can access this string with event.target.value inside the method. Update the input property of the component's state with this new string.
+
+In the render method, create the input element above the h4 tag. Add a value attribute which is equal to the input property of the component's state. Then add an onChange() event handler set to the handleChange() method.
+
+When you type in the input box, that text is processed by the handleChange() method, set as the input property in the local state, and rendered as the value in the input box on the page. The component state is the single source of truth regarding the input data.
+
+Last but not least, don't forget to add the necessary bindings in the constructor. */
+
+class ControlledInput extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        input: ''
+      };
+      // change code below this line
+      this.handleChange = this.handleChange.bind(this); ////binds this keyword to the method
+      // change code above this line
+    }
+    // change code below this line
+    handleChange(event) {
+      this.setState( {
+        input: event.target.value //Updates the input property of the component's state with this new string
+      });
+    }
+    // change code above this line
+    render() {
+      return (
+        <div>
+          { /* change code below this line - onChange keeps track of input values */}
+          <input type="text" value={this.state.input} onChange={this.handleChange} />
+          { /* change code above this line */}
+          <h4>Controlled Input:</h4>
+          <p>{this.state.input}</p>
+        </div>
+      );
+    }
+};
   
