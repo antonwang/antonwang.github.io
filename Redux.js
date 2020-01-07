@@ -147,4 +147,137 @@ const loginAction = () => {
     }
 };
 
-  
+
+/* Redux: Use a Switch Statement to Handle Multiple Actions
+You can tell the Redux store how to handle multiple action types. Say you are managing user authentication in your Redux store. You want to have a state representation for when users are logged in and when they are logged out. You represent this with a single state object with the property authenticated. You also need action creators that create actions corresponding to user login and user logout, along with the action objects themselves.
+
+The code editor has a store, actions, and action creators set up for you. Fill in the reducer function to handle multiple authentication actions. ***Use a JavaScript switch statement in the reducer to respond to different action events. This is a standard pattern in writing Redux reducers. The switch statement should switch over action.type and return the appropriate authentication state.***
+
+Note: At this point, don't worry about state immutability, since it is small and simple in this example. For each action, you can return a new object — for example, {authenticated: true}. Also, don't forget to write a default case in your switch statement that returns the current state. This is important because once your app has multiple reducers, they are all run any time an action dispatch is made, even when the action isn't related to that reducer. In such a case, you want to make sure that you return the current state. */
+
+const defaultState = {
+    authenticated: false
+};
+
+const authReducer = (state = defaultState, action) => {
+// change code below this line
+switch (action.type) {
+        case 'LOGIN': //returns true if 'LOGIN'
+            return {authenticated: true}; //returns new object to preserve state immutability
+        case 'LOGOUT': //returns false if 'LOGOUT'
+            return {authenticated: false}; 
+        default:
+            return state; //return current state
+    }
+// change code above this line
+};
+
+const store = Redux.createStore(authReducer);
+
+const loginUser = () => {
+    return {
+        type: 'LOGIN'
+    }
+};
+
+const logoutUser = () => {
+    return {
+        type: 'LOGOUT'
+    }
+};
+
+
+/* Redux: Use const for Action Types
+***A common practice when working with Redux is to assign action types as read-only constants, then reference these constants wherever they are used. You can refactor the code you're working with to write the action types as const declarations.***
+
+Declare LOGIN and LOGOUT as const values and assign them to the strings 'LOGIN' and 'LOGOUT', respectively. Then, edit the authReducer() and the action creators to reference these constants instead of string values.
+
+***Note: It's generally a convention to write constants in all uppercase, and this is standard practice in Redux as well. ***
+ */
+
+ // change code below this line
+const LOGIN = 'LOGIN'; // a convention to write constants in all uppercase
+const LOGOUT = 'LOGOUT'; 
+// change code above this line
+
+const defaultState = {
+  authenticated: false
+};
+
+const authReducer = (state = defaultState, action) => {
+
+  switch (action.type) {
+
+    case LOGIN: //using const LOGIN for the action.type
+      return {
+        authenticated: true
+      }
+
+    case LOGOUT:
+      return {
+        authenticated: false
+      }
+
+    default:
+      return state;
+
+  }
+
+};
+
+const store = Redux.createStore(authReducer);
+
+const loginUser = () => {
+  return {
+    type: LOGIN //using const LOGIN for the action.type
+  }
+};
+
+const logoutUser = () => {
+  return {
+    type: LOGOUT
+  }
+};
+
+
+
+/* Redux: Register a Store Listener
+Another method you have access to on the Redux store object is store.subscribe(). This allows you to subscribe listener functions to the store, which are called whenever an action is dispatched against the store. One simple use for this method is to subscribe a function to your store that simply logs a message every time an action is received and the store is updated.
+
+Write a callback function that increments the global variable count every time the store receives an action, and pass this function in to the store.subscribe() method. You'll see that store.dispatch() is called three times in a row, each time directly passing in an action object. Watch the console output between the action dispatches to see the updates take place. */
+
+const ADD = 'ADD';
+
+const reducer = (state = 0, action) => {
+  switch(action.type) {
+    case ADD:
+      return state + 1;
+    default:
+      return state;
+  }
+};
+
+const store = Redux.createStore(reducer);
+
+// global count variable:
+let count = 0;
+
+// change code below this line
+/* A callback function is simply a function that get’s called after another function is done being executed. */
+const increment = () => count += 1;
+/* pass a function to a method the same way we might pass a variable to a method. Just pass it in as an argument! */
+store.subscribe(increment);
+// change code above this line
+
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
+
+/* output
+1
+2
+3 */
+
