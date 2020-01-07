@@ -1,4 +1,4 @@
- // Contents are taken from freecodecamp's React tutorials. 
+// Contents are taken from freecodecamp's React tutorials. 
 //This is only for my learning purpose
 
 /* Tutorials
