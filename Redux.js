@@ -486,3 +486,151 @@ const decAction = () => {
 const store = Redux.createStore(counterReducer); 
 
 
+
+
+/* Redux: Never Mutate State
+These final challenges describe several methods of enforcing the key principle of state immutability in Redux. Immutable state means that you never modify state directly, instead, you return a new copy of state.
+
+If you took a snapshot of the state of a Redux app over time, you would see something like state 1, state 2, state 3,state 4, ... and so on where each state may be similar to the last, but each is a distinct piece of data. This immutability, in fact, is what provides such features as time-travel debugging that you may have heard about.
+
+Redux does not actively enforce state immutability in its store or reducers, that responsibility falls on the programmer. Fortunately, JavaScript (especially ES6) provides several useful tools you can use to enforce the immutability of your state, whether it is a string, number, array, or object. Note that strings and numbers are primitive values and are immutable by nature. In other words, 3 is always 3. You cannot change the value of the number 3. An array or object, however, is mutable. In practice, your state will probably consist of an array or object, as these are useful data structures for representing many types of information.
+
+There is a store and reducer in the code editor for managing to-do items. Finish writing the ADD_TO_DO case in the reducer to append a new to-do to the state. There are a few ways to accomplish this with standard JavaScript or ES6. See if you can find a way to return a new array with the item from action.todo appended to the end. */
+
+/* const means: it cannot change through re-assignment, and it cannot be re-declared.
+Since objects and arrays are mutable, you can add to it by index (array[3] = 3), by property (object.name=“sam”), by extending (with various array methods) 
+
+Reviewing array methods:
+.push() and .splice() directly modify the array
+
+.concat() doesn’t modify array but just returns a new array
+
+.slice() doesn’t modify array but just returns a new array
+
+spread operator […array] doesn’t modify array but just returns a new array */
+
+const ADD_TO_DO = 'ADD_TO_DO';
+
+// A list of strings representing tasks to do:
+const todos = [
+  'Go to the store',
+  'Clean the house',
+  'Cook dinner',
+  'Learn to code',
+];
+
+const immutableReducer = (state = todos, action) => {
+  switch(action.type) {
+    case ADD_TO_DO:
+      // don't mutate state here or the tests will fail
+      //return a new array with the item from action.todo appended to the end of state
+      return [...state, action.todo]; // or  todos.concat(action.todo);
+    default:
+      return state;
+  }
+};
+
+// an example todo argument would be 'Learn React',
+const addToDo = (todo) => {
+  return {
+    type: ADD_TO_DO,
+    todo: todo
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
+
+
+
+
+/* Redux: Use the Spread Operator on Arrays
+One solution from ES6 to help enforce state immutability in Redux is the spread operator: .... The spread operator has a variety of applications, one of which is well-suited to the previous challenge of producing a new array from an existing array. This is relatively new, but commonly used syntax. For example, if you have an array myArray and write:
+ */
+let newArray = [...myArray];
+
+/* newArray is now a clone of myArray. Both arrays still exist separately in memory. If you perform a mutation like newArray.push(5), myArray doesn't change. The ... effectively spreads out the values in myArray into a new array. To clone an array but add additional values in the new array, you could write [...myArray, 'new value']. This would return a new array composed of the values in myArray and the string 'new value' as the last value. The spread syntax can be used multiple times in array composition like this, but it's important to note that it only makes a shallow copy of the array. That is to say, it only provides immutable array operations for one-dimensional arrays.
+
+Use the spread operator to return a new copy of state when a to-do is added. */
+
+const immutableReducer = (state = ['Do not mutate state!'], action) => {
+    switch(action.type) {
+      case 'ADD_TO_DO':
+        // don't mutate state here or the tests will fail
+        return [...state, action.todo]; //same code as previous challenge
+      default:
+        return state;
+    }
+};
+
+const addToDo = (todo) => {
+    return {
+        type: 'ADD_TO_DO',
+        todo: todo
+    }
+}
+
+const store = Redux.createStore(immutableReducer);
+  
+
+
+
+/* Redux: Remove an Item from an Array
+Time to practice removing items from an array. The spread operator can be used here as well. Other useful JavaScript methods include slice() and concat().
+
+The reducer and action creator were modified to remove an item from an array based on the index of the item. Finish writing the reducer so a new state array is returned with the item at the specific index removed. */
+
+const immutableReducer = (state = [0,1,2,3,4,5], action) => {
+    switch(action.type) {
+      case 'REMOVE_ITEM':
+        // don't mutate state here or the tests will fail
+        return state.slice(0, action.index).concat(state.slice(action.index+1, state.length));//or[...state.slice(0, action.index), ...state.slice(action.index+1, state.length)];
+      default:
+        return state;
+    }
+};
+
+const removeItem = (index) => {
+    return {
+        type: 'REMOVE_ITEM',
+        index: index
+    }
+}
+
+const store = Redux.createStore(immutableReducer);
+
+
+
+/* Redux: Copy an Object with Object.assign
+The last several challenges worked with arrays, but there are ways to help enforce state immutability when state is an object, too. A useful tool for handling objects is the Object.assign() utility. Object.assign() takes a target object and source objects and maps properties from the source objects to the target object. Any matching properties are overwritten by properties in the source objects. This behavior is commonly used to make shallow copies of objects by passing an empty object as the first argument followed by the object(s) you want to copy. Here's an example: */
+
+const newObject = Object.assign({}, obj1, obj2);
+
+/* This creates newObject as a new object, which contains the properties that currently exist in obj1 and obj2.
+
+The Redux state and actions were modified to handle an object for the state. Edit the code to return a new state object for actions with type ONLINE, which set the status property to the string online. Try to use Object.assign() to complete the challenge. */
+
+const defaultState = {
+    user: 'CamperBot',
+    status: 'offline',
+    friends: '732,982',
+    community: 'freeCodeCamp'
+};
+
+const immutableReducer = (state = defaultState, action) => {
+    switch(action.type) {
+        case 'ONLINE':
+        // don't mutate state here or the tests will fail
+        //state is copied into {}, and any matching properties are overwritten
+        return Object.assign({}, state, {status: 'online'});
+        default:
+        return state;
+    }
+};
+
+const wakeUp = () => {
+    return {
+        type: 'ONLINE'
+    }
+};
+
+const store = Redux.createStore(immutableReducer);
