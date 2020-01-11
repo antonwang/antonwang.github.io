@@ -7,10 +7,17 @@ https://www.w3schools.com/cssref/css_units.asp
 I used both CSS flexbox and CSS grid here :D
 */
 <style>
-body {
-    background-color: pink;
-  }
+html, body {
+  height: 100%;
   
+  body{
+  background-image: url("https://raw.githubusercontent.com/antonwang/antonwang.github.io/master/images/Cannon%20beach%20-%20Oregon.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; //Resize the background image to cover the entire container, even if it has to stretch the image or cut a little bit off one of the edges
+  }
+}
+
 .container-fluid {
     display:flex;
     flex-direction: column;
