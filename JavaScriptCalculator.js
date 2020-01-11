@@ -120,7 +120,7 @@ body {
 <html>
 <body>
   <div class="container-fluid">
-    <h1>Basic Calculator</h1>
+    <p>Basic calculator v1.7</p>
     <div class="flex-container">
       <div class="outputDisplay">
         <span id="display">0</span>
@@ -129,33 +129,34 @@ body {
         {/* <!-- <div id="firstRow"> --> */}
         <button class="btn btn-danger" id="clear">AC</button>
         <button class="btn btn-danger" id="clear-entry">CE</button>
-        <button class="btn btn-primary" id="divide">/</button>
-        <button class="btn btn-primary" id="multiply">X</button>
+        <button class="btn btn-primary" id="divide" value="/">/</button>
+        <button class="btn btn-primary" id="multiply" value="*">X</button>
         {/* <!--       </div> -->
         <!--       <div id="secondRow"> --> */}
-        <button class="btn btn-primary" id="seven">7</button>
-        <button class="btn btn-primary" id="eight">8</button>
-        <button class="btn btn-primary" id="nine">9</button>
-        <button class="btn btn-primary" id="subtract">-</button>
-        <!--       </div>  
-      {/* <div id="thirdRow"> --> */}
-        <button class="btn btn-primary" id="four">4</button>
-        <button class="btn btn-primary" id="five">5</button>
-        <button class="btn btn-primary" id="six">6</button>
-        <button class="btn btn-primary" id="add">+</button>
-        <!--       </div>  
-      {/* <div id="fourthRow"> --> */}
-        <button class="btn btn-primary" id="one">1</button>
-        <button class="btn btn-primary" id="two">2</button>
-        <button class="btn btn-primary" id="three">3</button>
-        <button class="btn btn-primary" id="equals">=</button>
-        {/* <!--       </div>   */}
-      <div id="fifthRow"> -->
-        <button class="btn btn-primary" id="zero">0</button>
-        <button class="btn btn-primary" id="decimal">.</button>
+        <button class="btn btn-primary" id="seven" value="7">7</button>
+        <button class="btn btn-primary" id="eight" value="8">8</button>
+        <button class="btn btn-primary" id="nine" value="9">9</button>
+        <button class="btn btn-primary" id="subtract" value="-">-</button>
+        {/* <!--       </div>  
+      <div id="thirdRow"> --> */}
+        <button class="btn btn-primary" id="four" value="4">4</button>
+        <button class="btn btn-primary" id="five" value="5">5</button>
+        <button class="btn btn-primary" id="six" value="6">6</button>
+        <button class="btn btn-primary" id="add" value="+">+</button>
+        {/* <!--       </div>  
+      <div id="fourthRow"> --> */}
+        <button class="btn btn-primary" id="one" value="1">1</button>
+        <button class="btn btn-primary" id="two" value="2">2</button>
+        <button class="btn btn-primary" id="three" value="3">3</button>
+        <button class="btn btn-primary" id="equals" value="=">=</button>
+        {/* <!--       </div>  
+      <div id="fifthRow"> --> */}
+        <button class="btn btn-primary" id="zero" value="0">0</button>
+        <button class="btn btn-primary" id="decimal" value=".">.</button>
         {/* <!--       </div> --> */}
       </div>
     </div>
+    <p>Coded and designed by Anton</p>
   </div>
   <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </body>
@@ -202,13 +203,13 @@ $(document).ready(function() {
     var inputAsString;
     //to validate operations
     var arithmeticOperator = ["+", "-", "/", "*"];
-    //to validate a single decimal input
+    //to validate input of a single decimal
     var decimalOperator = ["."];
-    //numbers
+    //numbers stored in array
     var integers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   
-    function getValue(input) {
-      //conditional logic to determine the next action
+    //conditional logic to determine the next action for input (clicked button that is not AC, CE, =, 00)
+    function processValue(input) {
       if (
         (userInput[userInput.length - 1] === "." && input === ".") ||
         (userInput.includes(".") &&
@@ -216,49 +217,58 @@ $(document).ready(function() {
           input === ".")
       ) {
         //First part: We prevent consecutive decimal operator in an array, i.e 1..2  ||  Second part: Prohibits 5.5.5. but allowing 5.5 - 2.2 by making sure that array has . , that array does not include any arithmetic operator !(arithmeticOperator.some(x => userInput.indexOf(x) >=0)) , and that input is a .
-        outputValue();
       } else if (
-        arithmeticOperator.includes(input) || decimalOperator.includes(input)
+        arithmeticOperator.includes(input) ||
+        decimalOperator.includes(input)
       ) {
         //Add to array if input is any arithmetic operators
         userInput.push(input);
       } else if (integers.includes(Number(input))) {
-        //converts input into a number. If input is a number, push it to the array.
+        //converts input into a number. If input is a number, push it to the array
         userInput.push(input);
       }
-      outputValue();
+      outputValue(); //display the stored userInput as a string after if-else statements
     }
   
+    //display the stored userInput as a string
     function outputValue() {
-      inputAsString = userInput.join("");
+      inputAsString = userInput.join(""); //converts an array into a string
       $("#display").html(inputAsString);
     }
   
+    //Evaluate the userInput and display the total
     function getTotal() {
-      inputAsString = userInput.join("");
+      inputAsString = userInput.join(""); //converts an array into a string
   
-      var temp;
-      var tail;
-      //var regexNum = /[0-9]+$/;
+      //Regular expression: ending ($) in a number, then one or more operators, then one operator, then one or more numbers
       var regexOperator = /[0-9][+\/*-]+[+\/*-][0-9]+$/;
+  
+      //Regular expression: ending ($) in a number, then one operator excluding (-), then one (-) operator, then one or more numbers
       var regexOpMinus = /[0-9][+*\/][-][0-9]+$/;
-      if (regexOpMinus.test(inputAsString)) { //if only two operators are entered consecutively and the last operator entered is a (-) sign, perform the operation as it. I.e. if 5 * - 5 = is entered, the result should be -25 (i.e. 5 x (-5)).
+  
+      if (regexOpMinus.test(inputAsString)) {
+        //if only two operators are entered consecutively and the last operator entered is a (-) sign, perform the operation as it. I.e. if 5 * - 5 = is entered, the result should be -25 (i.e. 5 x (-5)).
         displayTotal();
-      } else if (regexOperator.test(inputAsString)) { //If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign because of previous if statement). I.e. if 5 + * 7 = is entered, the result should be 35 (i.e. 5 * 7)
-        inputAsString = inputAsString.replace(/([0-9])([+\/*-]+)([+\/*-])([0-9]+)$/, "$1 $3 $4");
+      } else if (regexOperator.test(inputAsString)) {
+        //If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign because of previous if statement). I.e. if 5 + * 7 = is entered, the result should be 35 (i.e. 5 * 7).
+        inputAsString = inputAsString.replace(
+          /([0-9])([+\/*-]+)([+\/*-])([0-9]+)$/,
+          "$1 $3 $4"
+        ); //replaces the string by removing extra operators ([+\/*-]+)
         displayTotal();
-      } else
-        displayTotal();
-      
+      } else displayTotal();
+  
       function displayTotal() {
-        var total = eval(inputAsString);
-        userInput = [];
+        //a function within a function (nested function) to reduce repetition of code
+        var total = eval(inputAsString); //eval() evaluates the argument and outputs the total
+        userInput = []; //set userInput to an empty array
         if (total > total.toFixed(5)) {
           //if a total with decimal places is longer than the 5th decimal place, add totalFloat to array and display total float to <span>. Otherwise, add total to array and display it w/o forcing decimal places on it. This preserves a total with a few decimal places i.e. 5/4 = 1.25 instead of 1.25000...
-          totalFloat = total.toFixed(8);
-          userInput.push(totalFloat);
+          var totalFloat = total.toFixed(8);
+          userInput.push(totalFloat); //stores the float in userInput array
           $("#display").text(totalFloat); //.text or .html seems to work
         } else {
+          //if total has 5 or less decimal places, preserve the float, then store and display it
           userInput.push(total);
           $("#display").html(total); //.text or .html seems to work
         }
@@ -267,18 +277,21 @@ $(document).ready(function() {
   
     $("button").click(function() {
       if (this.id === "clear") {
+        //if the clicked button is AC, clear userInput array
         userInput = [];
-        $("#display").html(0);
+        $("#display").html(0); //display 0
       } else if (this.id === "clear-entry") {
+        //if the clicked button is CE, remove last item in array
         userInput.pop(); //pop off/remove the last item in array
-        outputValue();
+        outputValue(); //calls outputValue() to display userInput as string
       } else if (this.id === "equals") {
+        //if the clicked button is (=), calls getTotal() for evaluation
         getTotal();
       } else if (userInput[0] == "0" && $(this).val() == "0") {
+        //if user clicked the zero button twice in a row, only display 1 zero as the output
         $("#display").html(0);
       } else {
-        getValue($(this).val());
+        processValue($(this).val()); //if none of the above, evaluate value of clicked button in processValue()
       }
     });
-  });
-  
+});
