@@ -1,6 +1,8 @@
-const SetTimer = (
-  props // (props) => { return () } or here we use the shortcut (props) => ( )
-) => (
+import React from "react";
+import ReactDOM from "react-dom";
+//import "./App.css";
+
+const SetTimer = props => (
   <div className="timer-container">
     <div id={`${props.type}-label`}>
       {props.type === "session" ? "Session" : "Break"} Length
@@ -10,16 +12,13 @@ const SetTimer = (
         id={`${props.type}-decrement`}
         onClick={() => props.handleSetTimer(false, `${props.type}Time`)}
       >
-        {" "}
         &darr;
       </button>
-      {/* &darr; is down arrow   https://www.w3schools.com/charsets/ref_utf_arrows.asp */}
       <div id={`${props.type}-length`}>{props.value}</div>
       <button
         id={`${props.type}-increment`}
         onClick={() => props.handleSetTimer(true, `${props.type}Time`)}
       >
-        {" "}
         &uarr;
       </button>
     </div>
@@ -28,9 +27,9 @@ const SetTimer = (
 
 const Timer = props => {
   return (
-    <div className="timer">
-      <h1 id="timer-label">{props.mode == "session" ? "Session" : "Break"}</h1>
-      <h1 id="time-left">{props.timer}</h1>
+    <div className="timer-container">
+      <h1 id="timer-label">{props.mode === "session" ? "Session" : "Break"}</h1>
+      <h1 id="time-left">{props.convertToMinSec}</h1>
     </div>
   );
 };
@@ -39,8 +38,7 @@ const Controls = props => {
   return (
     <div className="controls">
       <button id="start_stop" onClick={props.handlePlayPause}>
-        {/*could also use unicode <span>&#9658;</span> : <span>&#9611;&#9611;</span>  */}
-        {props.playOrPause == "pause" ? (
+        {props.playOrPause === "pause" ? (
           <i className="fa fa-play fa-2x"></i>
         ) : (
           <i className="fa fa-pause fa-2x"></i>
@@ -57,10 +55,10 @@ class PomodoroClock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      breakTime: 5, //break time after each session
-      sessionTime: 25, //session time set to 25 for a typical pomodoro clock
+      breakTime: 5,
+      sessionTime: 25,
       timerMode: "session",
-      timer: 1500000, // from 25 minutes x 60 seconds/minute x 1000 ms/second
+      timer: 1500000,
       playOrPause: "pause",
       userInput: false
     };
@@ -87,28 +85,29 @@ class PomodoroClock extends React.Component {
     }
   }
 
+  convertToMinSec(timer) {
+    let minutes = parseInt(timer / 1000 / 60, 10);
+    let seconds = parseInt((timer / 1000) % 60, 10);
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    return minutes + ":" + seconds;
+  }
+
   handleSetTimer(incr, type) {
     if (this.state[type] === 60 && incr) return;
     if (this.state[type] === 1 && !incr) return;
-    this.setState({
-      [type]: this.state[type] + (incr ? 1 : -1)
-    });
-    /*if (this.state.hasOwnProperty('sessionTime')) {
-    this.setState ({
-      timer: this.state.sessionTime * 60 * 1000
-    })
-  }*/
+    this.setState(state => ({ [type]: this.state[type] + (incr ? 1 : -1) }));
   }
 
   handlePlayPause() {
-    if (this.state.playOrPause == "play") {
-      //if timer is playing, onClick would pause it and change timerState to false
+    if (this.state.playOrPause === "play") {
       clearInterval(this.timeTracker);
       this.setState({ playOrPause: "pause" });
     } else {
-      //https://www.w3schools.com/jsref/met_win_setinterval.asp
-      //when the play button is pressed, we substract 1000 ms from timerState with every passing 1000 ms
-      //REVIEW THIS BOTTOM BLOCK CODE
       if (this.state.userInput) {
         this.timeTracker = setInterval(
           () => this.setState({ timer: this.state.timer - 1000 }),
@@ -133,6 +132,9 @@ class PomodoroClock extends React.Component {
   }
 
   handleReset() {
+    clearInterval(this.timeTracker);
+    this.audio.pause();
+    this.audio.currentTime = 0;
     this.setState({
       breakTime: 5,
       sessionTime: 25,
@@ -141,9 +143,6 @@ class PomodoroClock extends React.Component {
       playOrPause: "pause",
       userInput: false
     });
-    clearInterval(this.timeTracker); //stop the setInterval countdown below
-    this.audio.pause();
-    this.audio.currentTime = 0;
   }
 
   render() {
@@ -160,10 +159,9 @@ class PomodoroClock extends React.Component {
           value={this.state.sessionTime}
           handleSetTimer={this.handleSetTimer}
         />
-        {/*more info on moment.js: https://momentjs.com/docs/#/displaying/format/ ; could also calculate min:sec using algorithm: parseInt(counter / 60) + ':' + (counter % 60); */}
         <Timer
           mode={this.state.timerMode}
-          timer={moment(this.state.timer).format("mm:ss")}
+          convertToMinSec={this.convertToMinSec(this.state.timer)}
         />
         <Controls
           playOrPause={this.state.playOrPause}
@@ -173,7 +171,7 @@ class PomodoroClock extends React.Component {
         <audio
           id="beep"
           src="https://freesound.org/data/previews/352/352661_4019029-lq.mp3"
-          ref={e => (this.audio = e)}
+          ref={audio => (this.audio = audio)}
         ></audio>
       </div>
     );
