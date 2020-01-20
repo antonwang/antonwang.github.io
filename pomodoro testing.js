@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//import "./App.css";
 
 const SetTimer = props => (
   <div className="timer-container">
