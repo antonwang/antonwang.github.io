@@ -1,23 +1,73 @@
+<html>
+  <body>
+    <div id='root'></div>
+  </body>
+</html>
+
+<style>
+body {
+  background-color: pink;
+}
+
+.row {
+  //border: 1px solid black;
+  height: 100vh;
+  //margin: top, right, bottom, left
+  margin: 0 20vw 0 20vw
+}
+
+span {
+  font-size: 30px;
+  padding: 20px;
+}
+
+#break-decrement {
+  background-color: red;
+  border: red;
+}
+#session-decrement {
+  background-color: red;
+  border: red;
+}
+
+.timerboard-container {
+  background-color: orange;
+  border-radius: 4em;
+  //margin: top & bottom, left & right
+  //margin: 0 1vw;
+  padding: 10px;
+}
+
+.timer-controls {
+  //border: 1px solid black;
+  padding: 15px 0px;
+}
+#reset, #start_stop {
+  margin: 10px;
+  //border: 1px solid black;
+}
+
+</style>
 //In a stateless functional component, we can use the shortcut props => ( ) instead of props => { return ( )} if we are not defining anything before return
 const SetTimer = props => (
-  <div className="timer-container">
-    <div id={`${props.type}-label`}>
+  <div className="timer-container text-center" >
+    <h3 id={`${props.type}-label`}>
       {props.type === "session" ? "Session" : "Break"} Length
-    </div>
+    </h3>
     <div className="timer-controls">
       <button
         id={`${props.type}-decrement`}
         //with onClick, use ES6 function for passing arguments into method per Mosh on youtube
         onClick={() => props.handleSetTimer(false, `${props.type}Time`)}
-      >
+        className="btn btn-primary" data-toggle="button">
         {/* &darr; is down arrow   https://www.w3schools.com/charsets/ref_utf_arrows.asp */}
         &darr;
       </button>
-      <div id={`${props.type}-length`}>{props.value}</div>
+      <span className="" id={`${props.type}-length`}>{props.value}</span>
       <button
         id={`${props.type}-increment`}
         onClick={() => props.handleSetTimer(true, `${props.type}Time`)}
-      >
+        className="btn btn-success" data-toggle="button">
         &uarr;
       </button>
     </div>
@@ -27,9 +77,9 @@ const SetTimer = props => (
 //Proving that we can use the shortcut props => ( )  or props => { return ( )}
 const TimerBoard = props => {
   return (
-    <div className="timerboard-container">
-      <h1 id="timer-label">{props.mode}</h1>
-      <h1 id="time-left">{props.timeLeft}</h1>
+    <div className='timerboard-container text-center'>
+      <h3 id='timer-label'>{props.mode}</h3>
+      <h2 id='time-left'>{props.timeLeft}</h2>
     </div>
   );
 };
@@ -38,18 +88,17 @@ const TimerBoard = props => {
 class TimerControls extends React.Component {
   render() {
     return (
-      <div className="timer-controls">
-        <button id="start_stop" onClick={this.props.handlePlayPause}>
+      <div className="timer-controls text-center">
+        <button id="start_stop" className="btn btn-info" onClick={this.props.handlePlayPause}>
           {/*could also use unicode <span>&#9658;</span> : <span>&#9611;&#9611;</span>  */}
 
-          {this.props.atPause ? (
-            <i className="fa fa-play fa-4x"></i>
-          ) : (
-            <i className="fa fa-pause fa-4x"></i>
-          )}
+          {this.props.atPause ?
+            <i className="fa fa-play fa-2x"></i> : 
+            <i className="fa fa-pause fa-2x"></i>
+          }
         </button>
-        <button id="reset" onClick={this.props.handleReset}>
-          <i className="fa fa-refresh fa-4x"></i>
+        <button id="reset" className="btn btn-info" onClick={this.props.handleReset}>
+          <i className="fa fa-refresh fa-2x" ></i>
         </button>
       </div>
     );
@@ -61,7 +110,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       breakTime: 5, //break time after each session
-      sessionTime: 25, ////session time set to 25 for a typical pomodoro clock
+      sessionTime: 25,  ////session time set to 25 for a typical pomodoro clock
       timerMode: "Session",
       timeLeft: 60 * 25,
       userInput: false, //user hits play is set to false initially
@@ -73,8 +122,9 @@ class App extends React.Component {
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleStartTimer = this.handleStartTimer.bind(this);
     this.handleReset = this.handleReset.bind(this);
-  }
 
+  }
+  
   //convert time to display in minutes and seconds  MM:SS.
   //notice that this method is not bound using .bind(this) because this method doesn't call this.state
   convertToMinSec(timer) {
@@ -88,47 +138,46 @@ class App extends React.Component {
     }
     return minutes + ":" + seconds;
   }
-
+  
   //increment or decrement break/session intervals and making sure numbers are between 1-60 inclusively
   handleSetTimer(incr, type) {
-    if (!this.state.userInput) {
-      //if user has not hit play button
+    if (!this.state.userInput) { //if user has not hit play button
       //increment or decrement sessionTime and storing info into timeLeft too
-      if (type === "sessionTime" && this.state[type] < 60 && incr === true) {
+      if (type === 'sessionTime' && this.state[type] < 60 && incr === true) {
         let newIncrementTime = this.state[type] + 1;
-        this.setState({
+        this.setState ({
           [type]: newIncrementTime,
           timeLeft: 60 * newIncrementTime
-        });
+        })
       }
-      if (type === "sessionTime" && this.state[type] > 1 && incr === false) {
+      if (type === 'sessionTime' && this.state[type] >1 && incr === false) {
         let newDecrementTime = this.state[type] - 1;
-        this.setState({
+        this.setState ({
           [type]: newDecrementTime,
           timeLeft: 60 * newDecrementTime
-        });
+        })
       }
-      //increment or decrement breakTime and storing info
-      if (type === "breakTime" && this.state[type] < 60 && incr === true) {
-        this.setState({
+      //increment or decrement breakTime and storing info 
+      if (type === 'breakTime' && this.state[type] < 60 && incr === true) { 
+        this.setState ({
           [type]: this.state[type] + 1
-        });
+        })
       }
-      if (type === "breakTime" && this.state[type] > 1 && incr === false) {
-        this.setState({
+      if (type === 'breakTime' && this.state[type] >1 && incr === false) {
+        this.setState ({
           [type]: this.state[type] - 1
-        });
-      }
+        })
+      } 
     }
   }
-
+  
   //3 purposes. 1: toggles atPause to true/false  2: limit user when timer is played  3: performs countdown
   handlePlayPause() {
     //using (boolean ? return if true : return if false) eliminates many lines of code of if/else statement
     this.setState({
       atPause: this.state.atPause ? false : true
-    });
-
+    })
+    
     //prevents user from changing intervals when pomodoro clock is initiated; only start timer on the initial play hit, until reset.
     if (!this.state.userInput) {
       this.setState({
@@ -144,7 +193,7 @@ class App extends React.Component {
     let timer = 60 * sessionInterval;
 
     //https://www.w3schools.com/jsref/met_win_setinterval.asp
-    //when the play button is pressed, we substract 1000 ms from timerState with every passing 1000 ms
+    //when the play button is pressed, we substract 1000 ms from timerState with every passing 1000 ms  
     let displayTimeLeft = setInterval(async () => {
       if (!this.state.atPause) {
         timer -= 1;
@@ -154,7 +203,7 @@ class App extends React.Component {
         timeLeft: timer
       }));
 
-      if ((await timer) <= 0) {
+      if (await timer <= 0) {
         if (inSession) {
           inSession = false;
           timer = 60 * breakInterval;
@@ -166,20 +215,20 @@ class App extends React.Component {
           timerMode: inSession ? "Session" : "Break",
           timeLeft: timer
         }));
-        this.audioBeep.play();
+        this.audio.play();
       }
     }, 1000);
-
-    this.setState({
-      //created a new property for handleReset method to stop the setInterval countdown
-      displayTimeLeft //shortcut for displayTimeLeft: displayTimeLeft
+    
+    this.setState({ //created a new property for handleReset method to stop the setInterval countdown
+      displayTimeLeft //shortcut for displayTimeLeft: displayTimeLeft 
     });
   }
 
+  
   //Resets the state's keys to the original values
   handleReset() {
-    this.audioBeep.pause(); //stops the audio
-    this.audioBeep.currentTime = 0; //reset the audio playback to 0
+    this.audio.pause(); //stops the audio
+    this.audio.currentTime = 0; //reset the audio playback to 0
     clearInterval(this.state.displayTimeLeft); //stop the setInterval countdown
     this.setState({
       breakTime: 5,
@@ -187,21 +236,20 @@ class App extends React.Component {
       timerMode: "Session",
       timeLeft: 60 * 25,
       userInput: false, //user hits play is set to false initially
-      atPause: true
+      atPause: true 
     });
   }
 
   render() {
     return (
       <div className="container-fluid">
-        <div className="container">
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col-md-6">
               <SetTimer
                 type="break"
                 value={this.state.breakTime}
                 handleSetTimer={this.handleSetTimer}
-              />
+              />              
               <SetTimer
                 type="session"
                 value={this.state.sessionTime}
@@ -220,12 +268,11 @@ class App extends React.Component {
               />
             </div>
           </div>
-        </div>
 
         <audio
           id="beep"
           ref={audio => {
-            this.audioBeep = audio;
+            this.audio = audio;
           }}
           src="https://freesound.org/data/previews/352/352661_4019029-lq.mp3"
         />
@@ -233,5 +280,6 @@ class App extends React.Component {
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById("root"));

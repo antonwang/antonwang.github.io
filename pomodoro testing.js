@@ -43,8 +43,8 @@ const Controls = props => {
           <i className="fa fa-pause fa-2x"></i>
         )}
       </button>
-      <button id="reset">
-        <i className="fa fa-refresh fa-2x" onClick={props.handleReset}></i>
+      <button id="reset" onClick={props.handleReset}>
+        <i className="fa fa-refresh fa-2x"></i>
       </button>
     </div>
   );
