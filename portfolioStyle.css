@@ -69,8 +69,8 @@ main {
 }
 
 .imagesize {
-  height: 400px;
-  width: 500px;
+  height: auto;
+  max-width: 100%;
 }
 
 /* project section using CSS Gridbox */
