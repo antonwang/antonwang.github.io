@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #c3cfff;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+header {
+  top: 0;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  background-color: lightyellow;
+}
+
+#header-img {
+  margin-left: 50px;
+}
+
+.logo {
+  display: flex;
+  width: 67%;
+  align-items: center;
+}
+
+#name_logo {
+  font-size: 1.2em;
+  color: black;
+  padding: 10px;
+}
+
+.nav-link {
+  color: black;
+  text-decoration: overline wavy black;
+}
+
+nav > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+li {
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+#signmeup {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+}
+#email {
+  font-family: inherit;
+  font-size: inherit;
+  margin: 10px 0px;
+}
+
+#submit {
+  color: teal;
+  background-color: white;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#features {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.box {
+  display: flex;
+}
+
+.icon {
+  margin-top: 15px;
+  height: 60px;
+  width: 60px;
+  /* //border: 1px solid black; */
+}
+
+.text {
+  margin: 0px 0px 30px 70px;
+}
+
+#printTypes {
+  width: 60%;
+}
+
+#pricing {
+  display: flex;
+}
+
+.product {
+  margin: 40px;
+  width: 220px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.level {
+  height: 30px;
+  width: 100%;
+  text-transform: uppercase;
+  background-color: lightyellow;
+}
+
+div > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product > ul > li {
+  border: 1px solid black;
+}
+
+footer {
+  margin: 0 20%;
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.select {
+  border: 1px solid black;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 550;
+  margin: 10px;
+  padding: 5px;
+  background-color: yellow;
+}
+
+footer > ul {
+  display: flex;
+  list-style-type: none;
+}
+
+footer > ul > li {
+  margin: 0;
+}
+
+span {
+  font-size: 18px;
+}
+
+@media (max-width: 800px) {
+  #video {
+    height: 300px;
+  }
+}
