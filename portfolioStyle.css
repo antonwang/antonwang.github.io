@@ -97,10 +97,6 @@ main {
   padding: 0.5em 1em;
 }
 
-/* .project-tile a {
-  text-decoration: none;
-} */
-
 .project-tile a:hover {
   color: white;
   background-color: black;
