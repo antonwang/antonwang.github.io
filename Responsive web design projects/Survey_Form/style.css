@@ -1,0 +1,66 @@
+#title {
+  text-align: center;
+}
+#description {
+  text-align: center;
+  width: 45%;
+  margin: 0 auto 0 auto;
+  font-family: monospace;
+  font-size: 20;
+}
+body {
+  background-image: url("https://images.unsplash.com/photo-1498354136128-58f790194fa7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+  background-color: lightgreen;
+}
+
+#survey-form {
+  display: block;
+  width: 600px;
+  margin: 10px auto 50px auto;
+  background-color: rgba(0, 128, 128, 0.5);
+  border-radius: 10px;
+  padding: 30px 50px;
+  font-size: 20px;
+  font-family: "Comic Sans MS";
+}
+
+#name,
+#email,
+#number {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 10px;
+}
+
+#dropdown {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+#submit {
+  display: block;
+  width: 100%;
+  color: teal;
+  background-color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+}
+
+.groups:last-of-type {
+  margin: 20px 0;
+}

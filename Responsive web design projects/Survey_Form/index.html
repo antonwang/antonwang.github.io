@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Fitness Survey Form</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1 id="title">Fitness Survey Form</h1>
+        <p id="description">
+          Thank you for taking the time to share with us. "It is not about
+          having time, it is about making time." - anonymous
+        </p>
+      </header>
+
+      <form id="survey-form" action="">
+        <div class="groups">
+          <label id="name-label" for="name"> Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+
+        <div class="groups">
+          <label id="email-label" for="email"> Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+            required
+          />
+        </div>
+
+        <div class="groups">
+          <label id="number-label" for="number"> Age</label>
+          <input
+            type="number"
+            id="number"
+            name="age"
+            placeholder="Age"
+            min="4"
+            max="120"
+            required
+          />
+        </div>
+
+        <div class="groups">
+          <p>What option best describes your current physical fitness level?</p>
+          <select id="dropdown">
+            <option value="beginner">beginner</option>
+            <option value="intermediate">intermediate</option>
+            <option value="advance">advance</option>
+            <option value="expert">expert</option>
+          </select>
+        </div>
+
+        <div class="groups">
+          <p>How often do you workout?</p>
+          <label>
+            <input type="radio" name="frequencyofworkout" value="0 day/week" />
+            0 day/week
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="frequencyofworkout"
+              value="1-2 days/week"
+            />
+            1-2 days/week
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="frequencyofworkout"
+              value="3-4 days/week"
+            />
+            3-4 days/week
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="frequencyofworkout"
+              value="5-6 days/week"
+            />
+            5-6 days/week
+          </label>
+          <label>
+            <input type="radio" name="frequencyofworkout" value="Every day" />
+            Every day
+          </label>
+        </div>
+
+        <div class="groups">
+          <p>
+            On average, how much time do you give yourself to work out per day?
+          </p>
+          <label>
+            <input type="radio" name="timeperworkout" value="0 minute" /> 0
+            minute
+          </label>
+          <label>
+            <input type="radio" name="timeperworkout" value="15 minute" /> 15
+            minutes
+          </label>
+          <label>
+            <input type="radio" name="timeperworkout" value="30 minutes" /> 30
+            minutes
+          </label>
+          <label>
+            <input type="radio" name="timeperworkout" value="45 minutes" /> 45
+            minutes
+          </label>
+          <label>
+            <input type="radio" name="timeperworkout" value="60+ minutes" /> 60+
+            minutes
+          </label>
+        </div>
+
+        <div class="groups">
+          <p>What is your fitness goal? (Check all that apply)</p>
+          <label>
+            <input type="checkbox" name="fitnessgoal" value="Weightloss" />
+            Weight Loss
+          </label>
+          <label>
+            <input type="checkbox" name="fitnessgoal" value="Endurance" />
+            Increase Endurance
+          </label>
+          <label>
+            <input type="checkbox" name="fitnessgoal" value="Strength" />
+            Increase Strength
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="fitnessgoal"
+              value="SleepImprovement"
+            />
+            Sleep Improvement
+          </label>
+          <label>
+            <input type="checkbox" name="fitnessgoal" value="MoodEnhancement" />
+            Mood Enhancement
+          </label>
+          <label>
+            <input type="checkbox" name="fitnessgoal" value="Stress Relief" />
+            Stress Relief
+          </label>
+        </div>
+
+        <div class="groups">
+          <label>
+            <textarea
+              placeholder="Enter your comments here..."
+              rows="4"
+            ></textarea>
+          </label>
+        </div>
+
+        <button id="submit">Submit</button>
+      </form>
+
+      <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    </main>
+  </body>
+</html>
