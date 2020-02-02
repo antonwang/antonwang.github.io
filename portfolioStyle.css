@@ -101,7 +101,7 @@ main {
   text-decoration: none;
 }
 
-.project-tile a:hover {
+.project-tile a p:hover {
   p {
     color: white;
     background-color: black;
