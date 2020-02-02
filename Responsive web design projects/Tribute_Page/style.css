@@ -1,0 +1,31 @@
+#main {
+  text-align: center;
+}
+
+body {
+  background-color: lightblue;
+}
+
+#img-div {
+  background-color: beige;
+  width: 600px;
+  height: 100%;
+  display: inline-block;
+}
+
+img {
+  max-width: 90%;
+  display: block;
+  margin: auto;
+  padding: 30px;
+}
+
+#tribute-info {
+  max-width: 850px;
+  margin: 0 auto 50px auto;
+}
+
+ul {
+  text-align: left;
+  line-height: 2;
+}
