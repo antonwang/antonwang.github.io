@@ -1,0 +1,63 @@
+main {
+  margin-left: 300px;
+  padding: 0px 30px;
+}
+
+#navbar {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 5px solid grey;
+  overflow: auto;
+}
+
+@media (max-height 600px) {
+  #navbar {
+    overflow: scroll;
+  }
+}
+
+ul > li {
+  padding: 5px;
+}
+
+ol li {
+  padding: 5px;
+}
+
+#navbar > ul {
+  margin: 0;
+  padding: 0;
+}
+
+#navbar header p {
+  font-family: monospace;
+  font-size: 30px;
+  text-align: center;
+}
+
+#navbar > ul > li {
+  list-style: none;
+  padding: 20px 0;
+  text-align: center;
+  font-family: monospace;
+  font-size: 20px;
+  border-top: 1px solid black;
+  margin: 0;
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+a:hover {
+  color: blue;
+}
+
+code {
+  background-color: #e0dedc;
+}
