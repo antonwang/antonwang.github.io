@@ -90,22 +90,20 @@ main {
   grid-gap: 20px;
 }
 
-.project-tile a p {
+.project-tile a {
   text-align: center;
   color: #ffcc00;
   font-size: 25px;
   padding: 0.5em 1em;
 }
 
-.project-tile a {
+/* .project-tile a {
   text-decoration: none;
-}
+} */
 
-.project-tile a p:hover {
-  p {
-    color: white;
-    background-color: black;
-  }
+.project-tile a:hover {
+  color: white;
+  background-color: black;
 }
 
 /* contact me section using CSS Flexbox */
