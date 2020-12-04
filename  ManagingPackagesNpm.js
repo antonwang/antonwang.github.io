@@ -81,3 +81,33 @@ Some common licenses for open source projects include MIT and BSD. License infor
 
 "license": "MIT",
 Fill the license field in the package.json file of your project as you find suitable. */
+
+/* Managing Packages with Npm - Add a Version to Your package.json
+A version is one of the required fields of your package.json file. This field describes the current version of your project. Here's an example:
+
+"version": "1.2.0",
+Add a version to the package.json file of your project.
+ */
+
+/* Managing Packages with Npm - Expand Your Project with External Packages from npm
+One of the biggest reasons to use a package manager, is their powerful dependency management. Instead of manually having to make sure that you get all dependencies whenever you set up a project on a new computer, npm automatically installs everything for you. But how can npm know exactly what your project needs? Meet the dependencies section of your package.json file.
+
+In this section, packages your project requires are stored using the following format:
+
+"dependencies": {
+  "package-name": "version",
+  "express": "4.14.0"
+}
+Add version "2.14.0" of the "moment" package to the dependencies field of your package.json file.
+
+Note: Moment is a handy library for working with time and dates. */
+
+/* Managing Packages with Npm - Manage npm Dependencies By Understanding Semantic Versioning
+Versions of the npm packages in the dependencies section of your package.json file follow what’s called Semantic Versioning (SemVer), an industry standard for software versioning aiming to make it easier to manage dependencies. Libraries, frameworks or other tools published on npm should use SemVer in order to clearly communicate what kind of changes projects can expect if they update.
+
+Knowing SemVer can be useful when you develop software that uses external dependencies (which you almost always do). One day, your understanding of these numbers will save you from accidentally introducing breaking changes to your project without understanding why things that worked yesterday suddenly don’t work today. This is how Semantic Versioning works according to the official website:
+
+"package": "MAJOR.MINOR.PATCH"
+The MAJOR version should increment when you make incompatible API changes. The MINOR version should increment when you add functionality in a backwards-compatible manner. The PATCH version should increment when you make backwards-compatible bug fixes. This means that PATCHes are bug fixes and MINORs add new features but neither of them break what worked before. Finally, MAJORs add changes that won’t work with earlier versions.
+
+In the dependencies section of your package.json file, change the version of moment to match MAJOR version 2, MINOR version 10 and PATCH version 2 */
