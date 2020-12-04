@@ -111,3 +111,40 @@ Knowing SemVer can be useful when you develop software that uses external depend
 The MAJOR version should increment when you make incompatible API changes. The MINOR version should increment when you add functionality in a backwards-compatible manner. The PATCH version should increment when you make backwards-compatible bug fixes. This means that PATCHes are bug fixes and MINORs add new features but neither of them break what worked before. Finally, MAJORs add changes that won’t work with earlier versions.
 
 In the dependencies section of your package.json file, change the version of moment to match MAJOR version 2, MINOR version 10 and PATCH version 2 */
+
+/* Managing Packages with Npm - Use the Tilde-Character to Always Use the Latest Patch Version of a Dependency
+In the last challenge, you told npm to only include a specific version of a package. That’s a useful way to freeze your dependencies if you need to make sure that different parts of your project stay compatible with each other. But in most use cases, you don’t want to miss bug fixes since they often include important security patches and (hopefully) don’t break things in doing so.
+
+To allow an npm dependency to update to the latest PATCH version, you can prefix the dependency’s version with the tilde (~) character. Here's an example of how to allow updates to any 1.3.x version.
+
+"package": "~1.3.8"
+In the package.json file, your current rule for how npm may upgrade moment is to use a specific version (2.10.2). But now, you want to allow the latest 2.10.x version.
+
+Use the tilde (~) character to prefix the version of moment in your dependencies, and allow npm to update it to any new PATCH release.
+
+Note: The version numbers themselves should not be changed. */
+
+/* Managing Packages with Npm - Use the Caret-Character to Use the Latest Minor Version of a Dependency
+Similar to how the tilde we learned about in the last challenge allows npm to install the latest PATCH for a dependency, the caret (^) allows npm to install future updates as well. The difference is that the caret will allow both MINOR updates and PATCHes.
+
+Your current version of moment should be "~2.10.2" which allows npm to install to the latest 2.10.x version. If you were to use the caret (^) as a version prefix instead, npm would be allowed to update to any 2.x.x version.
+
+"package": "^1.3.8"
+This would allow updates to any 1.x.x version of the package.
+
+Use the caret (^) to prefix the version of moment in your dependencies and allow npm to update it to any new MINOR release.
+
+Note: The version numbers themselves should not be changed.
+
+ */
+
+/* Managing Packages with Npm - Remove a Package from Your Dependencies
+You have now tested a few ways you can manage dependencies of your project by using the package.json's dependencies section. You have also included external packages by adding them to the file and even told npm what types of versions you want, by using special characters such as the tilde or the caret.
+
+But what if you want to remove an external package that you no longer need? You might already have guessed it, just remove the corresponding key-value pair for that package from your dependencies.
+
+This same method applies to removing other fields in your package.json as well
+
+Remove the moment package from your dependencies.
+
+Note: Make sure you have the right amount of commas after removing it. */
