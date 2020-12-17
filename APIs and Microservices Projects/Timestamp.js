@@ -36,23 +36,27 @@ app.get("/api/timestamp/:input", (request, response) => {
   //input captures the value in request.parems.input as a string
   let input = request.params.input;
 
-  /* A request to /api/timestamp/:date? with a valid date should return a 
+  /* A request to /api/timestamp/:date? with a valid date (i.e. 2015-12-25) should return a 
   JSON object with a unix key that is a Unix timestamp of the input date in millisecond 
   
-  A request to /api/timestamp/:date? with a valid date should return a JSON object with 
+  A request to /api/timestamp/:date? with a valid date should return a JSON object with
   a utc key that is a string of the input date in the format: Thu, 01 Jan 1970 00:00:00 GMT
+  
+  Your project can handle dates that can be successfully parsed by new Date(date_string); i.e. 10 January 2013
   */
-  if (input.includes("-") || input.includes(":")) {
+  if (input.includes("-") || input.includes(" ")) {
+    //i.e. 2015-12-25 or 10 January 2013
     //getTime method converts the input date into unix timestamp in milliseconds
     responseObject["unix"] = new Date(input).getTime();
-    responseObject["utc"] = new Date(input).toUTCString();
+    //The toUTCString() method converts a Date object to a string, according to universal time.
+    responseObject["utc"] = new Date(input).toUTCString(); //i.e. Thu, 01 Jan 1970 00:00:00 GMT
   } else {
     /* A request to /api/timestamp/1451001600000 should return
     { unix: 1451001600000, utc: "Fri, 25 Dec 2015 00:00:00 GMT" }
     */
     let integerInput = parseInt(input); //converting input in string format to integer format; this is vanilla/plain JS
+    //can't have new Date(regular string) - not one of the 4 ways to create a date object; hence we have integerInput
     responseObject["unix"] = new Date(integerInput).getTime();
-    //can't have new Date(string) - not one of the 4 ways to create a date object
     responseObject["utc"] = new Date(integerInput).toUTCString();
   }
 
@@ -75,7 +79,6 @@ An empty date parameter should return the current time in a JSON object with a u
 app.get("/api/timestamp", (request, response) => {
   //the new Date() constructor creates a new date object with the current date and time;
   //getTime method converts the date into unix timestamp in milliseconds
-  responseObject["unix"] = new Date().getTime();
-  responseObject["utc"] = new Date().toUTCString();
-  response.json(responseObject);
+  //This is another way to return the json object instead of using responseObject
+  response.json({ unix: new Date().getTime(), utc: new Date().toUTCString() });
 });
