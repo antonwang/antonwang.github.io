@@ -1,5 +1,3 @@
-//Build a full stack JavaScript app that is functionally similar to this: https://url-shortener-microservice.freecodecamp.rocks/
-
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -44,8 +42,8 @@ let urlAddressSchema = new mongoose.Schema({
 //To use our schema definition, we pass it into mongoose.model(modelName, schema). By default, Mongoose adds an _id property to your schemas.
 let URL = mongoose.model("URL", urlAddressSchema);
 
-//You can POST a URL to /api/shorturl/new and get a JSON response with original_url and short_url properties.
-//Here's an example: { original_url : 'https://freeCodeCamp.org', short_url : 1}
+//User story #1: You can POST a URL to /api/shorturl/new and get a JSON response with original_url and short_url properties.
+//User story #1: Here's an example: { original_url : 'https://freeCodeCamp.org', short_url : 1}
 
 //https://www.npmjs.com/package/body-parser
 let bodyParser = require("body-parser");
@@ -56,6 +54,22 @@ app.post(
   "/api/shorturl/new",
   bodyParser.urlencoded({ extended: false }),
   (request, response) => {
+    //User story #3: If you pass an invalid URL that doesn't follow the valid http://www.example.com format,
+    //User story #3: the JSON response will contain { error: 'invalid url' }
+
+    //regex for typical URL needing http: or https: - from stack overflow - What is a good regular expression to match a URL?
+    let Regex = new RegExp(
+      //must start with http, optional 's', ://, option www., any length of 1 - 256 of letters/numbers/special characters,
+      //then '.', 1 - 6 characters of letters/numbers
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}/
+    );
+
+    if (!request.body.url.match(Regex)) {
+      //if user url input does not match the regular expression
+      response.json({ error: "invalid url" });
+      return; //important! Stops executing code
+    }
+
     let short_urlNum = 1; //the first url has a short_url number of 1
     URL.findOne({}) //empty object forces it to loop through all documents; https://mongoosejs.com/docs/api.html#model_Model.findOne
       .sort({ short_url: "desc" }) //sorts the short_url number in descending order. So the highest number, or most recent added one will be at the top
@@ -66,16 +80,17 @@ app.post(
           short_urlNum = data.short_url + 1;
         }
         if (!error) {
+          //if no error
           //https://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
           URL.findOneAndUpdate(
-            { original_url: request.body.url },
-            { original_url: request.body.url, short_url: short_urlNum },
-            { new: true, upsert: true },
-            (error, data) => {
+            { original_url: request.body.url }, //finds this object and update the short url # (find and update)
+            { original_url: request.body.url, short_url: short_urlNum }, //and replace with this new object
+            { new: true, upsert: true }, //new: true - returns the updated object; upsert:true - if no objects, then insert new object
+            (error, update) => {
               if (!error) {
                 response.json({
                   original_url: request.body.url,
-                  short_url: data.short_url
+                  short_url: update.short_url
                 });
               }
             }
@@ -83,10 +98,18 @@ app.post(
         }
       });
   }
-  //response.json({ original_url: request.body.url });
 );
 
-//When you visit /api/shorturl/<short_url>, you will be redirected to the original URL.
+//User story #2: When you visit /api/shorturl/<short_url>, you will be redirected to the original URL.
+app.get("/api/shorturl/:input", (request, response) => {
+  //Note --> : <-- 'input' to store information in request
+  let inputNum = request.params.input; //request.params.input is basically api/shorturl/: --> input <--
 
-//If you pass an invalid URL that doesn't follow the valid http://www.example.com format,
-//the JSON response will contain { error: 'invalid url' }
+  URL.findOne({ short_url: inputNum }, (error, result) => {
+    if (!error && result != undefined) {
+      response.redirect(result.original_url); // https://expressjs.com/en/api.html#res.redirect
+    } else {
+      response.json("Invalid Value");
+    }
+  });
+});
