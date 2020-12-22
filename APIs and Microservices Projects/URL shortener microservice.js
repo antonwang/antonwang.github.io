@@ -23,11 +23,12 @@ app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
 
+let mongoose = require("mongoose");
+
 let URI =
   "mongodb+srv://user01:" +
   process.env.PW +
   "@freecodecamp.ca81p.mongodb.net/database01?retryWrites=true&w=majority";
-let mongoose = require("mongoose");
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //Everything in Mongoose starts with a Schema.
