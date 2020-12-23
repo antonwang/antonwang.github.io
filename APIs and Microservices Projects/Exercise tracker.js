@@ -134,17 +134,44 @@ log array of all the exercises added. Each log item has the description, duratio
 /* User Story #5: A request to a user's log (/api/exercise/log) returns an object with a count property 
 representing the number of exercises returned. */
 
+/* User Story #6: You can add from, to and limit parameters to a /api/exercise/log request to retrieve 
+part of the log of any user. from and to are dates in yyyy-mm-dd format. limit is an integer of how many logs to send back. */
+
 app.get("/api/exercise/log", (request, response) => {
   user.findById(request.query.userId, (error, data) => {
     if (!error) {
-      //if(request.query.limit){
-        
+      let responseObj = data;
+
+      if (request.query.from || request.query.to) {
+        let fromDate = new Date(0); //earliest date of UNIX - January 1, 1970 in UTC.
+        let toDate = new Date(); //current date of running code
+
+        if (request.query.from) {
+          // i.e. (url: ...&from=2020-12-22)
+          fromDate = new Date(request.query.from);
+        }
+
+        if (request.query.to) {
+          // i.e. (url: ...&to=2020-12-22)
+          toDate = new Date(request.query.to);
+        }
+
+        let fromTime = fromDate.getTime(); //Return the number of milliseconds since 1970/01/01
+        let toTime = toDate.getTime(); //Return the number of milliseconds since 1970/01/01
+
+        responseObj.log = responseObj.log.filter(newDetail => {
+          //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+          let newDetailTime = new Date(newDetail.date).getTime();
+          return fromTime <= newDetailTime && newDetailTime <= toTime;
+        });
       }
+      if (request.query.limit) {
+        //if request.query.limit exists -> i.e. (url: ...&limit=3), then we want to show 3 logs
+        responseObj.log = data.log.slice(0, request.query.limit); //slice here shall start at array position 0, and ends at limit
+      }
+
       data["count"] = data.log.length;
       response.json(data);
     }
   });
 });
-
-/* User Story #6: You can add from, to and limit parameters to a /api/exercise/log request to retrieve 
-part of the log of any user. from and to are dates in yyyy-mm-dd format. limit is an integer of how many logs to send back. */
