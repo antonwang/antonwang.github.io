@@ -170,8 +170,12 @@ app.get("/api/exercise/log", (request, response) => {
         responseObj.log = data.log.slice(0, request.query.limit); //slice here shall start at array position 0, and ends at limit
       }
 
-      data["count"] = data.log.length;
-      response.json(data);
+      response.json({
+        _id: request.query.userId,
+        username: responseObj.username,
+        count: responseObj["log"].length,
+        log: responseObj.log
+      });
     }
   });
 });
