@@ -33,3 +33,5 @@ app.post('/api/fileanalyse', multer().single('upfile'), (request, response) => {
     size: request.file.size
   })
 })
+
+//example JSON response: {"name":"Baby Guide.pdf","type":"application/pdf","size":4489942}
