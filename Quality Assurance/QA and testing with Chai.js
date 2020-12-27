@@ -576,3 +576,67 @@ test('send {surname: "da Verrazzano"}', function (done) {
         done();
         });
 
+/* Quality Assurance and Testing with Chai - Run Functional Tests using a Headless Browser
+
+In the next challenges we are going to simulate the human interaction with a page using a device called 'Headless Browser'.
+
+A headless browser is a web browser without a graphical user interface. This kind of tool is particularly useful for testing web pages, as it is able to render and understand HTML, CSS, and JavaScript the same way a browser would.
+
+For these challenges we are using Zombie.JS. It's a lightweight browser which is totally based on JS, without relying on additional binaries to be installed. This feature makes it usable in an environment such as Repl.it. There are many other (more powerful) options.
+
+Mocha allows You to prepare the ground running some code before the actual tests. This can be useful for example to create items in the database, which will be used in the successive tests.
+
+With a headless browser, before the actual testing, we need to visit the page we are going to inspect. The suiteSetup 'hook' is executed only once at the suite startup. Other different hook types can be executed before each test, after each test, or at the end of a suite. See the Mocha docs for more information.
+
+Within tests/2_functional-tests.js, immediately after the Browser declaration, add your project URL to the site property of the variable:
+ */
+Browser.site = 'https://sincere-cone.gomix.me'; // Your URL here
+
+// If you are testing on a local environment replace the line above with
+Browser.localhost('example.com', process.env.PORT || 3000);
+
+// Within tests/2_functional-tests.js, at the root level of the 'e2e Testing with Zombie.js' suite, instantiate a new instance of the Browser object with the following code:
+
+const browser = new Browser();
+// Then, use the suiteSetup hook to direct the browser to the / route with the following code:
+
+suiteSetup(function(done) {
+  return browser.visit('/', done);
+});
+
+// solutions:
+
+const Browser = require("zombie");
+
+Browser.site = "https://fcc-chai-focus-concepts.glitch.me"; // Your URL here
+
+suite("e2e Testing with Zombie.js", function() {
+  const browser = new Browser();
+
+  suiteSetup(function(done) {
+    return browser.visit("/", done);
+  });
+
+  suite('"Famous Italian Explorers" form', function() {
+    // #5
+    test('submit "surname" : "Colombo" - write your e2e test...', function(done) {
+      browser.fill("surname", "Colombo").pressButton("submit", function() {
+        browser.assert.success(); // assert that headless browser request succeeded; status is OK 200
+        browser.assert.text("span#name", "Cristoforo"); // assert that the text inside the element 'span#name' is 'Cristoforo'
+        browser.assert.text("span#surname", "Colombo"); // assert that the text inside the element 'span#surname' is 'Colombo'
+        browser.assert.element("span#dates", 1); // assert that the element(s) 'span#dates' exist and their count is 1
+        done();
+      });
+    });
+    // #6
+    test('submit "surname" : "Vespucci" - write your e2e test...', function(done) {
+      browser.fill("surname", "Vespucci").pressButton("submit", function() {
+        browser.assert.success(); // assert that headless browser request succeeded; status is OK 200
+        browser.assert.text("span#name", "Amerigo"); // assert that the text inside the element 'span#name' is 'Amerigo'
+        browser.assert.text("span#surname", "Vespucci"); // assert that the text inside the element 'span#surname' is 'Vespucci'
+        browser.assert.element("span#dates", 1); // assert that the element(s) 'span#dates' exist and their count is 1
+        done();
+      });
+    });
+  });
+});
