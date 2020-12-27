@@ -357,4 +357,222 @@ const formatPeople = function (name, age) {
     });
   });
 
+/* Quality Assurance and Testing with Chai - Test if an Object has a Property
+
+property asserts that the actual object has a given property.
+
+.property(object, property, [message])
+@param { Object } object
+@param { String } property
+@param { String } message
+Asserts that object has a direct or inherited property named by property.
+*/
+assert.property({ tea: { green: 'matcha' }}, 'tea');
+
+/*Within tests/1_unit-tests.js under the test labelled #16 in the Objects suite, change each assert to either assert.property or assert.notProperty to make the test pass (should evaluate to true). Do not alter the arguments passed to the asserts.
+*/
+
+/* Quality Assurance and Testing with Chai - Test if a Value is of a Specific Data Structure Type
+
+#typeOf asserts that value's type is the given string, as determined by Object.prototype.toString.
+
+.typeOf(value, name, [message])
+@param { Mixed } value
+@param { String } name
+@param { String } message
+Asserts that value’s type is name, as determined by Object.prototype.toString.
+*/
+assert.typeOf({ tea: 'chai' }, 'object', 'we have an object');
+assert.typeOf(['chai', 'jasmine'], 'array', 'we have an array');
+assert.typeOf('tea', 'string', 'we have a string');
+assert.typeOf(/tea/, 'regexp', 'we have a regular expression');
+assert.typeOf(null, 'null', 'we have a null');
+assert.typeOf(undefined, 'undefined', 'we have an undefined');
+/*
+Within tests/1_unit-tests.js under the test labelled #17 in the Objects suite, change each assert to either assert.typeOf or assert.notTypeOf to make the test pass (should evaluate to true). Do not alter the arguments passed to the asserts. */
+
+
+/* Quality Assurance and Testing with Chai - Test if an Object is an Instance of a Constructor
+
+#instanceOf asserts that an object is an instance of a constructor.
+
+.instanceOf(object, constructor, [message])
+@param { Object } object
+@param { Constructor } constructor
+@param { String } message
+Asserts that value is an instance of constructor. */
+
+var Tea = function (name) { this.name = name; }
+  , chai = new Tea('chai');
+
+assert.instanceOf(chai, Tea, 'chai is an instance of tea');
+
+/* Within tests/1_unit-tests.js under the test labelled #18 in the Objects suite, change each assert to either assert.instanceOf or assert.notInstanceOf to make the test pass (should evaluate to true). Do not alter the arguments passed to the asserts.
+solutions: */
+
+const Car = function () {
+    this.model = 'cedan';
+    this.engines = 1;
+    this.wheels = 4;
+  };
+
+  const Plane = function () {
+    this.model = '737';
+    this.engines = ['left', 'right'];
+    this.wheels = 6;
+    this.wings = 2;
+  };
+
+  const myCar = new Car();
+  const airlinePlane = new Plane();
+
+  suite('Objects', function () {
+    // #16
+    test('#property, #notProperty', function () {
+      assert.notProperty(myCar, 'wings', 'A car has not wings');
+      assert.property(airlinePlane, 'engines', 'planes have engines');
+      assert.property(myCar, 'wheels', 'Cars have wheels');
+    });
+    // #17
+    test('#typeOf, #notTypeOf', function () {
+      assert.typeOf(myCar, 'object');
+      assert.typeOf(myCar.model, 'string');
+      assert.notTypeOf(airlinePlane.wings, 'string');
+      assert.typeOf(airlinePlane.engines, 'array');
+      assert.typeOf(myCar.wheels, 'number');
+    });
+    // #18
+    test('#instanceOf, #notInstanceOf', function () {
+      assert.notInstanceOf(myCar, Plane);
+      assert.instanceOf(airlinePlane, Plane);
+      assert.instanceOf(airlinePlane, Object, 'everything is an Object');
+      assert.notInstanceOf(myCar.wheels, String);
+    });
+  });
+
+/* Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP
+
+Mocha allows testing asyncronous operations. There is a small (BIG) difference. Can you spot it?
+
+We can test our API endpoints using a plugin, called chai-http. Let's see how it works. And remember, API calls are asynchronous.
+
+The following is an example of a test using chai-http for the 'GET /hello?name=[name] => "hello [name]"' suite. The test sends a name string in a url query string (?name=John) using a GETrequest to the server. In the end method's callback function, the response object (res) is received and contains the status property. The first assert.equal checks if the status is equal to 200. The second assert.equal checks that the response string (res.text) is equal to "hello John".
+ */
+suite('GET /hello?name=[name] => "hello [name]"', function () {
+  test("?name=John", function (done) {
+    chai
+      .request(server)
+      .get("/hello?name=John")
+      .end(function (err, res) {
+        assert.equal(res.status, 200, "response status should be 200");
+        assert.equal(
+          res.text,
+          "hello John",
+          'response should be "hello John"'
+        );
+        done();
+      });
+  });
+
+/* Notice the done parameter in the test's callback function. Calling it at the end without an argument is necessary to signal successful asynchronous completion.
+
+Within tests/2_functional-tests.js, alter the 'Test GET /hello with no name' test (// #1) to assert the status and the text response to make the test pass. Do not alter the arguments passed to the asserts.
+
+There should be no name in the query; the endpoint responds with hello Guest. */
+
+
+/* Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP II
+
+Within tests/2_functional-tests.js, alter the 'Test GET /hello with your name' test (// #2) to assert the status and the text response to make the test pass.
+
+Send your name in the query, appending ?name=<your_name> to the route. The endpoint responds with 'hello <your_name>'. */
+
+// #2
+test("Test GET /hello with your name", function (done) {
+    chai
+        .request(server)
+        .get("/hello?name=xy_z")
+        .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.text, "hello xy_z");
+        done();
+        });
+
+/* Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP III - PUT method
+
+In the next example we'll see how to send data in a request payload (body). We are going to test a PUT request. The '/travellers' endpoint accepts a JSON object taking the structure:
+ */
+{
+  "surname": [last name of a traveller of the past]
+}
+// The route responds with :
+
+{
+  "name": [first name], "surname": [last name], "dates": [birth - death years]
+}
+
+/* See the server code for more details.
+
+Within tests/2_functional-tests.js, alter the 'send {surname: "Colombo"}' test (// #3):
+
+Send the following JSON response as a payload:
+ */
+{
+  "surname": "Colombo"
+}
+/* Check for the following, within the request.end callback:
+
+status
+type
+body.name
+body.surname
+Follow the assertion order above - we rely on it. Be sure to remove assert.fail(), once complete.
+ */
+
+// #3
+test('send {surname: "Colombo"}', function (done) {
+    chai
+        .request(server)
+        .put("/travellers")
+        .send ({surname: "Colombo"})
+        .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.type, 'application/json');
+        assert.equal(res.body.name, 'Cristoforo');
+        assert.equal(res.body.surname, 'Colombo');
+        done();
+        });
+
+/* Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP IV - PUT method
+
+Now that you have seen how it is done, it is your turn to do it from scratch.
+
+Within tests/2_functional-tests.js, alter the 'send {surname: "da Verrazzano"}' test (// #4):
+
+Send the following JSON response as a payload to the /travellers route: */
+
+{
+  "surname": "da Verrazzano"
+}
+/* Check for the following, within a request.end callback:
+
+status
+type
+body.name
+body.surname
+Follow the assertion order above - we rely on it. Be sure to remove assert.fail(), once complete. */
+
+// #4
+test('send {surname: "da Verrazzano"}', function (done) {
+    chai
+        .request(server)
+        .put("/travellers")
+        .send ({surname: "da Verrazzano"})
+        .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.type, 'application/json');
+        assert.equal(res.body.name, 'Giovanni');
+        assert.equal(res.body.surname, 'da Verrazzano');
+        done();
+        });
 
